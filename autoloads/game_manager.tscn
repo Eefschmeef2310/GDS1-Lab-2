@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://chni7pbmkx6pk"]
+
+[ext_resource type="Script" path="res://GameManager.gd" id="1_bxapp"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_bxapp")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 150.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
