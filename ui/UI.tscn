@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://cil2rfrx2vfb2"]
+[gd_scene load_steps=2 format=3 uid="uid://cil2rfrx2vfb2"]
+
+[ext_resource type="Script" path="res://ui/ui.gd" id="1_8r7at"]
 
 [node name="Ui" type="CanvasLayer"]
+script = ExtResource("1_8r7at")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
