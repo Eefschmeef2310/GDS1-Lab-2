@@ -1,6 +1,7 @@
 extends Node
 
 var coin_counter = 0
+var score = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,4 +23,8 @@ func collect_coin():
 		#gain 1-up
 		#play 1-up sound
 		coin_counter = 0
+	pass
+	
+func score_increase(amount):
+	score += amount
 	pass
