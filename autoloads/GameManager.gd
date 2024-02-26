@@ -10,6 +10,10 @@ var coin_counter : int = 0
 var score : int = 0
 var lives : int = 3
 
+func _process(_delta):
+	if Input.is_action_just_pressed("esc"):
+		get_tree().quit()
+
 #You don't need to have pass in a method if ther are other lines of code
 func _on_timer_timeout():
 	#Kill the player
