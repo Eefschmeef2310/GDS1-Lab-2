@@ -18,6 +18,13 @@ config/icon="res://icon.svg"
 
 GameManager="*res://autoloads/game_manager.tscn"
 
+[display]
+
+window/size/viewport_width=256
+window/size/viewport_height=240
+window/size/mode=3
+window/stretch/mode="canvas_items"
+
 [file_customization]
 
 folder_colors={
@@ -26,6 +33,11 @@ folder_colors={
 "res://levels/": "green",
 "res://ui/": "purple"
 }
+
+[gui]
+
+theme/custom="res://ui/default.tres"
+theme/custom_font="res://ui/fonts/super-mario-bros-nes.ttf"
 
 [rendering]
 
