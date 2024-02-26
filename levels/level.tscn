@@ -8,6 +8,16 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5g0jp"]
 
+[sub_resource type="Gradient" id="Gradient_rib4k"]
+offsets = PackedFloat32Array(0.458746)
+colors = PackedColorArray(0.380392, 0.521569, 0.972549, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i4lyj"]
+gradient = SubResource("Gradient_rib4k")
+fill = 2
+fill_from = Vector2(0, 0.0384615)
+fill_to = Vector2(0.666667, 0.529915)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="Ui" parent="." instance=ExtResource("1_gwlbc")]
@@ -28,3 +38,9 @@ texture = ExtResource("3_e3wh4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("RectangleShape2D_5g0jp")
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground"]
+position = Vector2(128, 120)
+scale = Vector2(4, 3.75)
+texture = SubResource("GradientTexture2D_i4lyj")
