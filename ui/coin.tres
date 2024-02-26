@@ -1,0 +1,10 @@
+[gd_resource type="AnimatedTexture" load_steps=3 format=3 uid="uid://dwk1nv640aoi4"]
+
+[ext_resource type="Texture2D" uid="uid://dp0iigxc1omyt" path="res://ui/coin.png" id="1_vowqp"]
+[ext_resource type="Texture2D" uid="uid://bacpa46xwa76l" path="res://icon.svg" id="2_h1o3k"]
+
+[resource]
+frames = 2
+frame_0/texture = ExtResource("1_vowqp")
+frame_1/texture = ExtResource("2_h1o3k")
+frame_1/duration = 1.0

@@ -28,8 +28,13 @@ horizontal_alignment = 1
 [node name="Coins" type="Label" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+<<<<<<< Updated upstream
 text = "COINS x 00"
 horizontal_alignment = 1
+=======
+bbcode_enabled = true
+text = "[img]res://ui/coin.tres[/img] x 00"
+>>>>>>> Stashed changes
 
 [node name="Level" type="Label" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
