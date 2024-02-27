@@ -75,3 +75,12 @@ position = Vector2(199, 200)
 
 [node name="Goomba3" parent="." instance=ExtResource("6_te3kc")]
 position = Vector2(168, 200)
+
+[node name="Goomba4" parent="." instance=ExtResource("6_te3kc")]
+position = Vector2(624, 152)
+
+[node name="Goomba5" parent="." instance=ExtResource("6_te3kc")]
+position = Vector2(552, 200)
+
+[node name="Goomba6" parent="." instance=ExtResource("6_te3kc")]
+position = Vector2(688, 200)
