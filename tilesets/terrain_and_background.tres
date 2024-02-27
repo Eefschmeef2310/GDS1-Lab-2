@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dr67hccp51j3c"]
 
-[ext_resource type="Texture2D" path="res://assets/terrain_merged.png" id="1_8m81p"]
+[ext_resource type="Texture2D" uid="uid://c1fnf2ep54c37" path="res://assets/terrain_merged.png" id="1_8m81p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6jqjo"]
 resource_name = "palette_1_overworld"
