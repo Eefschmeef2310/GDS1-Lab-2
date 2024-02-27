@@ -146,6 +146,9 @@ func handle_animations():
 		anim_player.play(anim_prefix + "jump")
 	else:
 		if move_direction != 0:
-			anim_player.play(anim_prefix + "run")
+			if abs(velocity.x) >= max_run_speed:
+				anim_player.play(anim_prefix + "run_fast")
+			else:
+				anim_player.play(anim_prefix + "run")
 		else:
 			anim_player.play(anim_prefix + "idle")
