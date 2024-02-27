@@ -7,7 +7,7 @@ enum PowerupState {
 	FIRE
 }
 var powerup_state_names: PackedStringArray = ["small", "big", "fire"]
-var powerup_state: PowerupState = PowerupState.SMALL
+var powerup_state: PowerupState = PowerupState.BIG
 
 # Horizontal movement
 var max_speed = 85.0
@@ -145,8 +145,10 @@ func handle_animations():
 	if not is_on_floor():
 		anim_player.play(anim_prefix + "jump")
 	else:
-		if move_direction != 0:
-			if abs(velocity.x) >= max_run_speed:
+		if velocity.x != 0:
+			if move_direction != 0 and move_direction != sign(velocity.x):
+				anim_player.play(anim_prefix + "skid")
+			elif abs(velocity.x) >= max_run_speed:
 				anim_player.play(anim_prefix + "run_fast")
 			else:
 				anim_player.play(anim_prefix + "run")
