@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cil2rfrx2vfb2" path="res://ui/UI.tscn" id="1_gwlbc"]
 [ext_resource type="Script" path="res://levels/level_camera.gd" id="2_g17ur"]
-[ext_resource type="PackedScene" uid="uid://bxhlnr2grbq1t" path="res://player/player.tscn" id="3_1xoxj"]
+[ext_resource type="PackedScene" uid="uid://dxao0ij5ngysm" path="res://player/player.tscn" id="3_vj01a"]
 [ext_resource type="PackedScene" uid="uid://bsbgd1sq8a52i" path="res://tilesets/tile_map.tscn" id="4_665hs"]
 [ext_resource type="PackedScene" uid="uid://cdo0fgfx28qae" path="res://blocks/brick.tscn" id="6_n1vk4"]
 
@@ -32,15 +32,14 @@ texture = SubResource("GradientTexture2D_i4lyj")
 
 [node name="Ui" parent="." instance=ExtResource("1_gwlbc")]
 
-[node name="GameCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+[node name="GameCamera" type="Camera2D" parent="."]
 position = Vector2(128, 120)
 script = ExtResource("2_g17ur")
-player = NodePath("../Player")
 
-[node name="GameCamera#BackWall" type="StaticBody2D" parent="GameCamera"]
+[node name="BackWall" type="StaticBody2D" parent="GameCamera"]
 position = Vector2(-138, 0)
 
-[node name="GameCamera_BackWall#CollisionShape2D" type="CollisionShape2D" parent="GameCamera/GameCamera#BackWall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameCamera/BackWall"]
 shape = SubResource("RectangleShape2D_7v7rq")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -50,8 +49,7 @@ scale = Vector2(20, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_iej4u")
 
-[node name="Player" parent="." instance=ExtResource("3_1xoxj")]
-position = Vector2(87, 200)
+[node name="CharacterBody2D" parent="." instance=ExtResource("3_vj01a")]
 
 [node name="TileMap" parent="." instance=ExtResource("4_665hs")]
 position = Vector2(0, 208)

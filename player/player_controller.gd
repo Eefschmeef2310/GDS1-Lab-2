@@ -109,7 +109,7 @@ func jump():
 	jump_buffer_counter = jump_buffer_time
 	
 func try_jump():
-	if coyote_counter > 0 or (jump_phase < max_air_jumps and is_jumping):
+	if coyote_counter > 0:
 		if is_jumping:
 			jump_phase += 1
 			
