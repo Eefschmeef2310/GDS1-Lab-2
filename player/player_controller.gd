@@ -1,9 +1,17 @@
 extends CharacterBody2D
 class_name PlayerController
 
+enum PowerupState {
+	SMALL,
+	BIG,
+	FIRE
+}
+var powerup_state_names: PackedStringArray = ["small", "big", "fire"]
+var powerup_state: PowerupState = PowerupState.SMALL
+
 # Horizontal movement
-var max_speed = 100.0
-var max_run_speed = 200.0
+var max_speed = 85.0
+var max_run_speed = 150.0
 var acceleration = 10.0
 var deceleration = 10.0
 
@@ -35,7 +43,7 @@ var can_change_direction: bool = true
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 # Lauren variables
-#@onready var sprite_animator = $SpriteAnimator
+@onready var anim_player = $AnimationPlayer
 var is_falling = false
 var is_landing = true
 #signal toTankControl()
@@ -53,7 +61,7 @@ func _process(_delta):
 	if Input.is_action_just_released("jump"):
 		jump_release()
 	
-	#handle_animations()
+	handle_animations()
 
 func _physics_process(delta):
 	# Handle movement.
@@ -124,34 +132,20 @@ func jump_release():
 	jump_is_held = false
 
 func update_direction():
-	pass
-	#if move_direction != 0:
-		#$AnimatedSprite2D.flip_h = move_direction < 0
+	if move_direction != 0 and is_on_floor():
+		$Sprite2D.flip_h = move_direction < 0
+		$Sprite2DUpperFire.flip_h = move_direction < 0
+		$Sprite2DUpperFireThrow.flip_h = move_direction < 0
 
-##handles all animations
-#func handle_animations():
-	##jumping animations
-	#
-	#if not is_on_floor():
-		#if (velocity.y < 0):
-			#sprite_animator.play("Jump")
-		#elif (velocity.y > 0):
-			#sprite_animator.play("Falling")
-			#is_falling = true
-		#else:
-			#sprite_animator.play("midair")
-	#else:
-		#if (is_falling == true):
-			#is_falling = false
-			#is_landing = true
-			#sprite_animator.play("Land")
-		#else:
-			#if move_direction != 0:
-					#sprite_animator.play("Run")
-					#is_landing = false
-			#elif not (is_landing):
-				#sprite_animator.play("Idle")
-#
-#func _on_animated_sprite_2d_animation_finished():
-	#if (is_landing == true):
-		#is_landing = false
+#handles all animations
+func handle_animations():
+	var anim_prefix: String = powerup_state_names[powerup_state] + "_"
+	
+	#jumping animations
+	if not is_on_floor():
+		anim_player.play(anim_prefix + "jump")
+	else:
+		if move_direction != 0:
+			anim_player.play(anim_prefix + "run")
+		else:
+			anim_player.play(anim_prefix + "idle")
