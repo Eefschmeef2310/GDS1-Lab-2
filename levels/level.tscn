@@ -1,12 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://gj74vy0yftma"]
+[gd_scene load_steps=11 format=3 uid="uid://gj74vy0yftma"]
 
 [ext_resource type="PackedScene" uid="uid://cil2rfrx2vfb2" path="res://ui/UI.tscn" id="1_gwlbc"]
 [ext_resource type="Script" path="res://player/player_controller.gd" id="2_aykcj"]
 [ext_resource type="Script" path="res://levels/level_camera.gd" id="2_g17ur"]
 [ext_resource type="Texture2D" uid="uid://bacpa46xwa76l" path="res://icon.svg" id="3_e3wh4"]
 [ext_resource type="PackedScene" uid="uid://bsbgd1sq8a52i" path="res://tilesets/tile_map.tscn" id="4_665hs"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5g0jp"]
 
 [sub_resource type="Gradient" id="Gradient_rib4k"]
 offsets = PackedFloat32Array(0.458746)
@@ -54,8 +52,8 @@ scale = Vector2(20, 1)
 shape = SubResource("RectangleShape2D_iej4u")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(87, 113)
 z_index = 1
+position = Vector2(87, 113)
 script = ExtResource("2_aykcj")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
@@ -64,11 +62,6 @@ texture = ExtResource("3_e3wh4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("RectangleShape2D_5g0jp")
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground"]
-position = Vector2(128, 120)
-scale = Vector2(4, 3.75)
-texture = SubResource("GradientTexture2D_i4lyj")
 
 [node name="TileMap" parent="." instance=ExtResource("4_665hs")]
 position = Vector2(0, 208)
