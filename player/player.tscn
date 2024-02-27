@@ -557,7 +557,7 @@ _data = {
 "small_skid": SubResource("Animation_25ayd")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
 script = ExtResource("1_tgen6")
 
