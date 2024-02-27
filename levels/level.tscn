@@ -27,6 +27,11 @@ position = Vector2(128, 120)
 scale = Vector2(4, 3.75)
 texture = SubResource("GradientTexture2D_i4lyj")
 
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground"]
+position = Vector2(128, 120)
+scale = Vector2(4, 3.75)
+texture = SubResource("GradientTexture2D_i4lyj")
+
 [node name="Ui" parent="." instance=ExtResource("1_gwlbc")]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -46,9 +51,4 @@ texture = ExtResource("3_e3wh4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("RectangleShape2D_5g0jp")
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground"]
-position = Vector2(128, 120)
-scale = Vector2(4, 3.75)
-texture = SubResource("GradientTexture2D_i4lyj")
+[node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
