@@ -2,15 +2,16 @@ extends CharacterBody2D
 class_name PlayerController
 
 # Horizontal movement
-var max_speed = 200.0
-var acceleration = 300.0
-var deceleration = 300.0
+var max_speed = 100.0
+var max_run_speed = 200.0
+var acceleration = 10.0
+var deceleration = 10.0
 
 # Jumping and gravity
-var jump_speed = -400.0
-var air_jump_speed = -400.0
-var rise_factor = 1
-var fall_factor = 2
+var jump_speed = -275.0
+var air_jump_speed = -1.0
+var rise_factor = 0.5
+var fall_factor = 1
 var jump_phase = 0
 var max_air_jumps = 0;
 var jump_requested = false
@@ -56,7 +57,10 @@ func _process(_delta):
 
 func _physics_process(delta):
 	# Handle movement.
-	var desired_velocity = move_direction * max_speed * move_factor
+	var move_speed = max_speed
+	if Input.is_action_pressed("run"):
+		move_speed = max_run_speed
+	var desired_velocity = move_direction * move_speed * move_factor
 	if desired_velocity != 0:
 		velocity = velocity.move_toward(Vector2(desired_velocity, velocity.y), acceleration)
 	else:
@@ -97,7 +101,7 @@ func jump():
 	jump_buffer_counter = jump_buffer_time
 	
 func try_jump():
-	if coyote_counter > 0 or (jump_phase < max_air_jumps and is_jumping):
+	if coyote_counter > 0:
 		if is_jumping:
 			jump_phase += 1
 			

@@ -9,3 +9,5 @@ script = ExtResource("2_6ktmb")
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_l45l8")
+
+[connection signal="body_entered" from="PlayerHitBox" to="." method="_on_player_hit_box_body_entered"]
