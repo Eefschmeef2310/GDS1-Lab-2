@@ -3,8 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cil2rfrx2vfb2" path="res://ui/UI.tscn" id="1_gwlbc"]
 [ext_resource type="Script" path="res://player/player_controller.gd" id="2_aykcj"]
 [ext_resource type="Texture2D" uid="uid://bacpa46xwa76l" path="res://icon.svg" id="3_e3wh4"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iej4u"]
+[ext_resource type="PackedScene" uid="uid://bsbgd1sq8a52i" path="res://tilesets/tile_map.tscn" id="4_665hs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5g0jp"]
 
@@ -22,14 +21,8 @@ fill_to = Vector2(0.666667, 0.529915)
 
 [node name="Ui" parent="." instance=ExtResource("1_gwlbc")]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(118, 230)
-scale = Vector2(20, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("RectangleShape2D_iej4u")
-
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+z_index = 1
 script = ExtResource("2_aykcj")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
@@ -45,3 +38,6 @@ shape = SubResource("RectangleShape2D_5g0jp")
 position = Vector2(128, 120)
 scale = Vector2(4, 3.75)
 texture = SubResource("GradientTexture2D_i4lyj")
+
+[node name="TileMap" parent="." instance=ExtResource("4_665hs")]
+position = Vector2(0, 208)
