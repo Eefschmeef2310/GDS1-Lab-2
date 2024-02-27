@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://gj74vy0yftma"]
+[gd_scene load_steps=12 format=3 uid="uid://gj74vy0yftma"]
 
 [ext_resource type="PackedScene" uid="uid://cil2rfrx2vfb2" path="res://ui/UI.tscn" id="1_gwlbc"]
 [ext_resource type="Script" path="res://player/player_controller.gd" id="2_aykcj"]
 [ext_resource type="Script" path="res://levels/level_camera.gd" id="2_g17ur"]
 [ext_resource type="Texture2D" uid="uid://bacpa46xwa76l" path="res://icon.svg" id="3_e3wh4"]
 [ext_resource type="PackedScene" uid="uid://bsbgd1sq8a52i" path="res://tilesets/tile_map.tscn" id="4_665hs"]
+[ext_resource type="PackedScene" uid="uid://vngdnovxe7s6" path="res://enemy/goomba.tscn" id="6_te3kc"]
 
 [sub_resource type="Gradient" id="Gradient_rib4k"]
 offsets = PackedFloat32Array(0.458746)
@@ -51,7 +52,7 @@ scale = Vector2(20, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_iej4u")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["player"]]
 z_index = 1
 position = Vector2(87, 113)
 script = ExtResource("2_aykcj")
@@ -65,3 +66,12 @@ shape = SubResource("RectangleShape2D_5g0jp")
 
 [node name="TileMap" parent="." instance=ExtResource("4_665hs")]
 position = Vector2(0, 208)
+
+[node name="Goomba" parent="." instance=ExtResource("6_te3kc")]
+position = Vector2(232, 200)
+
+[node name="Goomba2" parent="." instance=ExtResource("6_te3kc")]
+position = Vector2(199, 200)
+
+[node name="Goomba3" parent="." instance=ExtResource("6_te3kc")]
+position = Vector2(168, 200)
