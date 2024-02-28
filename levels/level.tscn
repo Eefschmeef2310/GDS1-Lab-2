@@ -1,13 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://gj74vy0yftma"]
+[gd_scene load_steps=9 format=3 uid="uid://gj74vy0yftma"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_u42ox"]
 [ext_resource type="Script" path="res://levels/level_camera.gd" id="2_g17ur"]
 [ext_resource type="PackedScene" uid="uid://bxhlnr2grbq1t" path="res://player/player.tscn" id="3_1xoxj"]
 [ext_resource type="PackedScene" uid="uid://bsbgd1sq8a52i" path="res://tilesets/tile_map.tscn" id="4_665hs"]
-[ext_resource type="PackedScene" uid="uid://dekp28747487u" path="res://blocks/question_block.tscn" id="6_eiq3i"]
-[ext_resource type="PackedScene" uid="uid://cdo0fgfx28qae" path="res://blocks/brick.tscn" id="6_n1vk4"]
-[ext_resource type="PackedScene" uid="uid://byy40p35gico4" path="res://blocks/multicoin.tscn" id="7_fxrin"]
-[ext_resource type="PackedScene" uid="uid://cnq68exhuyi0x" path="res://blocks/coin_popup.tscn" id="8_ja671"]
 
 [sub_resource type="Gradient" id="Gradient_rib4k"]
 offsets = PackedFloat32Array(0.458746)
@@ -58,13 +54,3 @@ powerup_state = 0
 
 [node name="TileMap" parent="." instance=ExtResource("4_665hs")]
 position = Vector2(0, 208)
-
-[node name="Brick" parent="." instance=ExtResource("6_n1vk4")]
-position = Vector2(161, 162)
-
-[node name="?Block" parent="." instance=ExtResource("6_eiq3i")]
-position = Vector2(205, 166)
-
-[node name="Multicoin" parent="." instance=ExtResource("7_fxrin")]
-position = Vector2(133, 175)
-COIN = ExtResource("8_ja671")
