@@ -26,6 +26,7 @@ func collect_coin():
 		#play 1-up sound
 		coin_counter = 0
 	coins_updated.emit()
+	increase_score(200)
 	
 func increase_score(amount):
 	score += amount
