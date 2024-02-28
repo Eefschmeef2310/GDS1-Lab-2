@@ -33,6 +33,7 @@ folder_colors={
 "res://autoloads/": "yellow",
 "res://blocks/": "orange",
 "res://levels/": "green",
+"res://sounds/": "teal",
 "res://ui/": "purple"
 }
 

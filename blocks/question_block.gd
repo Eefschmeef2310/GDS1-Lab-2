@@ -17,4 +17,6 @@ func _on_player_hit_box_body_entered(body):
 		hit = true
 		
 		super.bump()
+	elif hit:
+		$Bump.play()
 		

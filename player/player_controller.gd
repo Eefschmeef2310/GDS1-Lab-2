@@ -7,7 +7,7 @@ enum PowerupState {
 	FIRE
 }
 var powerup_state_names: PackedStringArray = ["small", "big", "fire"]
-var powerup_state: PowerupState = PowerupState.FIRE
+@export var powerup_state: PowerupState = PowerupState.FIRE
 
 # Horizontal movement
 var max_speed = 85.0

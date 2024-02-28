@@ -9,3 +9,5 @@ func bump():
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", position + Vector2(0, -bump_height), bump_speed)
 	tween.chain().tween_property(self, "position", position, bump_speed)
+	
+	$Bump.play()

@@ -65,13 +65,13 @@ script = ExtResource("2_pcunx")
 texture = ExtResource("2_m14aa")
 region_rect = Rect2(208, 112, 16, 16)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
 libraries = {
 "": SubResource("AnimationLibrary_st0pa")
 }
 autoplay = "default"
 
-[node name="CoinMarker" type="Marker2D" parent="." index="4"]
+[node name="CoinMarker" type="Marker2D" parent="." index="5"]
 position = Vector2(0, -16)
 
 [connection signal="body_entered" from="PlayerHitBox" to="." method="_on_player_hit_box_body_entered"]
