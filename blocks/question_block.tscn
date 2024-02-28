@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dekp28747487u"]
+[gd_scene load_steps=9 format=3 uid="uid://dekp28747487u"]
 
 [ext_resource type="PackedScene" uid="uid://dikufx074gwpa" path="res://blocks/block_base.tscn" id="1_221f0"]
 [ext_resource type="Texture2D" uid="uid://cicguqevs6v08" path="res://assets/blocks.png" id="2_m14aa"]
 [ext_resource type="Script" path="res://blocks/question_block.gd" id="2_pcunx"]
+[ext_resource type="PackedScene" uid="uid://cnq68exhuyi0x" path="res://blocks/coin_popup.tscn" id="3_sj6yk"]
 
 [sub_resource type="Animation" id="Animation_sbvny"]
 length = 0.001
@@ -60,6 +61,8 @@ _data = {
 
 [node name="?Block" instance=ExtResource("1_221f0")]
 script = ExtResource("2_pcunx")
+COIN = ExtResource("3_sj6yk")
+max_hits = 1
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_m14aa")
