@@ -1,5 +1,4 @@
 extends Block
-class_name Brick
 
 const BRICK_PARTICLES = preload("res://blocks/brick_particles.tscn")
 
