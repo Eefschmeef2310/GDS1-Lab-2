@@ -1,7 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://bxhlnr2grbq1t"]
+[gd_scene load_steps=30 format=3 uid="uid://bxhlnr2grbq1t"]
 
 [ext_resource type="Script" path="res://player/player_controller.gd" id="1_tgen6"]
 [ext_resource type="Texture2D" uid="uid://bkmx0qwx2k4b2" path="res://assets/mario.png" id="2_8dkuo"]
+[ext_resource type="AudioStream" uid="uid://boimeadej3igc" path="res://sounds/Super Mario Bros (NES) Music - Overworld Theme.mp3" id="3_uhc0x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5g0jp"]
 size = Vector2(16, 16)
@@ -1817,3 +1818,8 @@ libraries = {
 libraries = {
 "": SubResource("AnimationLibrary_g05uj")
 }
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-87, -200)
+stream = ExtResource("3_uhc0x")
+autoplay = true
