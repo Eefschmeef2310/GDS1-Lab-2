@@ -7,7 +7,7 @@ enum PowerupState {
 	FIRE
 }
 var powerup_state_names: PackedStringArray = ["small", "big", "fire"]
-var powerup_state: PowerupState = PowerupState.SMALL
+var powerup_state: PowerupState = PowerupState.FIRE
 
 # Horizontal movement
 var max_speed = 85.0
@@ -16,9 +16,9 @@ var acceleration = 10.0
 var deceleration = 10.0
 
 # Jumping and gravity
-var jump_speed = -275.0
+var jump_speed = -300.0
 var air_jump_speed = -1.0
-var rise_factor = 0.5
+var rise_factor = 0.6
 var fall_factor = 1
 var jump_phase = 0
 var max_air_jumps = 0;
@@ -60,6 +60,13 @@ func _process(_delta):
 		jump()
 	if Input.is_action_just_released("jump"):
 		jump_release()
+	
+	#Fire
+	if powerup_state == PowerupState.FIRE and Input.is_action_just_pressed("run"):
+		if velocity.x != 0:
+			$AnimationPlayerFire.play("throw_replace")
+		else:
+			$AnimationPlayerFire.play("throw_whole")
 	
 	handle_animations()
 

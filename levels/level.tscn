@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://levels/level_camera.gd" id="2_g17ur"]
 [ext_resource type="PackedScene" uid="uid://bxhlnr2grbq1t" path="res://player/player.tscn" id="3_1xoxj"]
 [ext_resource type="PackedScene" uid="uid://bsbgd1sq8a52i" path="res://tilesets/tile_map.tscn" id="4_665hs"]
-[ext_resource type="PackedScene" uid="uid://dekp28747487u" path="res://blocks/question_block.tscn" id="6_eiq3i"]
+[ext_resource type="PackedScene" path="res://blocks/question_block.tscn" id="6_eiq3i"]
 [ext_resource type="PackedScene" uid="uid://cdo0fgfx28qae" path="res://blocks/brick.tscn" id="6_n1vk4"]
 
 [sub_resource type="Gradient" id="Gradient_rib4k"]
@@ -58,7 +58,7 @@ position = Vector2(87, 200)
 position = Vector2(0, 208)
 
 [node name="Brick" parent="." instance=ExtResource("6_n1vk4")]
-position = Vector2(169, 170)
+position = Vector2(168, 136)
 
 [node name="?Block" parent="." instance=ExtResource("6_eiq3i")]
 position = Vector2(205, 172)
