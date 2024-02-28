@@ -1,12 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://gj74vy0yftma"]
+[gd_scene load_steps=13 format=3 uid="uid://gj74vy0yftma"]
 
-[ext_resource type="PackedScene" uid="uid://cil2rfrx2vfb2" path="res://ui/UI.tscn" id="1_gwlbc"]
+[ext_resource type="Script" path="res://levels/level.gd" id="1_u42ox"]
 [ext_resource type="Script" path="res://levels/level_camera.gd" id="2_g17ur"]
 [ext_resource type="PackedScene" uid="uid://bxhlnr2grbq1t" path="res://player/player.tscn" id="3_1xoxj"]
 [ext_resource type="PackedScene" uid="uid://bsbgd1sq8a52i" path="res://tilesets/tile_map.tscn" id="4_665hs"]
 [ext_resource type="PackedScene" uid="uid://dekp28747487u" path="res://blocks/question_block.tscn" id="6_eiq3i"]
 [ext_resource type="PackedScene" uid="uid://cdo0fgfx28qae" path="res://blocks/brick.tscn" id="6_n1vk4"]
 [ext_resource type="PackedScene" uid="uid://byy40p35gico4" path="res://blocks/multicoin.tscn" id="7_fxrin"]
+[ext_resource type="PackedScene" uid="uid://cnq68exhuyi0x" path="res://blocks/coin_popup.tscn" id="8_ja671"]
 
 [sub_resource type="Gradient" id="Gradient_rib4k"]
 offsets = PackedFloat32Array(0.458746)
@@ -23,7 +24,8 @@ size = Vector2(20, 240)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iej4u"]
 
-[node name="Node2D" type="Node2D"]
+[node name="level" type="Node2D"]
+script = ExtResource("1_u42ox")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -31,8 +33,6 @@ size = Vector2(20, 240)
 position = Vector2(128, 120)
 scale = Vector2(4, 3.75)
 texture = SubResource("GradientTexture2D_i4lyj")
-
-[node name="Ui" parent="." instance=ExtResource("1_gwlbc")]
 
 [node name="GameCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 position = Vector2(128, 120)
@@ -67,3 +67,4 @@ position = Vector2(205, 166)
 
 [node name="Multicoin" parent="." instance=ExtResource("7_fxrin")]
 position = Vector2(133, 175)
+COIN = ExtResource("8_ja671")

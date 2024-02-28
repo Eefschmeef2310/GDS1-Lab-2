@@ -18,6 +18,11 @@ func _process(_delta):
 func _on_timer_timeout():
 	#Kill the player
 	pass
+
+func reset():
+	coin_counter = 0
+	score = 0
+	lives = 3
 	
 func collect_coin():
 	coin_counter += 1

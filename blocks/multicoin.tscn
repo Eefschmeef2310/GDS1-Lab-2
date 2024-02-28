@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://byy40p35gico4"]
+[gd_scene load_steps=7 format=3 uid="uid://byy40p35gico4"]
 
 [ext_resource type="PackedScene" uid="uid://dikufx074gwpa" path="res://blocks/block_base.tscn" id="1_lqftm"]
 [ext_resource type="Script" path="res://blocks/multicoin.gd" id="2_5yocx"]
 [ext_resource type="Texture2D" uid="uid://cicguqevs6v08" path="res://assets/blocks.png" id="2_h4y2o"]
+[ext_resource type="PackedScene" uid="uid://cnq68exhuyi0x" path="res://blocks/coin_popup.tscn" id="3_t0tv2"]
 
 [sub_resource type="Animation" id="Animation_qgd7x"]
 resource_name = "hit"
@@ -26,6 +27,7 @@ _data = {
 
 [node name="Multicoin" instance=ExtResource("1_lqftm")]
 script = ExtResource("2_5yocx")
+COIN = ExtResource("3_t0tv2")
 max_hits = 15
 
 [node name="Sprite2D" parent="." index="0"]
