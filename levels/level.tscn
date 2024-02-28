@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bsbgd1sq8a52i" path="res://tilesets/tile_map.tscn" id="4_665hs"]
 [ext_resource type="PackedScene" uid="uid://dekp28747487u" path="res://blocks/question_block.tscn" id="6_eiq3i"]
 [ext_resource type="PackedScene" uid="uid://cdo0fgfx28qae" path="res://blocks/brick.tscn" id="6_n1vk4"]
-[ext_resource type="PackedScene" uid="uid://beydurr3mjcrj" path="res://coin/node_2d.tscn" id="7_xlaxa"]
+[ext_resource type="PackedScene" uid="uid://beydurr3mjcrj" path="res://coin/coin.tscn" id="7_xlaxa"]
 
 [sub_resource type="Gradient" id="Gradient_rib4k"]
 offsets = PackedFloat32Array(0.458746)
@@ -64,5 +64,5 @@ position = Vector2(168, 136)
 [node name="?Block" parent="." instance=ExtResource("6_eiq3i")]
 position = Vector2(205, 165)
 
-[node name="Node2D" parent="." instance=ExtResource("7_xlaxa")]
-position = Vector2(119, 154)
+[node name="Coin" parent="." instance=ExtResource("7_xlaxa")]
+position = Vector2(115, 172)
