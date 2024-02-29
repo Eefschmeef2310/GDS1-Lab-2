@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://vngdnovxe7s6"]
+
+[ext_resource type="Script" path="res://enemy/goomba.gd" id="1_tkggg"]
+[ext_resource type="Texture2D" uid="uid://far6xocq267e" path="res://assets/deadGoomba.png" id="2_8pn4n"]
+[ext_resource type="Texture2D" uid="uid://c78q6y6k6miaw" path="res://assets/enemies.png" id="2_ggu3s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rumx"]
+atlas = ExtResource("2_ggu3s")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wynhg"]
+atlas = ExtResource("2_ggu3s")
+region = Rect2(18, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5t0ub"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8pn4n")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rumx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wynhg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y1cnn"]
+size = Vector2(16, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8gx4c"]
+size = Vector2(16, 2)
+
+[node name="Goomba" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite_2d")]
+script = ExtResource("1_tkggg")
+animated_sprite_2d = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5t0ub")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_y1cnn")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_8gx4c")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
