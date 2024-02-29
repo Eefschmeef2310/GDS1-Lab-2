@@ -1,9 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://bxhlnr2grbq1t"]
+[gd_scene load_steps=33 format=3 uid="uid://bxhlnr2grbq1t"]
 
 [ext_resource type="Script" path="res://player/player_controller.gd" id="1_tgen6"]
 [ext_resource type="Texture2D" uid="uid://bkmx0qwx2k4b2" path="res://assets/mario.png" id="2_8dkuo"]
 [ext_resource type="AudioStream" uid="uid://boimeadej3igc" path="res://sounds/Super Mario Bros (NES) Music - Overworld Theme.mp3" id="3_uhc0x"]
 [ext_resource type="Script" path="res://player/death_controller.gd" id="4_agbdj"]
+[ext_resource type="Script" path="res://player/FlagCollision.gd" id="5_wwyd1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5g0jp"]
 size = Vector2(16, 16)
@@ -1782,6 +1783,9 @@ _data = {
 "throw_whole": SubResource("Animation_avu88")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e0yof"]
+size = Vector2(16, 1)
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
 script = ExtResource("1_tgen6")
@@ -1827,3 +1831,13 @@ autoplay = true
 
 [node name="DeathController" type="Node" parent="."]
 script = ExtResource("4_agbdj")
+
+[node name="FlagCollision" type="Area2D" parent="."]
+script = ExtResource("5_wwyd1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlagCollision"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_e0yof")
+debug_color = Color(1, 1, 1, 0.419608)
+
+[connection signal="area_entered" from="FlagCollision" to="FlagCollision" method="_on_area_entered"]
