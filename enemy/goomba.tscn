@@ -40,13 +40,13 @@ size = Vector2(14, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y05ju"]
 size = Vector2(1, 15)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uj18e"]
+size = Vector2(16, 12)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8gx4c"]
 size = Vector2(16, 4)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hd6jf"]
-size = Vector2(16, 12)
-
-[node name="Goomba" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite_2d", "collision_shape_2d")]
+[node name="Goomba" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite_2d", "collision_shape_2d") groups=["entity"]]
 script = ExtResource("1_tkggg")
 animated_sprite_2d = NodePath("AnimatedSprite2D")
 collision_shape_2d = NodePath("CollisionShape2D")
@@ -64,21 +64,22 @@ shape = SubResource("RectangleShape2D_y1cnn")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="directionHitbox"]
 position = Vector2(-8.5, -0.5)
 shape = SubResource("RectangleShape2D_y05ju")
-debug_color = Color(0.576471, 0.384314, 1, 0.419608)
+debug_color = Color(0.666667, 0.509804, 0, 0.419608)
+
+[node name="hurtHitbox" type="Area2D" parent="."]
+position = Vector2(0, -6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtHitbox"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_uj18e")
+debug_color = Color(0.964706, 0, 0.478431, 0.419608)
 
 [node name="stompHitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="stompHitbox"]
 position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_8gx4c")
-debug_color = Color(0, 0.643137, 0.313726, 0.419608)
-
-[node name="hurtBox" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtBox"]
-position = Vector2(0, 2)
-shape = SubResource("RectangleShape2D_hd6jf")
-debug_color = Color(0.976471, 0, 0.423529, 0.419608)
+debug_color = Color(0, 0.647059, 0.211765, 0.419608)
 
 [connection signal="body_entered" from="directionHitbox" to="." method="_on_direction_hitbox_body_entered"]
 [connection signal="body_entered" from="stompHitbox" to="." method="_on_area_2d_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://gj74vy0yftma"]
+[gd_scene load_steps=13 format=3 uid="uid://gj74vy0yftma"]
 
 [ext_resource type="PackedScene" uid="uid://cil2rfrx2vfb2" path="res://ui/UI.tscn" id="1_gwlbc"]
 [ext_resource type="Script" path="res://player/player_controller.gd" id="2_aykcj"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bacpa46xwa76l" path="res://icon.svg" id="3_e3wh4"]
 [ext_resource type="PackedScene" uid="uid://bsbgd1sq8a52i" path="res://tilesets/tile_map.tscn" id="4_665hs"]
 [ext_resource type="PackedScene" uid="uid://vngdnovxe7s6" path="res://enemy/goomba.tscn" id="6_te3kc"]
+[ext_resource type="PackedScene" uid="uid://ddwmepjcxlt2p" path="res://enemy/koopa.tscn" id="7_rl3nh"]
 
 [sub_resource type="Gradient" id="Gradient_rib4k"]
 offsets = PackedFloat32Array(0.458746)
@@ -41,6 +42,7 @@ script = ExtResource("2_g17ur")
 
 [node name="BackWall" type="StaticBody2D" parent="Camera2D"]
 position = Vector2(-138, 0)
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/BackWall"]
 shape = SubResource("RectangleShape2D_7v7rq")
@@ -52,9 +54,10 @@ scale = Vector2(20, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_iej4u")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["player"]]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["entity", "player"]]
 z_index = 1
 position = Vector2(87, 113)
+collision_mask = 3
 script = ExtResource("2_aykcj")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
@@ -84,3 +87,6 @@ position = Vector2(552, 200)
 
 [node name="Goomba6" parent="." instance=ExtResource("6_te3kc")]
 position = Vector2(688, 200)
+
+[node name="Koopa" parent="." instance=ExtResource("7_rl3nh")]
+position = Vector2(505, 192)
