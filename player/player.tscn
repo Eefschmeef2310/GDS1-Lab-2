@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bxhlnr2grbq1t"]
+[gd_scene load_steps=35 format=3 uid="uid://bxhlnr2grbq1t"]
 
 [ext_resource type="Script" path="res://player/player_controller.gd" id="1_tgen6"]
 [ext_resource type="Texture2D" uid="uid://bkmx0qwx2k4b2" path="res://assets/mario.png" id="2_8dkuo"]
@@ -9,6 +9,10 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5g0jp"]
 size = Vector2(16, 16)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2bqea"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1hsaj"]
 
 [sub_resource type="Animation" id="Animation_j6hqj"]
 length = 0.001
@@ -1788,6 +1792,10 @@ _data = {
 z_index = 1
 script = ExtResource("1_tgen6")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_5g0jp")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_8dkuo")
 offset = Vector2(0, -8)
@@ -1796,6 +1804,7 @@ region_rect = Rect2(0, 8, 16, 16)
 
 [node name="Sprite2DUpperFire" type="Sprite2D" parent="."]
 visible = false
+material = SubResource("ShaderMaterial_2bqea")
 texture = ExtResource("2_8dkuo")
 offset = Vector2(0, -20)
 region_enabled = true
@@ -1803,14 +1812,11 @@ region_rect = Rect2(96, 140, 16, 24)
 
 [node name="Sprite2DUpperFireThrow" type="Sprite2D" parent="."]
 visible = false
+material = SubResource("ShaderMaterial_1hsaj")
 texture = ExtResource("2_8dkuo")
 offset = Vector2(0, -16)
 region_enabled = true
 region_rect = Rect2(136, 180, 16, 32)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8)
-shape = SubResource("RectangleShape2D_5g0jp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
