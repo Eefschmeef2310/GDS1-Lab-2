@@ -1,9 +1,11 @@
-[gd_scene load_steps=31 format=3 uid="uid://bxhlnr2grbq1t"]
+[gd_scene load_steps=33 format=3 uid="uid://bxhlnr2grbq1t"]
 
 [ext_resource type="Script" path="res://player/player_controller.gd" id="1_tgen6"]
 [ext_resource type="Texture2D" uid="uid://bkmx0qwx2k4b2" path="res://assets/mario.png" id="2_8dkuo"]
 [ext_resource type="AudioStream" uid="uid://boimeadej3igc" path="res://sounds/Super Mario Bros (NES) Music - Overworld Theme.mp3" id="3_uhc0x"]
 [ext_resource type="Script" path="res://player/death_controller.gd" id="4_agbdj"]
+[ext_resource type="AudioStream" uid="uid://46lroccp805h" path="res://sounds/smb_jump-small.wav" id="5_itp50"]
+[ext_resource type="AudioStream" uid="uid://c5q36cbhmv345" path="res://sounds/smb_jump-super.wav" id="6_bpru2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5g0jp"]
 size = Vector2(16, 16)
@@ -1828,3 +1830,9 @@ autoplay = true
 
 [node name="DeathController" type="Node" parent="."]
 script = ExtResource("4_agbdj")
+
+[node name="small_jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_itp50")
+
+[node name="big_jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_bpru2")
