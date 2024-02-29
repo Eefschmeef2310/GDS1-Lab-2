@@ -1,0 +1,110 @@
+[gd_scene load_steps=12 format=3 uid="uid://ddwmepjcxlt2p"]
+
+[ext_resource type="Texture2D" uid="uid://byds75sxxyxeu" path="res://assets/koopas.png" id="1_flkh1"]
+[ext_resource type="Script" path="res://enemy/koopa.gd" id="1_s5vyy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7os6l"]
+size = Vector2(1, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0vq41"]
+size = Vector2(17, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qxonv"]
+size = Vector2(17, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a2np5"]
+size = Vector2(15, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r634q"]
+atlas = ExtResource("1_flkh1")
+region = Rect2(0, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o61f2"]
+atlas = ExtResource("1_flkh1")
+region = Rect2(18, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j8dsu"]
+atlas = ExtResource("1_flkh1")
+region = Rect2(36, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwh1r"]
+atlas = ExtResource("1_flkh1")
+region = Rect2(54, 0, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eofnl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r634q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o61f2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j8dsu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwh1r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r634q")
+}],
+"loop": true,
+"name": &"recover",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j8dsu")
+}],
+"loop": true,
+"name": &"shell",
+"speed": 5.0
+}]
+
+[node name="Koopa" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite_2d") groups=["entity"]]
+script = ExtResource("1_s5vyy")
+animated_sprite_2d = NodePath("AnimatedSprite2D")
+shellSpeed = 225
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-8.5, 0.5)
+
+[node name="directionHitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="directionHitbox" groups=["entity"]]
+position = Vector2(-8.5, 0.5)
+shape = SubResource("RectangleShape2D_7os6l")
+debug_color = Color(0.831373, 0.392157, 0, 0.419608)
+
+[node name="stompHitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="stompHitbox"]
+position = Vector2(0.5, -6)
+shape = SubResource("RectangleShape2D_0vq41")
+debug_color = Color(0, 0.643137, 0.305882, 0.419608)
+
+[node name="hurtHitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtHitbox"]
+position = Vector2(0.5, 5.5)
+shape = SubResource("RectangleShape2D_qxonv")
+debug_color = Color(0.984314, 0, 0.360784, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 11.5)
+shape = SubResource("RectangleShape2D_a2np5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_eofnl")
+animation = &"shell"
+autoplay = "default"
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="Activate"]
+[connection signal="body_entered" from="directionHitbox" to="." method="_on_direction_hitbox_body_entered"]
+[connection signal="body_entered" from="stompHitbox" to="." method="_on_area_2d_body_entered"]

@@ -567,6 +567,23 @@ tracks/5/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"toggle_tree"
+}, {
+"args": [false],
+"method": &"toggle_tree"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_lj0xe"]
 resource_name = "fire_idle"
@@ -1082,6 +1099,23 @@ tracks/5/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"toggle_tree"
+}, {
+"args": [false],
+"method": &"toggle_tree"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_dqw82"]
 resource_name = "small_die"
@@ -1244,6 +1278,23 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2(0, -16), Vector2(0, -8), Vector2(0, -16), Vector2(0, -8), Vector2(0, -16), Vector2(0, -8)]
+}
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"toggle_tree"
+}, {
+"args": [false],
+"method": &"toggle_tree"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_a1sf6"]
@@ -1679,7 +1730,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_a05px"]
 resource_name = "throw_replace"
-length = 0.2
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1687,7 +1738,7 @@ tracks/0/path = NodePath("Sprite2DUpperFire:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [null, ExtResource("2_8dkuo")]
@@ -1699,7 +1750,7 @@ tracks/1/path = NodePath("Sprite2DUpperFireThrow:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -1731,7 +1782,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_avu88"]
 resource_name = "throw_whole"
-length = 0.2
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1739,7 +1790,7 @@ tracks/0/path = NodePath("Sprite2DUpperFire:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [null, ExtResource("2_8dkuo")]
@@ -1751,7 +1802,7 @@ tracks/1/path = NodePath("Sprite2DUpperFireThrow:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -1763,7 +1814,7 @@ tracks/2/path = NodePath("Sprite2D:texture")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [null, ExtResource("2_8dkuo")]
@@ -1790,6 +1841,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
+collision_mask = 11
 script = ExtResource("1_tgen6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
