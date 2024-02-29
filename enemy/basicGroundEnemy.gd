@@ -23,7 +23,8 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	if dying:
-		velocity.y = 0
+		velocity = Vector2 (0,0)
+		
 	
 	if !dying:
 		velocity.x = direction * speed

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://vngdnovxe7s6"]
+[gd_scene load_steps=11 format=3 uid="uid://vngdnovxe7s6"]
 
 [ext_resource type="Script" path="res://enemy/goomba.gd" id="1_tkggg"]
 [ext_resource type="Texture2D" uid="uid://far6xocq267e" path="res://assets/deadGoomba.png" id="2_8pn4n"]
@@ -35,13 +35,16 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y1cnn"]
-size = Vector2(16, 14)
+size = Vector2(14, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y05ju"]
 size = Vector2(1, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8gx4c"]
-size = Vector2(16, 2)
+size = Vector2(16, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hd6jf"]
+size = Vector2(16, 12)
 
 [node name="Goomba" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite_2d", "collision_shape_2d")]
 script = ExtResource("1_tkggg")
@@ -53,7 +56,7 @@ sprite_frames = SubResource("SpriteFrames_5t0ub")
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(0, 7.5)
 shape = SubResource("RectangleShape2D_y1cnn")
 
 [node name="directionHitbox" type="Area2D" parent="."]
@@ -61,14 +64,21 @@ shape = SubResource("RectangleShape2D_y1cnn")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="directionHitbox"]
 position = Vector2(-8.5, -0.5)
 shape = SubResource("RectangleShape2D_y05ju")
-debug_color = Color(0.666667, 0.509804, 0, 0.419608)
+debug_color = Color(0.576471, 0.384314, 1, 0.419608)
 
 [node name="stompHitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="stompHitbox"]
-position = Vector2(0, -7)
+position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_8gx4c")
-debug_color = Color(0.94902, 0, 0.584314, 0.419608)
+debug_color = Color(0, 0.643137, 0.313726, 0.419608)
+
+[node name="hurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtBox"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_hd6jf")
+debug_color = Color(0.976471, 0, 0.423529, 0.419608)
 
 [connection signal="body_entered" from="directionHitbox" to="." method="_on_direction_hitbox_body_entered"]
 [connection signal="body_entered" from="stompHitbox" to="." method="_on_area_2d_body_entered"]
