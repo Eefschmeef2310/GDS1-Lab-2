@@ -46,3 +46,12 @@ func reduce_lives():
 	if(lives == 0):
 		#game over
 		pass
+		
+
+func pause_timer():
+	$Timer.set_paused(true)
+
+#Should be called after the player dies
+func restart_level():
+	#Restart game from loading screen (due to autoload, it should save the stats)
+	print("Restart Level")
