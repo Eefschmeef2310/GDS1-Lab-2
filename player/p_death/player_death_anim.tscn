@@ -10,6 +10,7 @@ process_mode = 3
 script = ExtResource("1_6s703")
 
 [node name="GPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, -8)
 emitting = false
 amount = 1
 lifetime = 2.0
@@ -27,6 +28,7 @@ one_shot = true
 autostart = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
 texture = ExtResource("3_xl51y")
 region_enabled = true
 region_rect = Rect2(116, 8, 16, 16)
