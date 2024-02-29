@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_u42ox"]
 [ext_resource type="Script" path="res://levels/level_camera.gd" id="2_g17ur"]
-[ext_resource type="PackedScene" path="res://player/player.tscn" id="3_1xoxj"]
+[ext_resource type="PackedScene" uid="uid://bxhlnr2grbq1t" path="res://player/player.tscn" id="3_1xoxj"]
 [ext_resource type="PackedScene" uid="uid://bsbgd1sq8a52i" path="res://tilesets/tile_map.tscn" id="4_665hs"]
 [ext_resource type="PackedScene" uid="uid://dgr1285omhgcy" path="res://death_plane/death_plane.tscn" id="5_c48dc"]
 
@@ -54,7 +54,7 @@ scale = Vector2(20, 1)
 shape = SubResource("RectangleShape2D_iej4u")
 
 [node name="Player" parent="." instance=ExtResource("3_1xoxj")]
-position = Vector2(87, 200)
+position = Vector2(87, 192)
 collision_mask = 3
 powerup_state = 0
 
