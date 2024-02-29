@@ -169,3 +169,6 @@ func handle_animations():
 
 func get_death_controller():
 	return $DeathController
+
+func change_powerup(new_powerup: PowerupState):
+	

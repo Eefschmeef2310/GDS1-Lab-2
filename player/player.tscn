@@ -1786,8 +1786,9 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
-collision_mask = 9
+collision_mask = 11
 script = ExtResource("1_tgen6")
+powerup_state = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_8dkuo")
