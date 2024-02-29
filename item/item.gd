@@ -13,8 +13,8 @@ func _ready():
 	if item_type != ItemType.FLOWER:
 		velocity.x = move_speed
 
-func _process(delta):
-	velocity.y += 2
+func _physics_process(delta):
+	velocity.y += 5
 	
 	if item_type == ItemType.STAR and is_on_floor():
 		velocity.y = -125

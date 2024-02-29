@@ -10,6 +10,9 @@ var powerup_state_names: PackedStringArray = ["small", "big", "fire"]
 @export var powerup_state: PowerupState = PowerupState.FIRE
 var currently_changing_powerup = false
 
+var fireball_scene: PackedScene = preload("res://player/fireball.tscn")
+var fireball_x
+
 # Horizontal movement
 var max_speed = 85.0
 var max_run_speed = 150.0
@@ -52,7 +55,7 @@ var is_landing = true
 var killY = 9999
 
 func _ready():
-	pass
+	fireball_x = $FireballMarker.position.x
 
 func _process(_delta):
 	if !currently_changing_powerup:
@@ -154,6 +157,7 @@ func update_direction():
 		$Sprite2D.flip_h = move_direction < 0
 		$Sprite2DUpperFire.flip_h = move_direction < 0
 		$Sprite2DUpperFireThrow.flip_h = move_direction < 0
+		$FireballMarker.position.x = fireball_x * move_direction
 
 #handles all animations
 func handle_animations():
@@ -195,8 +199,7 @@ func change_powerup(new_powerup: String):
 
 func hurt():
 	if powerup_state == PowerupState.SMALL:
-		#die
-		pass
+		$DeathController.kill_player()
 	else:
 		powerup_state = PowerupState.SMALL
 		currently_changing_powerup = true
@@ -206,3 +209,10 @@ func toggle_tree(on: bool):
 	process_mode = Node.PROCESS_MODE_ALWAYS if on else Node.PROCESS_MODE_INHERIT
 	currently_changing_powerup = on
 	get_tree().paused = on
+
+func throw_fireball():
+	var fireball = fireball_scene.instantiate()
+	fireball.global_position = $FireballMarker.global_position
+	get_tree().get_root().add_child(fireball)
+	if $Sprite2D.flip_h:
+		fireball.velocity.x *= -1
