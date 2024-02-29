@@ -126,6 +126,11 @@ func try_jump():
 		
 		# Does not use air jump speed at all right now
 		velocity.y = jump_speed * jump_factor
+		
+		if powerup_state == PowerupState.SMALL:
+			$small_jump.play()
+		else:
+			$big_jump.play()
 
 func force_jump():
 	coyote_counter = 0
