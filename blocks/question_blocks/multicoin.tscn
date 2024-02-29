@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://byy40p35gico4"]
 
 [ext_resource type="PackedScene" uid="uid://dikufx074gwpa" path="res://blocks/block_base.tscn" id="1_lqftm"]
-[ext_resource type="Script" path="res://blocks/multicoin.gd" id="2_5yocx"]
+[ext_resource type="Script" path="res://blocks/question_blocks/multicoin.gd" id="2_5yocx"]
 [ext_resource type="Texture2D" uid="uid://cicguqevs6v08" path="res://assets/blocks.png" id="2_h4y2o"]
 [ext_resource type="PackedScene" uid="uid://cnq68exhuyi0x" path="res://blocks/coin_popup.tscn" id="3_t0tv2"]
 

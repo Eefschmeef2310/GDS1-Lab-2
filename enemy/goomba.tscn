@@ -47,6 +47,7 @@ size = Vector2(16, 12)
 size = Vector2(16, 4)
 
 [node name="Goomba" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite_2d", "collision_shape_2d") groups=["entity"]]
+collision_mask = 9
 script = ExtResource("1_tkggg")
 animated_sprite_2d = NodePath("AnimatedSprite2D")
 collision_shape_2d = NodePath("CollisionShape2D")

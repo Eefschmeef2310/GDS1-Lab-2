@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://cdcl5a7atg58o"]
 
-[ext_resource type="PackedScene" uid="uid://dikufx074gwpa" path="res://blocks/block_base.tscn" id="1_k0osu"]
-[ext_resource type="Script" path="res://blocks/question_block.gd" id="2_veky5"]
-[ext_resource type="PackedScene" uid="uid://cnq68exhuyi0x" path="res://blocks/coin_popup.tscn" id="3_rks8i"]
-[ext_resource type="Texture2D" uid="uid://cicguqevs6v08" path="res://assets/blocks.png" id="4_imqo6"]
+[ext_resource type="PackedScene" uid="uid://dikufx074gwpa" path="res://blocks/block_base.tscn" id="1_wiwc3"]
+[ext_resource type="Script" path="res://blocks/question_blocks/invisible_block.gd" id="2_v7mh0"]
+[ext_resource type="PackedScene" uid="uid://cnq68exhuyi0x" path="res://blocks/coin_popup.tscn" id="3_dm25w"]
+[ext_resource type="Texture2D" uid="uid://cicguqevs6v08" path="res://assets/blocks.png" id="4_0x2ay"]
 
 [sub_resource type="Animation" id="Animation_sbvny"]
 length = 0.001
@@ -35,13 +35,14 @@ _data = {
 "hit": SubResource("Animation_mfglj")
 }
 
-[node name="InvisibleBlock" instance=ExtResource("1_k0osu")]
-script = ExtResource("2_veky5")
-COIN = ExtResource("3_rks8i")
+[node name="InvisibleBlock" instance=ExtResource("1_wiwc3")]
+script = ExtResource("2_v7mh0")
+COIN = ExtResource("3_dm25w")
+item_type = 3
 max_hits = 1
 
 [node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("4_imqo6")
+texture = ExtResource("4_0x2ay")
 region_rect = Rect2(80, 192, 16, 16)
 
 [node name="CollisionShape2D" parent="." index="1"]
