@@ -32,12 +32,16 @@ func _on_area_2d_body_entered(body):
 		
 		#collision_shape_2d.set_deferred("disabled",true)
 		
-		body.velocity.y = -450
+		body.velocity.y = stompLanchHeight
 
 
 func _on_direction_hitbox_body_entered(body):
-	if !body.is_in_group("entity"):
+	if !body.is_in_group("player"):
 		scale.x *= -1
 		direction *= -1
 	elif shelled:
 		if body.has_method("startDying") : body.startDying()
+		
+
+func Activate():
+	activated = 1

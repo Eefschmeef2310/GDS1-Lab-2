@@ -6,8 +6,9 @@ class_name Ground_Enemy
 var dying : bool = false
 var direction : int = -1 #start moving towards the player
 
+var stompLanchHeight : float = -200
 
-
+var activated = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -27,7 +28,7 @@ func _physics_process(delta):
 		
 	
 	if !dying:
-		velocity.x = direction * speed
+		velocity.x = direction * speed * activated 
 
 
 	move_and_slide()

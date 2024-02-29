@@ -72,9 +72,12 @@ script = ExtResource("1_s5vyy")
 animated_sprite_2d = NodePath("AnimatedSprite2D")
 shellSpeed = 225
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-8.5, 0.5)
+
 [node name="directionHitbox" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="directionHitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="directionHitbox" groups=["entity"]]
 position = Vector2(-8.5, 0.5)
 shape = SubResource("RectangleShape2D_7os6l")
 debug_color = Color(0.831373, 0.392157, 0, 0.419608)
@@ -102,5 +105,6 @@ sprite_frames = SubResource("SpriteFrames_eofnl")
 animation = &"shell"
 autoplay = "default"
 
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="Activate"]
 [connection signal="body_entered" from="directionHitbox" to="." method="_on_direction_hitbox_body_entered"]
 [connection signal="body_entered" from="stompHitbox" to="." method="_on_area_2d_body_entered"]
