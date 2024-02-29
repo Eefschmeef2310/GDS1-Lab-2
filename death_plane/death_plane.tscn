@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgr1285omhgcy"]
+
+[ext_resource type="Script" path="res://death_plane/death_plane.gd" id="1_3gtpp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bgnor"]
+
+[node name="DeathPlane" type="Area2D"]
+script = ExtResource("1_3gtpp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1994, 0)
+scale = Vector2(250, 0.1)
+shape = SubResource("RectangleShape2D_bgnor")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
