@@ -30,7 +30,7 @@ offset_right = 114.0
 offset_bottom = 28.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "PRESS SPACE TO START"
+text = "PRESS SPACE"
 
 [node name="Cursor" type="Sprite2D" parent="."]
 position = Vector2(70, 143)
@@ -49,4 +49,4 @@ offset_right = 129.0
 offset_bottom = 71.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Top-000000"
+text = "Top-0000000"

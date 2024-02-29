@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameManager="*res://autoloads/game_manager.tscn"
 UI="*res://ui/UI.tscn"
+SaveManager="*res://autoloads/save_manager.gd"
 
 [display]
 
