@@ -55,7 +55,6 @@ shape = SubResource("RectangleShape2D_iej4u")
 
 [node name="Player" parent="." instance=ExtResource("3_1xoxj")]
 position = Vector2(87, 192)
-collision_mask = 3
 powerup_state = 0
 
 [node name="TileMap" parent="." instance=ExtResource("4_665hs")]
