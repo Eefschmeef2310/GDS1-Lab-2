@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://byy40p35gico4"]
+
+[ext_resource type="PackedScene" uid="uid://dikufx074gwpa" path="res://blocks/block_base.tscn" id="1_lqftm"]
+[ext_resource type="Script" path="res://blocks/multicoin.gd" id="2_5yocx"]
+[ext_resource type="Texture2D" uid="uid://cicguqevs6v08" path="res://assets/blocks.png" id="2_h4y2o"]
+[ext_resource type="PackedScene" uid="uid://cnq68exhuyi0x" path="res://blocks/coin_popup.tscn" id="3_t0tv2"]
+
+[sub_resource type="Animation" id="Animation_qgd7x"]
+resource_name = "hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(128, 112, 16, 16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r0s3f"]
+_data = {
+"hit": SubResource("Animation_qgd7x")
+}
+
+[node name="Multicoin" instance=ExtResource("1_lqftm")]
+script = ExtResource("2_5yocx")
+COIN = ExtResource("3_t0tv2")
+max_hits = 15
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_h4y2o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_r0s3f")
+}
+
+[node name="Timer" type="Timer" parent="." index="5"]
+wait_time = 4.0
+
+[node name="CoinMarker" type="Marker2D" parent="." index="6"]
+position = Vector2(0, -16)
+
+[connection signal="body_entered" from="PlayerHitBox" to="." method="_on_player_hit_box_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

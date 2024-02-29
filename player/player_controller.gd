@@ -1,16 +1,25 @@
 extends CharacterBody2D
 class_name PlayerController
 
+enum PowerupState {
+	SMALL,
+	BIG,
+	FIRE
+}
+var powerup_state_names: PackedStringArray = ["small", "big", "fire"]
+@export var powerup_state: PowerupState = PowerupState.FIRE
+
 # Horizontal movement
-var max_speed = 200.0
-var acceleration = 300.0
-var deceleration = 300.0
+var max_speed = 85.0
+var max_run_speed = 150.0
+var acceleration = 10.0
+var deceleration = 10.0
 
 # Jumping and gravity
-var jump_speed = -400.0
-var air_jump_speed = -400.0
-var rise_factor = 1
-var fall_factor = 2
+var jump_speed = -300.0
+var air_jump_speed = -1.0
+var rise_factor = 0.6
+var fall_factor = 1
 var jump_phase = 0
 var max_air_jumps = 0;
 var jump_requested = false
@@ -34,7 +43,7 @@ var can_change_direction: bool = true
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 # Lauren variables
-#@onready var sprite_animator = $SpriteAnimator
+@onready var anim_player = $AnimationPlayer
 var is_falling = false
 var is_landing = true
 #signal toTankControl()
@@ -52,11 +61,21 @@ func _process(_delta):
 	if Input.is_action_just_released("jump"):
 		jump_release()
 	
-	#handle_animations()
+	#Fire
+	if powerup_state == PowerupState.FIRE and Input.is_action_just_pressed("run"):
+		if velocity.x != 0:
+			$AnimationPlayerFire.play("throw_replace")
+		else:
+			$AnimationPlayerFire.play("throw_whole")
+	
+	handle_animations()
 
 func _physics_process(delta):
 	# Handle movement.
-	var desired_velocity = move_direction * max_speed * move_factor
+	var move_speed = max_speed
+	if Input.is_action_pressed("run"):
+		move_speed = max_run_speed
+	var desired_velocity = move_direction * move_speed * move_factor
 	if desired_velocity != 0:
 		velocity = velocity.move_toward(Vector2(desired_velocity, velocity.y), acceleration)
 	else:
@@ -97,7 +116,7 @@ func jump():
 	jump_buffer_counter = jump_buffer_time
 	
 func try_jump():
-	if coyote_counter > 0 or (jump_phase < max_air_jumps and is_jumping):
+	if coyote_counter > 0:
 		if is_jumping:
 			jump_phase += 1
 			
@@ -120,34 +139,28 @@ func jump_release():
 	jump_is_held = false
 
 func update_direction():
-	pass
-	#if move_direction != 0:
-		#$AnimatedSprite2D.flip_h = move_direction < 0
+	if move_direction != 0 and is_on_floor():
+		$Sprite2D.flip_h = move_direction < 0
+		$Sprite2DUpperFire.flip_h = move_direction < 0
+		$Sprite2DUpperFireThrow.flip_h = move_direction < 0
 
-##handles all animations
-#func handle_animations():
-	##jumping animations
-	#
-	#if not is_on_floor():
-		#if (velocity.y < 0):
-			#sprite_animator.play("Jump")
-		#elif (velocity.y > 0):
-			#sprite_animator.play("Falling")
-			#is_falling = true
-		#else:
-			#sprite_animator.play("midair")
-	#else:
-		#if (is_falling == true):
-			#is_falling = false
-			#is_landing = true
-			#sprite_animator.play("Land")
-		#else:
-			#if move_direction != 0:
-					#sprite_animator.play("Run")
-					#is_landing = false
-			#elif not (is_landing):
-				#sprite_animator.play("Idle")
-#
-#func _on_animated_sprite_2d_animation_finished():
-	#if (is_landing == true):
-		#is_landing = false
+#handles all animations
+func handle_animations():
+	var anim_prefix: String = powerup_state_names[powerup_state] + "_"
+	
+	#jumping animations
+	if not is_on_floor():
+		anim_player.play(anim_prefix + "jump")
+	else:
+		if velocity.x != 0:
+			if move_direction != 0 and move_direction != sign(velocity.x):
+				anim_player.play(anim_prefix + "skid")
+			elif abs(velocity.x) >= max_run_speed:
+				anim_player.play(anim_prefix + "run_fast")
+			else:
+				anim_player.play(anim_prefix + "run")
+		else:
+			anim_player.play(anim_prefix + "idle")
+
+func get_death_controller():
+	return $DeathController
