@@ -42,8 +42,11 @@ func _on_player_hit_box_body_entered(body):
 				body.change_powerup("mushroom")
 				queue_free()
 			ItemType.FLOWER:
-				pass
+				body.change_powerup("fire")
+				queue_free()
 			ItemType.STAR:
+				# Start invincibility
 				pass
 			ItemType.LIFE:
+				# Add a life
 				pass

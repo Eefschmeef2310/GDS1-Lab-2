@@ -71,6 +71,9 @@ func _process(_delta):
 				$AnimationPlayerFire.play("throw_whole")
 		
 		handle_animations()
+		
+		if Input.is_action_just_pressed("debug_hurt"):
+			hurt()
 
 func _physics_process(delta):
 	if !currently_changing_powerup:
@@ -178,7 +181,26 @@ func change_powerup(new_powerup: String):
 		powerup_state = PowerupState.BIG
 		currently_changing_powerup = true
 		$AnimationPlayer.play("big_upgrade")
-		
+	elif powerup_state == PowerupState.BIG:
+		if new_powerup == "fire":
+			powerup_state = PowerupState.FIRE
+			currently_changing_powerup = true
+			$AnimationPlayer.play("fire_upgrade")
+		else:
+			# Picked up a mushroom while big.
+			pass
+	else:
+		# Picked up a flower while fire.
+		pass
+
+func hurt():
+	if powerup_state == PowerupState.SMALL:
+		#die
+		pass
+	else:
+		powerup_state = PowerupState.SMALL
+		currently_changing_powerup = true
+		$AnimationPlayer.play("small_downgrade")
 
 func toggle_tree(on: bool):
 	process_mode = Node.PROCESS_MODE_ALWAYS if on else Node.PROCESS_MODE_INHERIT

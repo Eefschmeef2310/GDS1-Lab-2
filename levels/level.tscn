@@ -76,4 +76,8 @@ position = Vector2(467, 267)
 position = Vector2(151, 178)
 item_type = 1
 
+[node name="Item2" parent="." instance=ExtResource("6_vl6je")]
+position = Vector2(186, 178)
+item_type = 1
+
 [connection signal="body_entered" from="Checkpoint 1" to="." method="_on_checkpoint_1_body_entered"]
