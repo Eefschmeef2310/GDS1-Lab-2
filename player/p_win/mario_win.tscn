@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://oxvk4p2mxsli"]
+[gd_scene load_steps=12 format=3 uid="uid://oxvk4p2mxsli"]
 
 [ext_resource type="Texture2D" uid="uid://bkmx0qwx2k4b2" path="res://assets/mario.png" id="1_306xy"]
 [ext_resource type="Script" path="res://player/p_win/mario_win.gd" id="1_okfoy"]
 [ext_resource type="Texture2D" uid="uid://huwjplj0sabr" path="res://assets/1-1.png" id="2_kjkan"]
+[ext_resource type="AudioStream" uid="uid://dic0kvrau48dd" path="res://sounds/smb_flagpole.wav" id="4_tc5e0"]
+[ext_resource type="AudioStream" uid="uid://c3du4a4ct81df" path="res://sounds/Super Mario Bros. Music - Level Complete.mp3" id="5_kqup1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bjwre"]
 size = Vector2(16, 16)
@@ -198,3 +200,9 @@ shape = SubResource("RectangleShape2D_bjwre")
 libraries = {
 "": SubResource("AnimationLibrary_x1p7j")
 }
+
+[node name="FlagSlideFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_tc5e0")
+
+[node name="WinMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_kqup1")

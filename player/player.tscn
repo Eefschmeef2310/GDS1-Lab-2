@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bxhlnr2grbq1t"]
+[gd_scene load_steps=36 format=3 uid="uid://bxhlnr2grbq1t"]
 
 [ext_resource type="Script" path="res://player/player_controller.gd" id="1_tgen6"]
 [ext_resource type="Texture2D" uid="uid://bkmx0qwx2k4b2" path="res://assets/mario.png" id="2_8dkuo"]
@@ -1926,8 +1926,6 @@ position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_e0yof")
 debug_color = Color(1, 1, 1, 0.419608)
 
-[connection signal="area_entered" from="FlagCollision" to="." method="_on_flag_collision_area_entered"]
-[connection signal="area_entered" from="FlagCollision" to="FlagCollision" method="_on_area_entered"]
 [node name="small_jump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_itp50")
 
@@ -1937,3 +1935,6 @@ stream = ExtResource("6_bpru2")
 [node name="FireballMarker" type="Marker2D" parent="."]
 position = Vector2(8, -21)
 gizmo_extents = 2.0
+
+[connection signal="area_entered" from="FlagCollision" to="." method="_on_flag_collision_area_entered"]
+[connection signal="area_entered" from="FlagCollision" to="FlagCollision" method="_on_area_entered"]

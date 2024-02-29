@@ -9,6 +9,7 @@ var state = "sliding"
 
 func _ready():
 	anim_player.play("flag_slide_big")
+	$FlagSlideFX.playing = true
 
 func _physics_process(delta):
 
@@ -21,6 +22,8 @@ func _physics_process(delta):
 	elif(position.y >= 192):
 		if state != "run":
 			state = "run"
+			$FlagSlideFX.playing = false
+			$WinMusic.playing = true
 			position.y = 192
 			$AnimationPlayer.play("jump_off_flag_big")
 		
