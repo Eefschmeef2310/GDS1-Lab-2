@@ -10,6 +10,8 @@ var coin_counter : int = 0
 var score : int = 0
 var lives : int = 3
 
+var level1_checkpoint : bool
+
 func _process(_delta):
 	if Input.is_action_just_pressed("esc"):
 		get_tree().quit()
@@ -23,6 +25,7 @@ func reset():
 	coin_counter = 0
 	score = 0
 	lives = 3
+	level1_checkpoint = false
 	
 func collect_coin():
 	coin_counter += 1
