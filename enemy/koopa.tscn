@@ -7,10 +7,10 @@
 size = Vector2(1, 21)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0vq41"]
-size = Vector2(17, 10)
+size = Vector2(12, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxonv"]
-size = Vector2(17, 13)
+size = Vector2(16, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a2np5"]
 size = Vector2(15, 1)
@@ -68,6 +68,8 @@ animations = [{
 }]
 
 [node name="Koopa" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite_2d") groups=["entity"]]
+collision_layer = 8
+collision_mask = 8
 script = ExtResource("1_s5vyy")
 animated_sprite_2d = NodePath("AnimatedSprite2D")
 shellSpeed = 225
@@ -85,14 +87,14 @@ debug_color = Color(0.831373, 0.392157, 0, 0.419608)
 [node name="stompHitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="stompHitbox"]
-position = Vector2(0.5, -6)
+position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_0vq41")
 debug_color = Color(0, 0.643137, 0.305882, 0.419608)
 
 [node name="hurtHitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtHitbox"]
-position = Vector2(0.5, 5.5)
+position = Vector2(0, 9)
 shape = SubResource("RectangleShape2D_qxonv")
 debug_color = Color(0.984314, 0, 0.360784, 0.419608)
 
@@ -102,9 +104,9 @@ shape = SubResource("RectangleShape2D_a2np5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_eofnl")
-animation = &"shell"
 autoplay = "default"
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="Activate"]
 [connection signal="body_entered" from="directionHitbox" to="." method="_on_direction_hitbox_body_entered"]
 [connection signal="body_entered" from="stompHitbox" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="hurtHitbox" to="." method="_on_hurt_hitbox_body_entered"]
