@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmte44jyjyny5"]
+
+[ext_resource type="PackedScene" uid="uid://8p74kb7ef18s" path="res://ui/score_popup.tscn" id="1_7wm6c"]
+
+[node name="1upPopup" instance=ExtResource("1_7wm6c")]
+script = null
+
+[node name="Score" parent="." index="0"]
+text = "1UP"

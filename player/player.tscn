@@ -1,12 +1,18 @@
-[gd_scene load_steps=32 format=3 uid="uid://bxhlnr2grbq1t"]
+[gd_scene load_steps=35 format=3 uid="uid://bxhlnr2grbq1t"]
 
 [ext_resource type="Script" path="res://player/player_controller.gd" id="1_tgen6"]
 [ext_resource type="Texture2D" uid="uid://bkmx0qwx2k4b2" path="res://assets/mario.png" id="2_8dkuo"]
 [ext_resource type="AudioStream" uid="uid://boimeadej3igc" path="res://sounds/Super Mario Bros (NES) Music - Overworld Theme.mp3" id="3_uhc0x"]
 [ext_resource type="Script" path="res://player/death_controller.gd" id="4_agbdj"]
+[ext_resource type="AudioStream" uid="uid://46lroccp805h" path="res://sounds/smb_jump-small.wav" id="5_itp50"]
+[ext_resource type="AudioStream" uid="uid://c5q36cbhmv345" path="res://sounds/smb_jump-super.wav" id="6_bpru2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5g0jp"]
 size = Vector2(16, 16)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2bqea"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1hsaj"]
 
 [sub_resource type="Animation" id="Animation_j6hqj"]
 length = 0.001
@@ -561,6 +567,23 @@ tracks/5/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"toggle_tree"
+}, {
+"args": [false],
+"method": &"toggle_tree"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_lj0xe"]
 resource_name = "fire_idle"
@@ -1076,6 +1099,23 @@ tracks/5/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"toggle_tree"
+}, {
+"args": [false],
+"method": &"toggle_tree"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_dqw82"]
 resource_name = "small_die"
@@ -1238,6 +1278,23 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2(0, -16), Vector2(0, -8), Vector2(0, -16), Vector2(0, -8), Vector2(0, -16), Vector2(0, -8)]
+}
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"toggle_tree"
+}, {
+"args": [false],
+"method": &"toggle_tree"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_a1sf6"]
@@ -1673,7 +1730,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_a05px"]
 resource_name = "throw_replace"
-length = 0.2
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1681,7 +1738,7 @@ tracks/0/path = NodePath("Sprite2DUpperFire:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [null, ExtResource("2_8dkuo")]
@@ -1693,7 +1750,7 @@ tracks/1/path = NodePath("Sprite2DUpperFireThrow:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -1722,10 +1779,24 @@ tracks/3/keys = {
 "update": 0,
 "values": [Rect2(154, 180, 16, 32)]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"throw_fireball"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_avu88"]
 resource_name = "throw_whole"
-length = 0.2
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1733,7 +1804,7 @@ tracks/0/path = NodePath("Sprite2DUpperFire:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [null, ExtResource("2_8dkuo")]
@@ -1745,7 +1816,7 @@ tracks/1/path = NodePath("Sprite2DUpperFireThrow:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -1757,7 +1828,7 @@ tracks/2/path = NodePath("Sprite2D:texture")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [null, ExtResource("2_8dkuo")]
@@ -1774,6 +1845,20 @@ tracks/3/keys = {
 "update": 0,
 "values": [Rect2(136, 180, 16, 32)]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"throw_fireball"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g05uj"]
 _data = {
@@ -1787,7 +1872,12 @@ size = Vector2(16, 1)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
+collision_mask = 11
 script = ExtResource("1_tgen6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_5g0jp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_8dkuo")
@@ -1797,6 +1887,7 @@ region_rect = Rect2(0, 8, 16, 16)
 
 [node name="Sprite2DUpperFire" type="Sprite2D" parent="."]
 visible = false
+material = SubResource("ShaderMaterial_2bqea")
 texture = ExtResource("2_8dkuo")
 offset = Vector2(0, -20)
 region_enabled = true
@@ -1804,14 +1895,11 @@ region_rect = Rect2(96, 140, 16, 24)
 
 [node name="Sprite2DUpperFireThrow" type="Sprite2D" parent="."]
 visible = false
+material = SubResource("ShaderMaterial_1hsaj")
 texture = ExtResource("2_8dkuo")
 offset = Vector2(0, -16)
 region_enabled = true
 region_rect = Rect2(136, 180, 16, 32)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8)
-shape = SubResource("RectangleShape2D_5g0jp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -1840,3 +1928,12 @@ debug_color = Color(1, 1, 1, 0.419608)
 
 [connection signal="area_entered" from="FlagCollision" to="." method="_on_flag_collision_area_entered"]
 [connection signal="area_entered" from="FlagCollision" to="FlagCollision" method="_on_area_entered"]
+[node name="small_jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_itp50")
+
+[node name="big_jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_bpru2")
+
+[node name="FireballMarker" type="Marker2D" parent="."]
+position = Vector2(8, -21)
+gizmo_extents = 2.0

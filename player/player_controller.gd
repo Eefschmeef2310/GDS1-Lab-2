@@ -8,6 +8,10 @@ enum PowerupState {
 }
 var powerup_state_names: PackedStringArray = ["small", "big", "fire"]
 @export var powerup_state: PowerupState = PowerupState.FIRE
+var currently_changing_powerup = false
+
+var fireball_scene: PackedScene = preload("res://player/fireball.tscn")
+var fireball_x
 
 # Horizontal movement
 var max_speed = 85.0
@@ -53,63 +57,67 @@ var killY = 9999
 var player_win_scene = preload("res://player/p_win/mario_win.tscn")
 
 func _ready():
-	pass
+	fireball_x = $FireballMarker.position.x
 
 func _process(_delta):
-
-	#Input
-	move_direction = Input.get_axis("left", "right")
-	if Input.is_action_just_pressed("jump"):
-		jump()
-	if Input.is_action_just_released("jump"):
-		jump_release()
-	
-	#Fire
-	if powerup_state == PowerupState.FIRE and Input.is_action_just_pressed("run"):
-		if velocity.x != 0:
-			$AnimationPlayerFire.play("throw_replace")
-		else:
-			$AnimationPlayerFire.play("throw_whole")
-	
-	handle_animations()
+	if !currently_changing_powerup:
+		#Input
+		move_direction = Input.get_axis("left", "right")
+		if Input.is_action_just_pressed("jump"):
+			jump()
+		if Input.is_action_just_released("jump"):
+			jump_release()
+		
+		#Fire
+		if powerup_state == PowerupState.FIRE and Input.is_action_just_pressed("run"):
+			if velocity.x != 0:
+				$AnimationPlayerFire.play("throw_replace")
+			else:
+				$AnimationPlayerFire.play("throw_whole")
+		
+		handle_animations()
+		
+		if Input.is_action_just_pressed("debug_hurt"):
+			hurt()
 
 func _physics_process(delta):
-	# Handle movement.
-	var move_speed = max_speed
-	if Input.is_action_pressed("run"):
-		move_speed = max_run_speed
-	var desired_velocity = move_direction * move_speed * move_factor
-	if desired_velocity != 0:
-		velocity = velocity.move_toward(Vector2(desired_velocity, velocity.y), acceleration)
-	else:
-		velocity = velocity.move_toward(Vector2(0, velocity.y), deceleration)
+	if !currently_changing_powerup:
+		# Handle movement.
+		var move_speed = max_speed
+		if Input.is_action_pressed("run"):
+			move_speed = max_run_speed
+		var desired_velocity = move_direction * move_speed * move_factor
+		if desired_velocity != 0:
+			velocity = velocity.move_toward(Vector2(desired_velocity, velocity.y), acceleration)
+		else:
+			velocity = velocity.move_toward(Vector2(0, velocity.y), deceleration)
+			
+		# Flip based on movement input.
+		if can_change_direction:
+			update_direction()
+			
+		# Handle jumping.
+		if is_on_floor():
+			jump_phase = 0
+			coyote_counter = coyote_time
+			is_jumping = false
+		else:
+			coyote_counter -= delta
 		
-	# Flip based on movement input.
-	if can_change_direction:
-		update_direction()
+		if jump_buffer_counter > 0:
+			jump_buffer_counter -= delta
+			try_jump()
+			
+		# Add the gravity.
+		if jump_is_held and velocity.y < 0:
+			velocity.y += gravity * delta * rise_factor
+		elif !jump_is_held or velocity.y > 0:
+			velocity.y += gravity * delta * fall_factor
+		elif velocity.y == 0:
+			velocity.y  += gravity * delta
 		
-	# Handle jumping.
-	if is_on_floor():
-		jump_phase = 0
-		coyote_counter = coyote_time
-		is_jumping = false
-	else:
-		coyote_counter -= delta
-	
-	if jump_buffer_counter > 0:
-		jump_buffer_counter -= delta
-		try_jump()
-		
-	# Add the gravity.
-	if jump_is_held and velocity.y < 0:
-		velocity.y += gravity * delta * rise_factor
-	elif !jump_is_held or velocity.y > 0:
-		velocity.y += gravity * delta * fall_factor
-	elif velocity.y == 0:
-		velocity.y  += gravity * delta
-	
-	# Move and slide.
-	move_and_slide()
+		# Move and slide.
+		move_and_slide()
 
 func move(direction: float):
 	move_direction = direction
@@ -129,6 +137,11 @@ func try_jump():
 		
 		# Does not use air jump speed at all right now
 		velocity.y = jump_speed * jump_factor
+		
+		if powerup_state == PowerupState.SMALL:
+			$small_jump.play()
+		else:
+			$big_jump.play()
 
 func force_jump():
 	coyote_counter = 0
@@ -146,6 +159,7 @@ func update_direction():
 		$Sprite2D.flip_h = move_direction < 0
 		$Sprite2DUpperFire.flip_h = move_direction < 0
 		$Sprite2DUpperFireThrow.flip_h = move_direction < 0
+		$FireballMarker.position.x = fireball_x * move_direction
 
 #handles all animations
 func handle_animations():
@@ -164,12 +178,26 @@ func handle_animations():
 				anim_player.play(anim_prefix + "run")
 		else:
 			anim_player.play(anim_prefix + "idle")
-			
-			
-			
+
 func get_death_controller():
 	return $DeathController
 
+func change_powerup(new_powerup: String):
+	if powerup_state == PowerupState.SMALL:
+		powerup_state = PowerupState.BIG
+		currently_changing_powerup = true
+		$AnimationPlayer.play("big_upgrade")
+	elif powerup_state == PowerupState.BIG:
+		if new_powerup == "fire":
+			powerup_state = PowerupState.FIRE
+			currently_changing_powerup = true
+			$AnimationPlayer.play("fire_upgrade")
+		else:
+			# Picked up a mushroom while big.
+			pass
+	else:
+		# Picked up a flower while fire.
+		pass
 
 
 
@@ -194,3 +222,22 @@ func _on_flag_collision_area_entered(area):
 		print(position)
 		print(player_win.position)
 		queue_free();
+func hurt():
+	if powerup_state == PowerupState.SMALL:
+		$DeathController.kill_player()
+	else:
+		powerup_state = PowerupState.SMALL
+		currently_changing_powerup = true
+		$AnimationPlayer.play("small_downgrade")
+
+func toggle_tree(on: bool):
+	process_mode = Node.PROCESS_MODE_ALWAYS if on else Node.PROCESS_MODE_INHERIT
+	currently_changing_powerup = on
+	get_tree().paused = on
+
+func throw_fireball():
+	var fireball = fireball_scene.instantiate()
+	fireball.global_position = $FireballMarker.global_position
+	get_tree().get_root().add_child(fireball)
+	if $Sprite2D.flip_h:
+		fireball.velocity.x *= -1

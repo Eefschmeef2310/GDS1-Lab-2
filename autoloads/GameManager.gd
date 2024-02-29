@@ -4,11 +4,14 @@ signal score_updated
 signal coins_updated
 
 @onready var timer = $Timer
+@onready var audio_stream_player = $AudioStreamPlayer
 
 #Because we know these variables will only be ints, we can cast them as such
 var coin_counter : int = 0
 var score : int = 0
 var lives : int = 3
+
+var level1_checkpoint : bool
 
 func _process(_delta):
 	if Input.is_action_just_pressed("esc"):
@@ -23,6 +26,7 @@ func reset():
 	coin_counter = 0
 	score = 0
 	lives = 3
+	level1_checkpoint = false
 	
 func collect_coin():
 	coin_counter += 1
@@ -39,19 +43,16 @@ func increase_score(amount):
 	#logic here for stacking score? we'll see how xander sorts out the character controller
 	
 func gain_1up():
+	audio_stream_player.play()
 	lives += 1
 	
 func reduce_lives():
-	lives -= 0
+	lives -= 1
 	if(lives == 0):
 		#game over
 		pass
-		
-
-func pause_timer():
-	$Timer.set_paused(true)
 
 #Should be called after the player dies
 func restart_level():
 	#Restart game from loading screen (due to autoload, it should save the stats)
-	print("Restart Level")
+	get_tree().change_scene_to_file("res://levels/loading_screen.tscn")

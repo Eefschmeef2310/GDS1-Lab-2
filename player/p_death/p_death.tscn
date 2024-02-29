@@ -4,6 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://dxfyh67q4mkrm" path="res://sounds/smb_mario_die.wav" id="2_y05qi"]
 
 [node name="PlayerDeath" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_yo57h")
 
 [node name="Timer" type="Timer" parent="."]
