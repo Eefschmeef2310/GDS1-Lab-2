@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+const UP_POPUP = preload("res://ui/1up_popup.tscn")
+
 enum ItemType {
 	MUSHROOM,
 	FLOWER,
@@ -21,7 +23,6 @@ func _process(delta):
 	if is_on_wall():
 		velocity.x = get_last_slide_collision().get_normal().x * move_speed
 		
-	
 	move_and_slide()
 	
 	match item_type:
@@ -32,7 +33,7 @@ func _process(delta):
 		ItemType.STAR:
 			$AnimationPlayer.play("star")
 		ItemType.LIFE:
-			$AnimationPlayer.play("mushroom")
+			$AnimationPlayer.play("1up")
 
 
 func _on_player_hit_box_body_entered(body):
@@ -48,5 +49,9 @@ func _on_player_hit_box_body_entered(body):
 				# Start invincibility
 				pass
 			ItemType.LIFE:
-				# Add a life
+				var popup = UP_POPUP.instantiate()
+				popup.global_position = global_position
+				get_tree().root.add_child(popup)
+				GameManager.gain_1up()
+				queue_free()
 				pass

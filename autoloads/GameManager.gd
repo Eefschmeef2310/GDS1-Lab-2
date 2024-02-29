@@ -4,6 +4,7 @@ signal score_updated
 signal coins_updated
 
 @onready var timer = $Timer
+@onready var audio_stream_player = $AudioStreamPlayer
 
 #Because we know these variables will only be ints, we can cast them as such
 var coin_counter : int = 0
@@ -42,6 +43,7 @@ func increase_score(amount):
 	#logic here for stacking score? we'll see how xander sorts out the character controller
 	
 func gain_1up():
+	audio_stream_player.play()
 	lives += 1
 	
 func reduce_lives():
