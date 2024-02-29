@@ -1,11 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://chni7pbmkx6pk"]
+[gd_scene load_steps=3 format=3 uid="uid://chni7pbmkx6pk"]
 
 [ext_resource type="Script" path="res://autoloads/GameManager.gd" id="1_bxapp"]
+[ext_resource type="AudioStream" uid="uid://det766hdr0lfx" path="res://sounds/smb_1-up.wav" id="2_lljld"]
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_bxapp")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 160.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_lljld")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
