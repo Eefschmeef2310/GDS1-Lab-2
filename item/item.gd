@@ -39,7 +39,8 @@ func _on_player_hit_box_body_entered(body):
 	if body != self and body.is_in_group("player"):
 		match item_type:
 			ItemType.MUSHROOM:
-				pass
+				body.change_powerup("mushroom")
+				queue_free()
 			ItemType.FLOWER:
 				pass
 			ItemType.STAR:
