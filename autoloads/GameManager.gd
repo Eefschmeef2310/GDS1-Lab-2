@@ -45,7 +45,12 @@ func gain_1up():
 	lives += 1
 	
 func reduce_lives():
-	lives -= 0
+	lives -= 1
 	if(lives == 0):
 		#game over
 		pass
+
+#Should be called after the player dies
+func restart_level():
+	#Restart game from loading screen (due to autoload, it should save the stats)
+	get_tree().change_scene_to_file("res://levels/loading_screen.tscn")

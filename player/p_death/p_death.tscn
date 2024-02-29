@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3ecgbxupd3ln"]
+
+[ext_resource type="Script" path="res://player/p_death/p_death.gd" id="1_yo57h"]
+[ext_resource type="AudioStream" uid="uid://dxfyh67q4mkrm" path="res://sounds/smb_mario_die.wav" id="2_y05qi"]
+
+[node name="PlayerDeath" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_yo57h")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.5
+one_shot = true
+autostart = true
+
+[node name="DeathSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_y05qi")
+autoplay = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

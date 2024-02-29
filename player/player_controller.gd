@@ -161,3 +161,6 @@ func handle_animations():
 				anim_player.play(anim_prefix + "run")
 		else:
 			anim_player.play(anim_prefix + "idle")
+
+func get_death_controller():
+	return $DeathController

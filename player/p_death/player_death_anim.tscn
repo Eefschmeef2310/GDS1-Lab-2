@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://ci4uofxgfevoe"]
+
+[ext_resource type="Script" path="res://player/p_death/player_death_anim.gd" id="1_6s703"]
+[ext_resource type="Texture2D" uid="uid://cwm6wlvkh0v68" path="res://player/p_death/death_particle.png" id="2_mey5j"]
+[ext_resource type="Texture2D" uid="uid://bkmx0qwx2k4b2" path="res://assets/mario.png" id="3_xl51y"]
+[ext_resource type="PackedScene" uid="uid://c3ecgbxupd3ln" path="res://player/p_death/p_death.tscn" id="4_ghs6t"]
+
+[node name="PlayerDeath" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_6s703")
+
+[node name="GPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 1
+lifetime = 2.0
+one_shot = true
+texture = ExtResource("2_mey5j")
+direction = Vector2(0, -0.1)
+spread = 0.0
+gravity = Vector2(0, 400)
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_xl51y")
+region_enabled = true
+region_rect = Rect2(116, 8, 16, 16)
+
+[node name="PlayerDeath" parent="." instance=ExtResource("4_ghs6t")]
+
+[connection signal="finished" from="GPUParticles2D" to="." method="_on_gpu_particles_2d_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

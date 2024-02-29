@@ -3,8 +3,8 @@ extends Node2D
 @onready var player = $Player
 
 func _ready():
-	GameManager.timer.start(160)
 	UI.underground = false
+	GameManager.timer.start(160)
 	UI.update_coin()
 	
 	if GameManager.level1_checkpoint:

@@ -9,8 +9,7 @@ class_name QuestionBlock
 var hits : int = 0
 
 func _on_player_hit_box_body_entered(body):
-	if body.is_in_group("player")  and hits < max_hits:
-		
+	if body.is_in_group("player") and hits < max_hits and body.velocity.y < 50:
 		var coin = COIN.instantiate()
 		coin.global_position = $CoinMarker.global_position
 		get_tree().root.add_child(coin)
@@ -22,4 +21,3 @@ func _on_player_hit_box_body_entered(body):
 		super.bump()
 	elif hits >= max_hits:
 		$Bump.play()
-		
