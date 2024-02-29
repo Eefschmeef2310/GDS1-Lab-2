@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://ddwmepjcxlt2p"]
+
+[ext_resource type="Texture2D" uid="uid://byds75sxxyxeu" path="res://assets/koopas.png" id="1_flkh1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r634q"]
+atlas = ExtResource("1_flkh1")
+region = Rect2(0, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o61f2"]
+atlas = ExtResource("1_flkh1")
+region = Rect2(18, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j8dsu"]
+atlas = ExtResource("1_flkh1")
+region = Rect2(36, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwh1r"]
+atlas = ExtResource("1_flkh1")
+region = Rect2(54, 0, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eofnl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r634q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o61f2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j8dsu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwh1r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r634q")
+}],
+"loop": true,
+"name": &"recover",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j8dsu")
+}],
+"loop": true,
+"name": &"shell",
+"speed": 5.0
+}]
+
+[node name="Koopa" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_eofnl")
+autoplay = "default"
+frame_progress = 0.840813
