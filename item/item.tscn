@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://d2e0861lfir3p"]
+[gd_scene load_steps=14 format=3 uid="uid://d2e0861lfir3p"]
 
 [ext_resource type="Script" path="res://item/item.gd" id="1_0fi75"]
 [ext_resource type="Texture2D" uid="uid://d3qyt0ccrl0v1" path="res://assets/items.png" id="1_44kvo"]
+[ext_resource type="AudioStream" uid="uid://bhfksbk3hepbc" path="res://sounds/smb_powerup_appears.wav" id="3_es8ew"]
 
 [sub_resource type="Animation" id="Animation_g7xhy"]
 resource_name = "1up"
@@ -159,7 +160,43 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k5l3a"]
 size = Vector2(16, 16)
 
+[sub_resource type="Animation" id="Animation_w82um"]
+resource_name = "start"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 8), Vector2(0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"complete"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xcf81"]
+_data = {
+"start": SubResource("Animation_w82um")
+}
+
 [node name="Item" type="CharacterBody2D"]
+z_index = -1
 collision_layer = 4
 collision_mask = 8
 script = ExtResource("1_0fi75")
@@ -181,5 +218,15 @@ shape = SubResource("RectangleShape2D_gtm4e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitBox"]
 shape = SubResource("RectangleShape2D_k5l3a")
+
+[node name="StartingAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xcf81")
+}
+autoplay = "start"
+
+[node name="Appearance" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_es8ew")
+autoplay = true
 
 [connection signal="body_entered" from="PlayerHitBox" to="." method="_on_player_hit_box_body_entered"]
