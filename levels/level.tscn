@@ -1,12 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://gj74vy0yftma"]
+[gd_scene load_steps=14 format=3 uid="uid://gj74vy0yftma"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_u42ox"]
 [ext_resource type="Script" path="res://levels/level_camera.gd" id="2_g17ur"]
 [ext_resource type="PackedScene" uid="uid://bxhlnr2grbq1t" path="res://player/player.tscn" id="3_1xoxj"]
 [ext_resource type="PackedScene" uid="uid://bsbgd1sq8a52i" path="res://tilesets/tile_map.tscn" id="4_665hs"]
-[ext_resource type="PackedScene" path="res://blocks/question_blocks/question_block.tscn" id="4_ptaqm"]
+[ext_resource type="PackedScene" uid="uid://dekp28747487u" path="res://blocks/question_blocks/question_block.tscn" id="4_ptaqm"]
 [ext_resource type="PackedScene" uid="uid://dgr1285omhgcy" path="res://death_plane/death_plane.tscn" id="5_c48dc"]
-[ext_resource type="PackedScene" path="res://blocks/question_blocks/star_block.tscn" id="7_x4b0g"]
+[ext_resource type="PackedScene" uid="uid://nd650yer0alk" path="res://blocks/question_blocks/star_block.tscn" id="7_x4b0g"]
+[ext_resource type="PackedScene" uid="uid://d2e0861lfir3p" path="res://item/item.tscn" id="8_3seho"]
 
 [sub_resource type="Gradient" id="Gradient_rib4k"]
 offsets = PackedFloat32Array(0.458746)
@@ -92,5 +93,9 @@ shape = SubResource("RectangleShape2D_hv3lb")
 
 [node name="DeathPlane" parent="." instance=ExtResource("5_c48dc")]
 position = Vector2(467, 267)
+
+[node name="Item" parent="." instance=ExtResource("8_3seho")]
+position = Vector2(141, 178)
+item_type = 2
 
 [connection signal="body_entered" from="Checkpoint 1" to="." method="_on_checkpoint_1_body_entered"]
