@@ -51,8 +51,7 @@ func gain_1up():
 func reduce_lives():
 	lives -= 1
 	if(lives == 0):
-		#game over
-		pass
+		get_tree().change_scene_to_file("res://levels/game_over.tscn")
 
 #Should be called after the player dies
 func restart_level():
