@@ -212,7 +212,7 @@ func _on_flag_collision_area_entered(area):
 	var area_type = area.get_groups()
 	if (area_type.has("flag")):
 		var player_win = player_win_scene.instantiate()
-		$"..".add_child(player_win)
+		$"..".call_deferred("add_child", player_win)
 		player_win.global_position = pos
 		player_win.powerup_state = powerup_state
 		if (area_type.has("5000p")):
@@ -249,6 +249,7 @@ func toggle_tree(on: bool):
 	get_tree().paused = on
 
 func throw_fireball():
+	$fireball.play()
 	var fireball = fireball_scene.instantiate()
 	fireball.global_position = $FireballMarker.global_position
 	get_tree().root.add_child(fireball)

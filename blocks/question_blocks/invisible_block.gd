@@ -1,8 +1,9 @@
 extends QuestionBlock
 
 func _on_player_hit_box_body_entered(body):
-	call_deferred("turn_off_collision")
+	if body.velocity.y < 50:
+		call_deferred("turn_off_collision")
 	super._on_player_hit_box_body_entered(body)
 	
 func turn_off_collision():
-	$CollisionShape2D.one_way_collision = false
+	$CollisionShape2D.disabled = false

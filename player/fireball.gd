@@ -18,4 +18,3 @@ func _physics_process(_delta):
 			$AnimationPlayer.play("explode")
 			
 		move_and_slide()
-	

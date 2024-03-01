@@ -101,8 +101,7 @@ position = Vector2(180, -85)
 texture = ExtResource("2_rpmqn")
 
 [node name="FLAG TESTING" type="Node2D" parent="."]
-visible = false
-position = Vector2(180, -18)
+position = Vector2(189, 195)
 
 [node name="100p" type="Node2D" parent="FLAG TESTING" groups=["100p", "flag"]]
 
