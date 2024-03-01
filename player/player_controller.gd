@@ -219,26 +219,36 @@ func throw_fireball():
 	if $Sprite2D.flip_h:
 		fireball.velocity.x *= -1
 		
-		
+
 func anim_teleport(tele_location, down: bool):
-	#Play animation	
+	#Plays "dummy" animation for now
+	$PipeAnimTimer.start()
 	if(down):
 		#Play pipedown animation
 		pass
 	else:
 		#Play right pipe animation
 		pass
+	#Play Pipe Sound	
+	#Sets the position that the player will teleport to
 	pipe_tele_location = tele_location
 	toggle_movement(false)
-	$PipeAnimTimer.start()
 	
+	
+	
+#Called when entering a pipe
 func toggle_movement(on: bool):
 	move_factor = 1 if on else 0
 
+#When the "animation" finishes
 func _on_pipe_anim_timer_timeout():
 	toggle_movement(true)
-	teleport_player()
 	GameManager.update_subworld()
+	teleport_player()
 
 func teleport_player():
 	global_position = pipe_tele_location
+	if(!GameManager.get_subworld_state()):
+		#Plays getting out of pipe animation here
+		#For some reason it only exists for the overworld not subworld
+		pass

@@ -101,6 +101,6 @@ tele_location = Vector2(2400, 300)
 
 [node name="PipeLeft" parent="." instance=ExtResource("9_eyeag")]
 position = Vector2(2584, 440)
-tele_location = Vector2(2624, 168)
+tele_location = Vector2(2624, 177)
 
 [connection signal="body_entered" from="Checkpoint 1" to="." method="_on_checkpoint_1_body_entered"]
