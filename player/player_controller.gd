@@ -54,7 +54,10 @@ var is_landing = true
 
 var killY = 9999
 
+var pipe_tele_location: Vector2
+
 func _ready():
+	GameManager.player_teleported_subworld.connect(teleport_player_subworld)
 	fireball_x = $FireballMarker.position.x
 
 func _process(_delta):
@@ -216,3 +219,22 @@ func throw_fireball():
 	get_tree().get_root().add_child(fireball)
 	if $Sprite2D.flip_h:
 		fireball.velocity.x *= -1
+		
+		
+func anim_teleport_down(tele_location):
+	#Play animation	
+	pipe_tele_location = tele_location
+	toggle_movement(false)
+	$PipeAnimTimer.start()
+	pass
+	
+func toggle_movement(on: bool):
+	move_factor = 1 if on else 0
+
+
+func _on_pipe_anim_timer_timeout():
+	toggle_movement(true)
+	GameManager.teleport_subworld()
+
+func teleport_player_subworld():
+	global_position = pipe_tele_location

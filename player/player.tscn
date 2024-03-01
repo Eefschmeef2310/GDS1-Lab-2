@@ -1925,3 +1925,8 @@ stream = ExtResource("6_bpru2")
 [node name="FireballMarker" type="Marker2D" parent="."]
 position = Vector2(8, -21)
 gizmo_extents = 2.0
+
+[node name="PipeAnimTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="PipeAnimTimer" to="." method="_on_pipe_anim_timer_timeout"]

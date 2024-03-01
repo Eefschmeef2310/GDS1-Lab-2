@@ -2,6 +2,7 @@ extends Node
 
 signal score_updated
 signal coins_updated
+signal player_teleported_subworld
 
 @onready var timer = $Timer
 @onready var audio_stream_player = $AudioStreamPlayer
@@ -56,3 +57,6 @@ func reduce_lives():
 func restart_level():
 	#Restart game from loading screen (due to autoload, it should save the stats)
 	get_tree().change_scene_to_file("res://levels/loading_screen.tscn")
+	
+func teleport_subworld():
+	player_teleported_subworld.emit()
