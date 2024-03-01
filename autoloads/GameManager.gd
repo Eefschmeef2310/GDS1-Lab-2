@@ -2,7 +2,7 @@ extends Node
 
 signal score_updated
 signal coins_updated
-signal player_teleported_subworld
+signal updated_subworld
 
 @onready var timer = $Timer
 @onready var audio_stream_player = $AudioStreamPlayer
@@ -13,6 +13,7 @@ var score : int = 0
 var lives : int = 3
 
 var level1_checkpoint : bool
+var in_subworld: bool = false
 
 func _process(_delta):
 	if Input.is_action_just_pressed("esc"):
@@ -58,5 +59,9 @@ func restart_level():
 	#Restart game from loading screen (due to autoload, it should save the stats)
 	get_tree().change_scene_to_file("res://levels/loading_screen.tscn")
 	
-func teleport_subworld():
-	player_teleported_subworld.emit()
+func get_subworld_state():
+	return in_subworld
+	
+func update_subworld():
+	in_subworld = true if !in_subworld else false
+	updated_subworld.emit()

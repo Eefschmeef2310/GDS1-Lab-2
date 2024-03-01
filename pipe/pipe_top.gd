@@ -25,11 +25,15 @@ func _physics_process(delta):
 	if(player == null):
 		return
 	
-	if(can_transport == true && Input.is_action_pressed("down") && player.is_on_floor()):
-		#Teleport the player to a new location
-		player.anim_teleport_down(tele_location)
-		can_transport = false
-		
+	#I hate coding sometimes jesus christ wtf did I just write
+	if(can_transport == true && player.is_on_floor()):
+		if(Input.is_action_just_pressed("down") && pipe_direction == PipeDirection.UP):
+			player.anim_teleport(tele_location, true)
+			can_transport = false
+		elif(Input.is_action_just_pressed("right") && pipe_direction == PipeDirection.LEFT):
+			player.anim_teleport(tele_location, false)
+			can_transport = false
+
 
 func _on_tele_collider_body_entered(body):
 	if(body.is_in_group("player")):
