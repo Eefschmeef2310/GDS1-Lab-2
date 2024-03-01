@@ -55,8 +55,11 @@ scale = Vector2(20, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_iej4u")
 
-[node name="Player" parent="." instance=ExtResource("3_1xoxj")]
+[node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(87, 192)
+
+[node name="Player" parent="." instance=ExtResource("3_1xoxj")]
+position = Vector2(1623, 137)
 powerup_state = 0
 
 [node name="ItemBlocks" type="Node2D" parent="."]
