@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bxhlnr2grbq1t"]
+[gd_scene load_steps=42 format=3 uid="uid://bxhlnr2grbq1t"]
 
 [ext_resource type="Script" path="res://player/player_controller.gd" id="1_tgen6"]
 [ext_resource type="Texture2D" uid="uid://bkmx0qwx2k4b2" path="res://assets/mario.png" id="2_8dkuo"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://player/death_controller.gd" id="4_agbdj"]
 [ext_resource type="AudioStream" uid="uid://46lroccp805h" path="res://sounds/smb_jump-small.wav" id="5_itp50"]
 [ext_resource type="AudioStream" uid="uid://c5q36cbhmv345" path="res://sounds/smb_jump-super.wav" id="6_bpru2"]
+[ext_resource type="AudioStream" uid="uid://uhdnalrfcp6j" path="res://sounds/smb_powerup.wav" id="7_pdam7"]
+[ext_resource type="AudioStream" uid="uid://cdh1xg1wcv8ey" path="res://sounds/smb_pipe.wav" id="8_xhkl1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5g0jp"]
 size = Vector2(16, 16)
@@ -1896,20 +1898,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [false],
-"method": &"toggle_shader"
-}]
-}
 
 [sub_resource type="Animation" id="Animation_kgqsf"]
 resource_name = "invincible"
@@ -1927,20 +1915,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [true],
-"method": &"toggle_shader"
-}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ex0nv"]
@@ -2020,6 +1994,12 @@ stream = ExtResource("5_itp50")
 [node name="big_jump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_bpru2")
 
+[node name="powerup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_pdam7")
+
+[node name="powerdown" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_xhkl1")
+
 [node name="FireballMarker" type="Marker2D" parent="."]
 position = Vector2(8, -21)
 gizmo_extents = 2.0
@@ -2027,6 +2007,14 @@ gizmo_extents = 2.0
 [node name="PipeAnimTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="StarTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="InvincibilityTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="FlagCollision" to="." method="_on_flag_collision_area_entered"]
 [connection signal="area_entered" from="FlagCollision" to="FlagCollision" method="_on_area_entered"]
 [connection signal="timeout" from="PipeAnimTimer" to="." method="_on_pipe_anim_timer_timeout"]
+[connection signal="timeout" from="StarTimer" to="." method="_on_star_timer_timeout"]
+[connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]

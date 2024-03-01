@@ -1,8 +1,12 @@
 extends Control
 
 func _ready():
+	GameManager.reset()
+	
 	UI.loading_screen = true
 	UI.underground = false
+	UI.update_coin()
+	UI.coin_animation.speed_scale = 1
 	
 	$"Top Score".text = "TOP-" + str(SaveManager.save_game.high_score).pad_zeros(7)
 

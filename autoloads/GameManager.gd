@@ -1,5 +1,8 @@
 extends Node
 
+const SCORE_POPUP = preload("res://ui/score_popup.tscn")
+const _1_UP_POPUP = preload("res://ui/1up_popup.tscn")
+
 signal score_updated
 signal coins_updated
 signal updated_subworld
@@ -15,14 +18,32 @@ var lives : int = 3
 var level1_checkpoint : bool
 var in_subworld: bool = false
 
+var player_scores : Array[int] = [
+	100,
+	200,
+	400,
+	500,
+	800,
+	1000,
+	2000,
+	4000,
+	5000,
+	8000] #all score stacking. anything above is a 1-UP
+var shell_scores : Array[int] = [
+	500,
+	800,
+	1000,
+	2000,
+	4000,
+	5000,
+	8000]
+
 func _process(_delta):
 	if Input.is_action_just_pressed("esc"):
 		get_tree().quit()
 
-#You don't need to have pass in a method if ther are other lines of code
 func _on_timer_timeout():
-	#Kill the player
-	pass
+	get_tree().get_first_node_in_group("player").hurt()
 
 func reset():
 	coin_counter = 0
@@ -37,7 +58,6 @@ func collect_coin():
 		#play 1-up sound
 		coin_counter = 0
 	coins_updated.emit()
-	increase_score(200)
 	
 func increase_score(amount):
 	score += amount
@@ -50,9 +70,6 @@ func gain_1up():
 	
 func reduce_lives():
 	lives -= 1
-	if(lives == 0):
-		#game over
-		pass
 
 #Should be called after the player dies
 func restart_level():
@@ -66,3 +83,13 @@ func update_subworld():
 	in_subworld = true if !in_subworld else false
 	#Updates the level camera to change position
 	updated_subworld.emit()
+
+func spawn_score_or_1up_popup(position : Vector2):
+	#Method for calculating chained attacks
+	if get_tree().get_first_node_in_group("player").stomp_sequence < player_scores.size():
+		#spawn score popup
+		var score_popup = SCORE_POPUP.instantiate()
+		score_popup.set_values(player_scores[get_tree().get_first_node_in_group("player").stomp_sequence], position)
+		get_tree().root.add_child(score_popup)
+	else:
+		get_tree().root.add_child(_1_UP_POPUP.instantiate())

@@ -13,7 +13,7 @@ var can_transport: bool = false
 var player
 
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	if(player == null):
 		return
 	

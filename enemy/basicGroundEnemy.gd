@@ -25,11 +25,8 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 	if dying:
 		velocity = Vector2 (0,0)
-		
 	
 	if !dying:
 		velocity.x = direction * speed * activated 
 
-
 	move_and_slide()
-
