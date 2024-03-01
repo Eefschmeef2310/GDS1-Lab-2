@@ -52,8 +52,9 @@ func Activate():
 	
 func _on_hurt_hitbox_body_entered(body):
 	#print (body)
-	if body.is_in_group("player") && !false: # replace false with if player is invicinble
-		body.hurt()
+	if body.is_in_group("player"): # replace false with if player is invicinble
+		if !body.is_star():
+			body.hurt()
 	if body.has_method("startDying") && shelled : body.startDying()
 	else:
 		pass
