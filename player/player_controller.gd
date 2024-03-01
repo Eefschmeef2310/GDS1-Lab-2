@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name PlayerController
 
+const STAR = preload("res://shaders/star.tres")
+
 enum PowerupState {
 	SMALL,
 	BIG,
@@ -89,7 +91,6 @@ func _process(delta):
 			$AnimationPlayerInvincible.play("base")
 		
 		if star_timer > 0:
-			print(star_timer)
 			star_timer -= delta
 			# Do visual star stuff here
 		
@@ -273,3 +274,8 @@ func is_invincible():
 # Star powerup that kills things.
 func is_star():
 	return star_timer > 0
+
+func toggle_shader(on : bool):
+	$Sprite2D.material = STAR if on else null
+	$Sprite2DUpperFire.material = STAR if on else null
+	$Sprite2DUpperFireThrow.material = STAR if on else null
