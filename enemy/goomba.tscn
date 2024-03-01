@@ -44,7 +44,7 @@ size = Vector2(1, 15)
 size = Vector2(16, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8gx4c"]
-size = Vector2(10, 4)
+size = Vector2(12, 4)
 
 [node name="Goomba" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite_2d", "collision_shape_2d", "hurtHitbox") groups=["entity"]]
 collision_layer = 8
