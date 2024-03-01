@@ -7,10 +7,25 @@ var x_velocity = 0
 @onready var anim_player = $AnimationPlayer
 var state = "sliding"
 
+enum PowerupState {
+	SMALL,
+	BIG,
+	FIRE
+}
+var powerup_state_names: PackedStringArray = ["small", "big", "fire"]
+@export var powerup_state: PowerupState
+
 func _ready():
 	anim_player.play("RESET")
-	anim_player.play("flag_slide_small")
+	if (powerup_state == PowerupState.SMALL):
+		anim_player.play("flag_slide_small")
+	elif (powerup_state == PowerupState.BIG):
+		anim_player.play("flag_slide_big")
+	elif (powerup_state == PowerupState.FIRE):
+		anim_player.play("flag_slide_big_fire")
 	$FlagSlideFX.playing = true
+	
+	print(powerup_state)
 
 func _physics_process(delta):
 
@@ -27,6 +42,13 @@ func _physics_process(delta):
 			$WinMusic.playing = true
 			position.y = 192
 			$AnimationPlayer.play("jump_off_flag_small")
+			
+			if (powerup_state == PowerupState.SMALL):
+				anim_player.play("jump_off_flag_slide_small")
+			elif (powerup_state == PowerupState.BIG):
+				anim_player.play("jump_off_flag_slide_big")
+			elif (powerup_state == PowerupState.FIRE):
+				anim_player.play("jump_off_flag_slide_big_fire")
 		
 			
 		

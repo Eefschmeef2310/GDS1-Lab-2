@@ -209,6 +209,8 @@ func _on_flag_collision_area_entered(area):
 		var player_win = player_win_scene.instantiate()
 		$"..".add_child(player_win)
 		player_win.global_position = pos
+		player_win.powerup_state = powerup_state
+		#print(PowerupState.SMALL, PowerupState.BIG, PowerupState.FIRE)
 		if (area_type.has("5000p")):
 			print("5000 points")
 		elif (area_type.has("2000p")):
