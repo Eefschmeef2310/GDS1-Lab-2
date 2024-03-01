@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dho6r65s680p1"]
+
+[ext_resource type="Shader" path="res://shaders/star.gdshader" id="1_j0xxr"]
+
+[resource]
+shader = ExtResource("1_j0xxr")
+shader_parameter/speed = 2.0
+shader_parameter/tint = Color(1, 1, 0.8, 1)
+shader_parameter/span = 0.5

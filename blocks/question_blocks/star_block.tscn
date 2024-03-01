@@ -6,7 +6,7 @@
 item_type = 2
 
 [node name="Sprite2D" parent="." index="0"]
-region_rect = Rect2(96, 112, 16, 16)
+region_rect = Rect2(272, 192, 16, 16)
 
 [node name="AnimationPlayer" parent="." index="4"]
 autoplay = ""

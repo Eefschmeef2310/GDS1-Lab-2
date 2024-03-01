@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bxhlnr2grbq1t"]
+[gd_scene load_steps=39 format=3 uid="uid://bxhlnr2grbq1t"]
 
 [ext_resource type="Script" path="res://player/player_controller.gd" id="1_tgen6"]
 [ext_resource type="Texture2D" uid="uid://bkmx0qwx2k4b2" path="res://assets/mario.png" id="2_8dkuo"]
@@ -1867,6 +1867,91 @@ _data = {
 "throw_whole": SubResource("Animation_avu88")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e0yof"]
+size = Vector2(16, 1)
+[sub_resource type="Animation" id="Animation_iifk4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_tw0pn"]
+resource_name = "base"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"toggle_shader"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_kgqsf"]
+resource_name = "invincible"
+length = 0.1
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [true],
+"method": &"toggle_shader"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ex0nv"]
+_data = {
+"RESET": SubResource("Animation_iifk4"),
+"base": SubResource("Animation_tw0pn"),
+"invincible": SubResource("Animation_kgqsf")
+}
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
 collision_mask = 11
@@ -1908,6 +1993,11 @@ libraries = {
 "": SubResource("AnimationLibrary_g05uj")
 }
 
+[node name="AnimationPlayerInvincible" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ex0nv")
+}
+
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(-87, -200)
 stream = ExtResource("3_uhc0x")
@@ -1915,6 +2005,13 @@ autoplay = true
 
 [node name="DeathController" type="Node" parent="."]
 script = ExtResource("4_agbdj")
+
+[node name="FlagCollision" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlagCollision"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_e0yof")
+debug_color = Color(1, 1, 1, 0.419608)
 
 [node name="small_jump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_itp50")
@@ -1930,3 +2027,5 @@ gizmo_extents = 2.0
 one_shot = true
 
 [connection signal="timeout" from="PipeAnimTimer" to="." method="_on_pipe_anim_timer_timeout"]
+[connection signal="area_entered" from="FlagCollision" to="." method="_on_flag_collision_area_entered"]
+[connection signal="area_entered" from="FlagCollision" to="FlagCollision" method="_on_area_entered"]

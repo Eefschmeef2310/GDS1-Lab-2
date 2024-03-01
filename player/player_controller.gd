@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name PlayerController
 
+const STAR = preload("res://shaders/star.tres")
+
 enum PowerupState {
 	SMALL,
 	BIG,
@@ -12,6 +14,12 @@ var currently_changing_powerup = false
 
 var fireball_scene: PackedScene = preload("res://player/fireball.tscn")
 var fireball_x
+
+var max_star_time: float = 12
+var star_timer: float
+
+var max_incinvible_time: float = 3
+var invincible_timer: float = 0
 
 # Horizontal movement
 var max_speed = 85.0
@@ -55,11 +63,12 @@ var is_landing = true
 var killY = 9999
 
 var pipe_tele_location: Vector2
+var player_win_scene = preload("res://player/p_win/mario_win.tscn")
 
 func _ready():
 	fireball_x = $FireballMarker.position.x
 
-func _process(_delta):
+func _process(delta):
 	if !currently_changing_powerup:
 		#Input
 		move_direction = Input.get_axis("left", "right")
@@ -75,6 +84,18 @@ func _process(_delta):
 			else:
 				$AnimationPlayerFire.play("throw_whole")
 		
+		# Timed States
+		if invincible_timer > 0:
+			invincible_timer -= delta
+			$AnimationPlayerInvincible.play("invincible")
+		else:
+			$AnimationPlayerInvincible.play("base")
+		
+		if star_timer > 0:
+			star_timer -= delta
+			# Do visual star stuff here
+		
+		# Animation
 		handle_animations()
 		
 		if Input.is_action_just_pressed("debug_hurt"):
@@ -199,12 +220,37 @@ func change_powerup(new_powerup: String):
 		# Picked up a flower while fire.
 		pass
 
+
+
+
+func _on_flag_collision_area_entered(area):
+	var pos = global_position
+	var area_type = area.get_groups()
+	if (area_type.has("flag")):
+		var player_win = player_win_scene.instantiate()
+		$"..".add_child(player_win)
+		player_win.global_position = pos
+		player_win.powerup_state = powerup_state
+		if (area_type.has("5000p")):
+			print("5000 points")
+		elif (area_type.has("2000p")):
+			print("2000 points")
+		elif (area_type.has("800p")):
+			print("800 points")
+		elif (area_type.has("400p")):
+			print("400 points")
+		elif (area_type.has("100p")):
+			print("100 points")
+		print(position)
+		print(player_win.position)
+		queue_free();
 func hurt():
 	if powerup_state == PowerupState.SMALL:
 		$DeathController.kill_player()
 	else:
 		powerup_state = PowerupState.SMALL
 		currently_changing_powerup = true
+		invincible_timer = max_incinvible_time
 		$AnimationPlayer.play("small_downgrade")
 
 func toggle_tree(on: bool):
@@ -252,3 +298,19 @@ func teleport_player():
 		#Plays getting out of pipe animation here
 		#For some reason it only exists for the overworld not subworld
 		pass
+
+func start_star():
+	star_timer = max_star_time
+
+# Invincibility after getting hit.
+func is_invincible():
+	return invincible_timer > 0
+
+# Star powerup that kills things.
+func is_star():
+	return star_timer > 0
+
+func toggle_shader(on : bool):
+	$Sprite2D.material = STAR if on else null
+	$Sprite2DUpperFire.material = STAR if on else null
+	$Sprite2DUpperFireThrow.material = STAR if on else null
