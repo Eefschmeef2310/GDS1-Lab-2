@@ -13,6 +13,12 @@ var currently_changing_powerup = false
 var fireball_scene: PackedScene = preload("res://player/fireball.tscn")
 var fireball_x
 
+var max_star_time: float = 12
+var star_timer: float
+
+var max_incinvible_time: float = 3
+var invincible_timer: float = 0
+
 # Horizontal movement
 var max_speed = 85.0
 var max_run_speed = 150.0
@@ -59,7 +65,7 @@ var player_win_scene = preload("res://player/p_win/mario_win.tscn")
 func _ready():
 	fireball_x = $FireballMarker.position.x
 
-func _process(_delta):
+func _process(delta):
 	if !currently_changing_powerup:
 		#Input
 		move_direction = Input.get_axis("left", "right")
@@ -75,6 +81,19 @@ func _process(_delta):
 			else:
 				$AnimationPlayerFire.play("throw_whole")
 		
+		# Timed States
+		if invincible_timer > 0:
+			invincible_timer -= delta
+			$AnimationPlayerInvincible.play("invincible")
+		else:
+			$AnimationPlayerInvincible.play("base")
+		
+		if star_timer > 0:
+			print(star_timer)
+			star_timer -= delta
+			# Do visual star stuff here
+		
+		# Animation
 		handle_animations()
 		
 		if Input.is_action_just_pressed("debug_hurt"):
@@ -229,6 +248,7 @@ func hurt():
 	else:
 		powerup_state = PowerupState.SMALL
 		currently_changing_powerup = true
+		invincible_timer = max_incinvible_time
 		$AnimationPlayer.play("small_downgrade")
 
 func toggle_tree(on: bool):
@@ -242,3 +262,14 @@ func throw_fireball():
 	get_tree().get_root().add_child(fireball)
 	if $Sprite2D.flip_h:
 		fireball.velocity.x *= -1
+
+func start_star():
+	star_timer = max_star_time
+
+# Invincibility after getting hit.
+func is_invincible():
+	return invincible_timer > 0
+
+# Star powerup that kills things.
+func is_star():
+	return star_timer > 0
