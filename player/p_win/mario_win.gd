@@ -8,7 +8,8 @@ var x_velocity = 0
 var state = "sliding"
 
 func _ready():
-	anim_player.play("flag_slide_big")
+	anim_player.play("RESET")
+	anim_player.play("flag_slide_small")
 	$FlagSlideFX.playing = true
 
 func _physics_process(delta):
@@ -25,7 +26,7 @@ func _physics_process(delta):
 			$FlagSlideFX.playing = false
 			$WinMusic.playing = true
 			position.y = 192
-			$AnimationPlayer.play("jump_off_flag_big")
+			$AnimationPlayer.play("jump_off_flag_small")
 		
 			
 		
