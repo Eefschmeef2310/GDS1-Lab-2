@@ -38,20 +38,24 @@ func _on_area_2d_body_entered(body):
 
 
 func _on_direction_hitbox_body_entered(body):
-	if !body.is_in_group("player"):
-		scale.x *= -1
-		direction *= -1
-	elif shelled:
-		if body.has_method("startDying") : body.startDying()
+	#if !body.is_in_group("player"):
+	#print(body)
+	scale.x *= -1
+	direction *= -1
+	if shelled:
+		
+		if body.get_parent().has_method("startDying") : body.get_parent().startDying()
 		
 
 func Activate():
 	activated = 1
 	
 func _on_hurt_hitbox_body_entered(body):
+	#print (body)
 	if body.is_in_group("player") && !false: # replace false with if player is invicinble
 		body.hurt()
 	if body.has_method("startDying") && shelled : body.startDying()
 	else:
-		queue_free()
+		pass
+		#queue_free()
 	
