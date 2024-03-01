@@ -1,7 +1,7 @@
 extends Control
 
 func _ready():
-	UI.underground = true
+	UI.loading_screen = true
 	UI.update_coin()
 	UI.coin_animation.speed_scale = 0
 	
