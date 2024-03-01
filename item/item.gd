@@ -59,8 +59,8 @@ func _on_player_hit_box_body_entered(body):
 				body.change_powerup("fire")
 				queue_free()
 			ItemType.STAR:
-				# Start invincibility
-				pass
+				body.start_star()
+				queue_free()
 			ItemType.LIFE:
 				var popup = UP_POPUP.instantiate()
 				popup.global_position = global_position
