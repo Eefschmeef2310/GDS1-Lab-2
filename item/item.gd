@@ -1,22 +1,30 @@
 extends CharacterBody2D
-class_name Item
 
 const UP_POPUP = preload("res://ui/1up_popup.tscn")
-const SCORE_POPUP = preload("res://ui/score_popup.tscn")
 
 enum ItemType {
 	MUSHROOM,
 	FLOWER,
 	STAR,
-	LIFE,
-	NULL
+	LIFE
 }
 @export var item_type = ItemType.MUSHROOM
 var move_speed = 60
 
-var complete_animation : bool = false
-
 func _ready():
+	if item_type != ItemType.FLOWER:
+		velocity.x = move_speed
+
+func _physics_process(delta):
+	velocity.y += 5
+	
+	if item_type == ItemType.STAR and is_on_floor():
+		velocity.y = -125
+	if is_on_wall():
+		velocity.x = get_last_slide_collision().get_normal().x * move_speed
+		
+	move_and_slide()
+	
 	match item_type:
 		ItemType.MUSHROOM:
 			$AnimationPlayer.play("mushroom")
@@ -27,29 +35,9 @@ func _ready():
 		ItemType.LIFE:
 			$AnimationPlayer.play("1up")
 
-func complete():
-	if item_type != ItemType.FLOWER:
-		velocity.x = move_speed
-	complete_animation = true
-
-func _physics_process(delta):
-	if complete_animation:
-		velocity.y += 5
-		
-		if item_type == ItemType.STAR and is_on_floor():
-			velocity.y = -125
-		if is_on_wall():
-			velocity.x = get_last_slide_collision().get_normal().x * move_speed
-			
-		move_and_slide()
 
 func _on_player_hit_box_body_entered(body):
 	if body != self and body.is_in_group("player"):
-		#Create score pop-up (this is the same across all items thank god)
-		var score_popup = SCORE_POPUP.instantiate()
-		score_popup.set_values(1000, global_position)
-		get_tree().root.add_child(score_popup)
-		
 		match item_type:
 			ItemType.MUSHROOM:
 				body.change_powerup("mushroom")

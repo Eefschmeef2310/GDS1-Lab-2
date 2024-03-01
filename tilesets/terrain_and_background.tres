@@ -2,16 +2,16 @@
 
 [ext_resource type="Texture2D" uid="uid://c1fnf2ep54c37" path="res://assets/terrain_merged.png" id="1_8m81p"]
 [ext_resource type="PackedScene" uid="uid://cdo0fgfx28qae" path="res://blocks/brick.tscn" id="1_ggxmb"]
-[ext_resource type="PackedScene" path="res://blocks/question_blocks/question_block.tscn" id="2_gwli1"]
-[ext_resource type="PackedScene" path="res://blocks/question_blocks/multicoin.tscn" id="3_jejjr"]
+[ext_resource type="PackedScene" uid="uid://dekp28747487u" path="res://blocks/question_block.tscn" id="2_ds6oo"]
+[ext_resource type="PackedScene" uid="uid://byy40p35gico4" path="res://blocks/multicoin.tscn" id="3_lrjgk"]
 [ext_resource type="PackedScene" uid="uid://vngdnovxe7s6" path="res://enemy/goomba.tscn" id="4_mdidn"]
-[ext_resource type="PackedScene" path="res://blocks/question_blocks/invisible_block.tscn" id="4_vm5og"]
+[ext_resource type="PackedScene" uid="uid://cdcl5a7atg58o" path="res://blocks/invisible_block.tscn" id="4_vm5og"]
 [ext_resource type="PackedScene" uid="uid://ddwmepjcxlt2p" path="res://enemy/koopa.tscn" id="5_uvfil"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_tra15"]
 scenes/1/scene = ExtResource("1_ggxmb")
-scenes/2/scene = ExtResource("2_gwli1")
-scenes/3/scene = ExtResource("3_jejjr")
+scenes/2/scene = ExtResource("2_ds6oo")
+scenes/3/scene = ExtResource("3_lrjgk")
 scenes/4/scene = ExtResource("4_mdidn")
 scenes/5/scene = ExtResource("5_uvfil")
 scenes/6/scene = ExtResource("4_vm5og")

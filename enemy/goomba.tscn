@@ -44,15 +44,12 @@ size = Vector2(1, 15)
 size = Vector2(16, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8gx4c"]
-size = Vector2(10, 4)
+size = Vector2(16, 4)
 
-[node name="Goomba" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite_2d", "collision_shape_2d", "hurtHitbox") groups=["entity"]]
-collision_layer = 8
-collision_mask = 8
+[node name="Goomba" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite_2d", "collision_shape_2d") groups=["entity"]]
 script = ExtResource("1_tkggg")
 animated_sprite_2d = NodePath("AnimatedSprite2D")
 collision_shape_2d = NodePath("CollisionShape2D")
-hurtHitbox = NodePath("hurtHitbox")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5t0ub")
@@ -63,8 +60,6 @@ position = Vector2(0, 7.5)
 shape = SubResource("RectangleShape2D_y1cnn")
 
 [node name="directionHitbox" type="Area2D" parent="."]
-collision_layer = 8
-collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="directionHitbox"]
 position = Vector2(-8.5, -0.5)
@@ -89,6 +84,5 @@ debug_color = Color(0, 0.647059, 0.211765, 0.419608)
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [connection signal="body_entered" from="directionHitbox" to="." method="_on_direction_hitbox_body_entered"]
-[connection signal="body_entered" from="hurtHitbox" to="." method="_on_hurt_hitbox_body_entered"]
 [connection signal="body_entered" from="stompHitbox" to="." method="_on_area_2d_body_entered"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="Activate"]

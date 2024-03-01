@@ -4,7 +4,6 @@ extends Node2D
 
 func _ready():
 	UI.underground = false
-	UI.loading_screen = false
 	GameManager.timer.start(160)
 	UI.update_coin()
 	

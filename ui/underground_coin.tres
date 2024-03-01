@@ -1,4 +1,4 @@
-[gd_resource type="AnimatedTexture" load_steps=4 format=3 uid="uid://bv3wwaiuskuxb"]
+[gd_resource type="AnimatedTexture" load_steps=4 format=3 uid="uid://dti5mxdxr8qn5"]
 
 [ext_resource type="Texture2D" uid="uid://dbm433rmf4bks" path="res://ui/sprites/menu_coin.png" id="1_xvcc1"]
 [ext_resource type="Texture2D" uid="uid://dm2d8cl1k5kej" path="res://ui/sprites/menu_coin2.png" id="2_487r6"]

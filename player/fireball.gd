@@ -7,7 +7,7 @@ func _ready():
 	velocity.y = 150
 	$AnimationPlayer.play("idle")
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if !is_exploding:
 		if is_on_floor():
 			velocity.y = -150
