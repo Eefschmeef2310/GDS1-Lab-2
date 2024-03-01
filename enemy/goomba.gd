@@ -20,7 +20,7 @@ func startDying():
 	animated_sprite_2d.set_animation("dead")
 	collision_shape_2d.set_deferred("disabled",true)
 	
-func _on_direction_hitbox_body_entered(body):
+func _on_direction_hitbox_body_entered(_body):
 	#if !body.is_in_group("player"):
 	scale.x *= -1
 	direction *= -1

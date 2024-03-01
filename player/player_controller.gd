@@ -61,7 +61,7 @@ const STAR = preload("res://shaders/star.tres")
 @export var max_star_time: float = 12
 @onready var star_timer = $StarTimer
 
-func _process(delta):
+func _process(_delta):
 	if !currently_changing_powerup:
 		#Input
 		move_direction = Input.get_axis("left", "right")

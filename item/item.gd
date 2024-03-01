@@ -32,7 +32,7 @@ func complete():
 		velocity.x = move_speed
 	complete_animation = true
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if complete_animation:
 		velocity.y += 5
 		

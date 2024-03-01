@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://levels/loading_screen.gd" id="1_iw7xy"]
 
-[sub_resource type="Gradient" id="Gradient_388rn"]
+[sub_resource type="Gradient" id="Gradient_pg8eo"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_mcnc7"]
-gradient = SubResource("Gradient_388rn")
+gradient = SubResource("Gradient_pg8eo")
 
 [node name="LoadingScreen" type="Control"]
 layout_mode = 3

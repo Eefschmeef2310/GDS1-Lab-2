@@ -37,7 +37,6 @@ func collect_coin():
 		#play 1-up sound
 		coin_counter = 0
 	coins_updated.emit()
-	increase_score(200)
 	
 func increase_score(amount):
 	score += amount
@@ -50,8 +49,6 @@ func gain_1up():
 	
 func reduce_lives():
 	lives -= 1
-	if(lives == 0):
-		get_tree().change_scene_to_file("res://levels/game_over.tscn")
 
 #Should be called after the player dies
 func restart_level():
