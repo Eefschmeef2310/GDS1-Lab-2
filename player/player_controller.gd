@@ -61,7 +61,14 @@ const STAR = preload("res://shaders/star.tres")
 @export var max_star_time: float = 12
 @onready var star_timer = $StarTimer
 
+#for stomp sequence
+var stomp_sequence : int
+
 func _process(_delta):
+	#reset stomp sequence when on floor. also /looked into it, having a star does NOT stack score
+	if is_on_floor():
+		stomp_sequence = 0
+	
 	if !currently_changing_powerup:
 		#Input
 		move_direction = Input.get_axis("left", "right")
@@ -186,6 +193,7 @@ func get_death_controller():
 	return $DeathController
 
 func change_powerup(new_powerup: String):
+	$powerup.play()
 	if powerup_state == PowerupState.SMALL:
 		powerup_state = PowerupState.BIG
 		currently_changing_powerup = true
@@ -222,6 +230,7 @@ func _on_flag_collision_area_entered(area):
 		queue_free();
 
 func hurt():
+	$powerdown.play()
 	if powerup_state == PowerupState.SMALL:
 		$DeathController.kill_player()
 	else:

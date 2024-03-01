@@ -1,9 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmte44jyjyny5"]
+[gd_scene load_steps=3 format=3 uid="uid://cmte44jyjyny5"]
 
 [ext_resource type="PackedScene" uid="uid://8p74kb7ef18s" path="res://ui/score_popup.tscn" id="1_7wm6c"]
+[ext_resource type="Script" path="res://ui/1up_popup.gd" id="2_ten56"]
 
 [node name="1upPopup" instance=ExtResource("1_7wm6c")]
-script = null
+script = ExtResource("2_ten56")
 
 [node name="Score" parent="." index="0"]
 text = "1UP"

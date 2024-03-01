@@ -65,6 +65,5 @@ func _on_player_hit_box_body_entered(body):
 				var popup = UP_POPUP.instantiate()
 				popup.global_position = global_position
 				get_tree().root.add_child(popup)
-				GameManager.gain_1up()
 				queue_free()
 				pass

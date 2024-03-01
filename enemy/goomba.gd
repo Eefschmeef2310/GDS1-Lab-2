@@ -7,6 +7,7 @@ extends Ground_Enemy
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("player") && !dying:
 		startDying()
+		body.stomp_sequence += 1
 		
 		body.velocity.y = stompLanchHeight
 	if "shelled" in body.get_parent():
@@ -16,6 +17,10 @@ func _on_area_2d_body_entered(body):
 		#startDying()
 
 func startDying():
+	#spawn score popup or 1-up popup
+	GameManager.spawn_score_or_1up_popup(global_position)
+	
+	$AudioStreamPlayer.play()
 	dying = true
 	animated_sprite_2d.set_animation("dead")
 	collision_shape_2d.set_deferred("disabled",true)
