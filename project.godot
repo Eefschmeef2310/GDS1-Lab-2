@@ -91,8 +91,10 @@ down={
 
 2d_physics/layer_1="Main Layer"
 2d_physics/layer_2="Backwall Layer"
+2d_physics/layer_5="Enemies"
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+anti_aliasing/screen_space_roughness_limiter/enabled=false

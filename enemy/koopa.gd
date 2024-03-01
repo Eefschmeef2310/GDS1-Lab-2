@@ -1,20 +1,12 @@
 extends Ground_Enemy
 
-
-
-
-
 @export var animated_sprite_2d : AnimatedSprite2D
 @export var collision_shape_2d : CollisionShape2D
-
-	
 
 var shelled : bool = false
 @export var shellRecoverTime : float = 5
 var recoverTimer : float = 0
 @export var shellSpeed = 300
-
-
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("player"):
@@ -36,7 +28,6 @@ func _on_area_2d_body_entered(body):
 		
 		body.velocity.y = stompLanchHeight
 
-
 func _on_direction_hitbox_body_entered(body):
 	#if !body.is_in_group("player"):
 	#print(body)
@@ -45,7 +36,6 @@ func _on_direction_hitbox_body_entered(body):
 	if shelled:
 		
 		if body.get_parent().has_method("startDying") : body.get_parent().startDying()
-		
 
 func Activate():
 	activated = 1
@@ -59,4 +49,3 @@ func _on_hurt_hitbox_body_entered(body):
 	else:
 		pass
 		#queue_free()
-	
