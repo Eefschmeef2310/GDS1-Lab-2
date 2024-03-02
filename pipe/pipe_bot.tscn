@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b0bvqkrdb2jaf"]
 
 [ext_resource type="Script" path="res://pipe/pipe_top.gd" id="1_higw5"]
-[ext_resource type="Texture2D" uid="uid://c1fnf2ep54c37" path="res://assets/terrain_merged.png" id="2_0lqti"]
+[ext_resource type="Texture2D" uid="uid://dgwyodwv3deoc" path="res://assets/terrain_merged.png" id="2_0lqti"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lkxgv"]
 size = Vector2(7.5, 32)
@@ -17,7 +17,7 @@ pipe_direction = 1
 position = Vector2(0, -8)
 texture = ExtResource("2_0lqti")
 region_enabled = true
-region_rect = Rect2(80, 256, 16, 32)
+region_rect = Rect2(224, 544, 16, 32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -8)

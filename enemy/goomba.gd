@@ -26,12 +26,12 @@ func startDying():
 	dying = true
 	animated_sprite_2d.set_animation("dead")
 	collision_shape_2d.set_deferred("disabled",true)
-	hurtHitbox.monitorable = false
-	stompHitbox.monitorable = false
-	directionHithox.monitorable = false
-	hurtHitbox.process_mode = Node.PROCESS_MODE_DISABLED
-	stompHitbox.process_mode = Node.PROCESS_MODE_DISABLED
-	directionHithox.process_mode = Node.PROCESS_MODE_DISABLED
+	hurtHitbox.set_deferred("monitorable", false)
+	stompHitbox.set_deferred("monitorable", false)
+	directionHithox.set_deferred("monitorable", false)
+	hurtHitbox.set_deferred("disabled", true)
+	stompHitbox.set_deferred("disabled", true)
+	directionHithox.set_deferred("disabled", true)
 	
 func _on_direction_hitbox_body_entered(_body):
 	ChangeDirection()

@@ -7,7 +7,12 @@ signal score_updated
 signal coins_updated
 signal updated_subworld
 signal music_stoped
+signal hundred_time_left
+signal star_music_start
+signal star_music_stopped
 
+
+var fast_time : bool = false
 @onready var timer = $Timer
 @onready var audio_stream_player = $AudioStreamPlayer
 
@@ -42,15 +47,20 @@ var shell_scores : Array[int] = [
 func _process(_delta):
 	if Input.is_action_just_pressed("esc"):
 		get_tree().quit()
+	if int(timer.time_left * 2.5) == 100 and !fast_time:
+		fast_time = true
+		hundred_time_left.emit()
 
 func _on_timer_timeout():
 	get_tree().get_first_node_in_group("player").hurt()
 
 func reset():
+	fast_time = false
 	coin_counter = 0
 	score = 0
 	lives = 3
 	level1_checkpoint = false
+	score_updated.emit()
 	
 func collect_coin():
 	coin_counter += 1
@@ -64,7 +74,6 @@ func collect_coin():
 func increase_score(amount):
 	score += amount
 	score_updated.emit()
-	#logic here for stacking score? we'll see how xander sorts out the character controller
 	
 func gain_1up():
 	audio_stream_player.play()
@@ -84,6 +93,7 @@ func get_subworld_state():
 func update_subworld():
 	in_subworld = !in_subworld
 	UI.underground = in_subworld
+	UI.update_coin()
 	#Updates the level camera to change position
 	updated_subworld.emit()
 
@@ -100,3 +110,9 @@ func spawn_score_or_1up_popup(position : Vector2):
 
 func stop_playing_music():
 	music_stoped.emit()
+
+func star_music():
+	star_music_start.emit()
+
+func star_music_stop():
+	star_music_stopped.emit()

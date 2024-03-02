@@ -8,5 +8,5 @@ func _ready():
 	UI.update_coin()
 	UI.coin_animation.speed_scale = 0
 
-#func _on_audio_stream_player_finished():
-	#get_tree().change_scene_to_file("res://levels/main_menu.tscn")
+func _on_audio_stream_player_finished():
+	get_tree().change_scene_to_file("res://levels/main_menu.tscn")
