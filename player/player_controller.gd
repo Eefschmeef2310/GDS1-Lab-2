@@ -292,8 +292,8 @@ func anim_teleport(tele_location, down: bool):
 		pass
 	$powerdown.play()
 	#Sets the position that the player will teleport to
-	pipe_tele_location = tele_location
-	toggle_movement(false)
+	#pipe_tele_location = tele_location
+	#toggle_movement(false)
 	velocity = Vector2(0, 0)
 	$TransitionController.pipe_in_animation(down, tele_location)
 
