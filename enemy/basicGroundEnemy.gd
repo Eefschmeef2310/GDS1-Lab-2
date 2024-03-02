@@ -30,3 +30,7 @@ func _physics_process(delta):
 		velocity.x = direction * speed * activated 
 
 	move_and_slide()
+
+func ChangeDirection():
+	scale.x *= -1
+	direction *= -1

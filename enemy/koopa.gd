@@ -29,12 +29,8 @@ func _on_area_2d_body_entered(body):
 		body.velocity.y = stompLanchHeight
 
 func _on_direction_hitbox_body_entered(body):
-	#if !body.is_in_group("player"):
-	#print(body)
-	scale.x *= -1
-	direction *= -1
+	ChangeDirection()
 	if shelled:
-		
 		if body.get_parent().has_method("startDying") : body.get_parent().startDying()
 
 func Activate():
@@ -49,3 +45,8 @@ func _on_hurt_hitbox_body_entered(body):
 	else:
 		pass
 		#queue_free()
+
+func startDying():
+	#spawn score popup or 1-up popup
+	GameManager.spawn_score_or_1up_popup(global_position)
+	queue_free()

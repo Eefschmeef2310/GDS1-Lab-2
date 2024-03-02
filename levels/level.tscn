@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://gj74vy0yftma"]
+[gd_scene load_steps=16 format=3 uid="uid://gj74vy0yftma"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_u42ox"]
 [ext_resource type="Script" path="res://levels/level_camera.gd" id="2_g17ur"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://nd650yer0alk" path="res://blocks/question_blocks/star_block.tscn" id="7_x4b0g"]
 [ext_resource type="PackedScene" uid="uid://lb25hug0ny0m" path="res://pipe/pipe_top.tscn" id="8_hb8k2"]
 [ext_resource type="PackedScene" uid="uid://b0bvqkrdb2jaf" path="res://pipe/pipe_bot.tscn" id="9_eyeag"]
+[ext_resource type="PackedScene" uid="uid://d2e0861lfir3p" path="res://item/item.tscn" id="10_64162"]
 
 [sub_resource type="Gradient" id="Gradient_rib4k"]
 offsets = PackedFloat32Array(0.458746)
@@ -105,5 +106,13 @@ tele_location = Vector2(2400, 300)
 [node name="PipeLeft" parent="." instance=ExtResource("9_eyeag")]
 position = Vector2(2584, 440)
 tele_location = Vector2(2624, 177)
+
+[node name="Item" parent="." instance=ExtResource("10_64162")]
+position = Vector2(128, 194)
+item_type = 1
+
+[node name="Item2" parent="." instance=ExtResource("10_64162")]
+position = Vector2(148, 186)
+item_type = 1
 
 [connection signal="body_entered" from="Checkpoint 1" to="." method="_on_checkpoint_1_body_entered"]

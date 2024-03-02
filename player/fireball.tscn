@@ -102,7 +102,7 @@ _data = {
 size = Vector2(8, 8)
 
 [node name="Fireball" type="CharacterBody2D"]
-collision_layer = 0
+collision_layer = 32
 collision_mask = 24
 script = ExtResource("1_17vni")
 
@@ -120,6 +120,9 @@ libraries = {
 shape = SubResource("RectangleShape2D_kf85t")
 
 [node name="EnemyHitBox" type="Area2D" parent="."]
+collision_mask = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitBox"]
 shape = SubResource("RectangleShape2D_kf85t")
+
+[connection signal="area_entered" from="EnemyHitBox" to="." method="_on_enemy_hit_box_area_entered"]
