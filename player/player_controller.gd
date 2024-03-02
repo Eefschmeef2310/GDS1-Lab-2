@@ -10,8 +10,8 @@ var powerup_state_names: PackedStringArray = ["small", "big", "fire"]
 @export var powerup_state: PowerupState = PowerupState.FIRE
 @export var camera: Camera2D
 var currently_changing_powerup = false
-
 var fireball_scene: PackedScene = preload("res://player/fireball.tscn")
+var fireball_marker_x: float
 
 var max_incinvible_time: float = 3
 @onready var invincibility_timer = $InvincibilityTimer
@@ -19,6 +19,7 @@ var max_incinvible_time: float = 3
 signal touched_flag(points_value)
 
 # Horizontal movement
+var current_max_speed = 85.0
 var max_speed = 85.0
 var max_run_speed = 150.0
 var acceleration = 10.0
@@ -47,6 +48,7 @@ var gravity_factor = 1
 # Input
 var move_direction: float
 var can_change_direction: bool = true
+var is_crouched = false
 
 # Get the gravity from the project settings so you can sync with rigid body nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -56,7 +58,6 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 #var is_falling = false
 #var is_landing = true
 
-var pipe_tele_location: Vector2
 var player_win_scene = preload("res://player/p_win/mario_win.tscn")
 
 #Star shader and powerup
@@ -67,7 +68,13 @@ const STAR = preload("res://shaders/star.tres")
 #for stomp sequence
 var stomp_sequence : int
 
+func _ready():
+	fireball_marker_x = $FireballMarker.position.x
+
 func _process(_delta):
+	if is_transitioning():
+		return
+			
 	#reset stomp sequence when on floor. also /looked into it, having a star does NOT stack score
 	if is_on_floor():
 		stomp_sequence = 0
@@ -75,14 +82,20 @@ func _process(_delta):
 	if !currently_changing_powerup:
 		#Input
 		move_direction = Input.get_axis("left", "right")
+		if powerup_state != PowerupState.SMALL and is_on_floor():
+			if move_direction == 0 and Input.is_action_pressed("down"):
+				is_crouched = true
+			else:
+				is_crouched = false
 		if Input.is_action_just_pressed("jump"):
 			jump()
 		if Input.is_action_just_released("jump"):
 			jump_release()
 		
+		
 		#Fire
 		if powerup_state == PowerupState.FIRE and Input.is_action_just_pressed("run"):
-			if velocity.x != 0:
+			if velocity.x != 0 and !is_crouched:
 				$AnimationPlayerFire.play("throw_replace")
 			else:
 				$AnimationPlayerFire.play("throw_whole")
@@ -94,12 +107,16 @@ func _process(_delta):
 			hurt()
 
 func _physics_process(delta):
+	if is_transitioning():
+		return
+
 	if !currently_changing_powerup:
 		# Handle movement.
-		var move_speed = max_speed
-		if Input.is_action_pressed("run"):
-			move_speed = max_run_speed
-		var desired_velocity = move_direction * move_speed * move_factor
+		if is_on_floor():
+			current_max_speed = max_speed
+			if Input.is_action_pressed("run"):
+				current_max_speed = max_run_speed
+		var desired_velocity = move_direction * current_max_speed * move_factor
 		if desired_velocity != 0:
 			velocity = velocity.move_toward(Vector2(desired_velocity, velocity.y), acceleration)
 		else:
@@ -172,25 +189,27 @@ func update_direction():
 		$Sprite2D.flip_h = move_direction < 0
 		$Sprite2DUpperFire.flip_h = move_direction < 0
 		$Sprite2DUpperFireThrow.flip_h = move_direction < 0
-		$FireballMarker.position.x *= move_direction
+		$FireballMarker.position.x = fireball_marker_x * move_direction
 
 #handles all animations
 func handle_animations():
 	var anim_prefix: String = powerup_state_names[powerup_state] + "_"
 	
-	#jumping animations
-	if not is_on_floor():
-		anim_player.play(anim_prefix + "jump")
+	if is_crouched:
+		anim_player.play(anim_prefix + "crouch")
 	else:
-		if velocity.x != 0:
-			if move_direction != 0 and move_direction != sign(velocity.x):
-				anim_player.play(anim_prefix + "skid")
-			elif abs(velocity.x) >= max_run_speed:
-				anim_player.play(anim_prefix + "run_fast")
-			else:
-				anim_player.play(anim_prefix + "run")
+		if not is_on_floor():
+			anim_player.play(anim_prefix + "jump")
 		else:
-			anim_player.play(anim_prefix + "idle")
+			if velocity.x != 0:
+				if move_direction != 0 and move_direction != sign(velocity.x):
+					anim_player.play(anim_prefix + "skid")
+				elif abs(velocity.x) >= max_run_speed:
+					anim_player.play(anim_prefix + "run_fast")
+				else:
+					anim_player.play(anim_prefix + "run")
+			else:
+				anim_player.play(anim_prefix + "idle")
 
 func get_death_controller():
 	return $DeathController
@@ -268,36 +287,15 @@ func throw_fireball():
 	if $Sprite2D.flip_h:
 		fireball.velocity.x *= -1
 
+#Refactored the pipe code into Transition Contoller
 func anim_teleport(tele_location, down: bool):
-	#Plays "dummy" animation for now
-	$PipeAnimTimer.start()
-	if(down):
-		#Play pipedown animation
-		pass
-	else:
-		#Play right pipe animation
-		pass
-	#Play Pipe Sound	
-	#Sets the position that the player will teleport to
-	pipe_tele_location = tele_location
-	toggle_movement(false)
+	velocity = Vector2(0, 0)
+	$TransitionController.pipe_in_animation(down, tele_location)
+
+#Checks if mario is in pipe (to prevent any input/animations being called when true)
+func is_transitioning():
+	return $TransitionController.is_transitioning()
 	
-#Called when entering a pipe
-func toggle_movement(on: bool):
-	move_factor = 1 if on else 0
-
-#When the "animation" finishes
-func _on_pipe_anim_timer_timeout():
-	toggle_movement(true)
-	GameManager.update_subworld()
-	teleport_player()
-
-func teleport_player():
-	global_position = pipe_tele_location
-	if(!GameManager.get_subworld_state()):
-		#Plays getting out of pipe animation here
-		#For some reason it only exists for the overworld not subworld
-		pass
 
 func start_star():
 	toggle_shader(true)
