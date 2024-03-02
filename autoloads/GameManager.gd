@@ -80,7 +80,8 @@ func get_subworld_state():
 	return in_subworld
 	
 func update_subworld():
-	in_subworld = true if !in_subworld else false
+	in_subworld = !in_subworld
+	UI.underground = in_subworld
 	#Updates the level camera to change position
 	updated_subworld.emit()
 

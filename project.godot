@@ -91,6 +91,7 @@ down={
 
 2d_physics/layer_1="Main Layer"
 2d_physics/layer_2="Backwall Layer"
+2d_physics/layer_4="Terrain"
 2d_physics/layer_5="Enemies"
 
 [rendering]

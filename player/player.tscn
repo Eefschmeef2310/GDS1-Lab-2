@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://bxhlnr2grbq1t"]
+[gd_scene load_steps=43 format=3 uid="uid://bxhlnr2grbq1t"]
 
 [ext_resource type="Script" path="res://player/player_controller.gd" id="1_tgen6"]
 [ext_resource type="Texture2D" uid="uid://bkmx0qwx2k4b2" path="res://assets/mario.png" id="2_8dkuo"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://c5q36cbhmv345" path="res://sounds/smb_jump-super.wav" id="6_bpru2"]
 [ext_resource type="AudioStream" uid="uid://uhdnalrfcp6j" path="res://sounds/smb_powerup.wav" id="7_pdam7"]
 [ext_resource type="AudioStream" uid="uid://cdh1xg1wcv8ey" path="res://sounds/smb_pipe.wav" id="8_xhkl1"]
+[ext_resource type="AudioStream" uid="uid://cqrcrb8b04svk" path="res://sounds/smb_fireball.wav" id="9_rbkpq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5g0jp"]
 size = Vector2(16, 16)
@@ -1999,6 +2000,9 @@ stream = ExtResource("7_pdam7")
 
 [node name="powerdown" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_xhkl1")
+
+[node name="fireball" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_rbkpq")
 
 [node name="FireballMarker" type="Marker2D" parent="."]
 position = Vector2(8, -21)
