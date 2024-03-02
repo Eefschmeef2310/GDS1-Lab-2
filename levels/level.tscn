@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://gj74vy0yftma"]
+[gd_scene load_steps=21 format=3 uid="uid://gj74vy0yftma"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_u42ox"]
 [ext_resource type="Script" path="res://levels/level_camera.gd" id="2_g17ur"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bsbgd1sq8a52i" path="res://tilesets/tile_map.tscn" id="4_665hs"]
 [ext_resource type="PackedScene" uid="uid://dekp28747487u" path="res://blocks/question_blocks/question_block.tscn" id="4_ptaqm"]
 [ext_resource type="PackedScene" uid="uid://dgr1285omhgcy" path="res://death_plane/death_plane.tscn" id="5_c48dc"]
+[ext_resource type="AudioStream" uid="uid://beyho031wejqu" path="res://sounds/Super Mario Bros (NES) Music - Star Theme.mp3" id="5_hcgmd"]
 [ext_resource type="PackedScene" uid="uid://nd650yer0alk" path="res://blocks/question_blocks/star_block.tscn" id="7_x4b0g"]
 [ext_resource type="PackedScene" uid="uid://lb25hug0ny0m" path="res://pipe/pipe_top.tscn" id="8_hb8k2"]
 [ext_resource type="PackedScene" uid="uid://b0bvqkrdb2jaf" path="res://pipe/pipe_bot.tscn" id="9_eyeag"]
@@ -72,6 +73,9 @@ collision_layer = 2
 [node name="GameCamera_BackWall#CollisionShape2D" type="CollisionShape2D" parent="GameCamera/GameCamera#BackWall"]
 shape = SubResource("RectangleShape2D_7v7rq")
 
+[node name="StarTheme" type="AudioStreamPlayer" parent="GameCamera"]
+stream = ExtResource("5_hcgmd")
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(118, 230)
 scale = Vector2(20, 1)
@@ -135,6 +139,12 @@ tele_location = Vector2(2624, 177)
 
 [connection signal="touched_flag" from="Player" to="TileMap/Flag" method="_on_player_touched_flag"]
 [connection signal="body_entered" from="TileMap/Coin" to="TileMap/Coin" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@18603" to="TileMap/@Area2D@18603" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@18604" to="TileMap/@Area2D@18604" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@18605" to="TileMap/@Area2D@18605" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@18606" to="TileMap/@Area2D@18606" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@18607" to="TileMap/@Area2D@18607" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@18608" to="TileMap/@Area2D@18608" method="_on_body_entered"]
 [connection signal="body_entered" from="TileMap/@Area2D@18609" to="TileMap/@Area2D@18609" method="_on_body_entered"]
 [connection signal="body_entered" from="TileMap/@Area2D@18610" to="TileMap/@Area2D@18610" method="_on_body_entered"]
 [connection signal="body_entered" from="TileMap/@Area2D@18611" to="TileMap/@Area2D@18611" method="_on_body_entered"]
@@ -147,10 +157,4 @@ tele_location = Vector2(2624, 177)
 [connection signal="body_entered" from="TileMap/@Area2D@18618" to="TileMap/@Area2D@18618" method="_on_body_entered"]
 [connection signal="body_entered" from="TileMap/@Area2D@18619" to="TileMap/@Area2D@18619" method="_on_body_entered"]
 [connection signal="body_entered" from="TileMap/@Area2D@18620" to="TileMap/@Area2D@18620" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@18621" to="TileMap/@Area2D@18621" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@18622" to="TileMap/@Area2D@18622" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@18623" to="TileMap/@Area2D@18623" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@18624" to="TileMap/@Area2D@18624" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@18625" to="TileMap/@Area2D@18625" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@18626" to="TileMap/@Area2D@18626" method="_on_body_entered"]
 [connection signal="body_entered" from="Checkpoint 1" to="." method="_on_checkpoint_1_body_entered"]

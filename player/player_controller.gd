@@ -298,10 +298,12 @@ func is_transitioning():
 	
 
 func start_star():
+	GameManager.star_music()
 	toggle_shader(true)
 	star_timer.start(max_star_time)
 	
 func _on_star_timer_timeout():
+	GameManager.star_music_stop()
 	toggle_shader(false)
 
 # Invincibility after getting hit.
