@@ -319,3 +319,5 @@ stream = ExtResource("4_tc5e0")
 
 [node name="WinMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_kqup1")
+
+[connection signal="finished" from="WinMusic" to="." method="_on_win_music_finished"]

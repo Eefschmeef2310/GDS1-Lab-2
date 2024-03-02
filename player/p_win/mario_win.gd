@@ -67,3 +67,7 @@ func _physics_process(delta):
 		#velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	#move_and_slide()
+
+
+func _on_win_music_finished():
+	get_tree().change_scene_to_file("res://levels/you_win.tscn")
