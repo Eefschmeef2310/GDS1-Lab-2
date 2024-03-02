@@ -6,6 +6,7 @@ const _1_UP_POPUP = preload("res://ui/1up_popup.tscn")
 signal score_updated
 signal coins_updated
 signal updated_subworld
+signal music_stoped
 
 @onready var timer = $Timer
 @onready var audio_stream_player = $AudioStreamPlayer
@@ -94,3 +95,7 @@ func spawn_score_or_1up_popup(position : Vector2):
 		get_tree().root.add_child(score_popup)
 	else:
 		get_tree().root.add_child(_1_UP_POPUP.instantiate())
+		
+
+func stop_playing_music():
+	music_stoped.emit()

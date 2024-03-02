@@ -8,6 +8,7 @@ enum PowerupState {
 }
 var powerup_state_names: PackedStringArray = ["small", "big", "fire"]
 @export var powerup_state: PowerupState = PowerupState.FIRE
+@export var camera: Camera2D
 var currently_changing_powerup = false
 
 var fireball_scene: PackedScene = preload("res://player/fireball.tscn")
@@ -227,6 +228,7 @@ func _on_flag_collision_area_entered(area):
 			print("100 points")
 		print(position)
 		print(player_win.position)
+		GameManager.stop_playing_music()
 		queue_free();
 
 func hurt():
@@ -246,6 +248,8 @@ func _on_invincibility_timer_timeout():
 func toggle_tree(on: bool):
 	process_mode = Node.PROCESS_MODE_ALWAYS if on else Node.PROCESS_MODE_INHERIT
 	currently_changing_powerup = on
+	if (camera != null):
+		camera.process_mode = Node.PROCESS_MODE_ALWAYS if on else Node.PROCESS_MODE_INHERIT
 	get_tree().paused = on
 
 func throw_fireball():
