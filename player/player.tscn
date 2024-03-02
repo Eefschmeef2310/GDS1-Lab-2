@@ -2090,7 +2090,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e0yof"]
-size = Vector2(16, 1.5)
+size = Vector2(16, 1)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
@@ -2102,7 +2102,6 @@ position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_5g0jp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 1)
 texture = ExtResource("2_8dkuo")
 offset = Vector2(0, -8)
 region_enabled = true
@@ -2111,7 +2110,6 @@ region_rect = Rect2(0, 8, 16, 16)
 [node name="Sprite2DUpperFire" type="Sprite2D" parent="."]
 visible = false
 material = SubResource("ShaderMaterial_2bqea")
-position = Vector2(0, 1)
 texture = ExtResource("2_8dkuo")
 offset = Vector2(0, -20)
 region_enabled = true
@@ -2120,7 +2118,6 @@ region_rect = Rect2(96, 140, 16, 24)
 [node name="Sprite2DUpperFireThrow" type="Sprite2D" parent="."]
 visible = false
 material = SubResource("ShaderMaterial_1hsaj")
-position = Vector2(0, 1)
 texture = ExtResource("2_8dkuo")
 offset = Vector2(0, -16)
 region_enabled = true
@@ -2150,7 +2147,7 @@ script = ExtResource("4_7b27s")
 [node name="FlagCollision" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FlagCollision"]
-position = Vector2(0, -0.75)
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_e0yof")
 debug_color = Color(1, 1, 1, 0.419608)
 

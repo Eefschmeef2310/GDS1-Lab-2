@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=11 format=3 uid="uid://dr67hccp51j3c"]
 
-[ext_resource type="Texture2D" uid="uid://dirihtptpuege" path="res://assets/terrain_merged.png" id="1_8m81p"]
+[ext_resource type="Texture2D" uid="uid://c1fnf2ep54c37" path="res://assets/terrain_merged.png" id="1_8m81p"]
 [ext_resource type="PackedScene" uid="uid://cdo0fgfx28qae" path="res://blocks/brick.tscn" id="1_ggxmb"]
 [ext_resource type="PackedScene" uid="uid://dekp28747487u" path="res://blocks/question_blocks/question_block.tscn" id="2_gwli1"]
 [ext_resource type="PackedScene" uid="uid://byy40p35gico4" path="res://blocks/question_blocks/multicoin.tscn" id="3_jejjr"]
