@@ -54,6 +54,7 @@ func reset():
 	
 func collect_coin():
 	coin_counter += 1
+	$CoinSFX.play()
 	if(coin_counter >= 100):
 		gain_1up()
 		#play 1-up sound
