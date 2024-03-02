@@ -17,7 +17,7 @@ pipe_direction = 1
 position = Vector2(0, -8)
 texture = ExtResource("2_0lqti")
 region_enabled = true
-region_rect = Rect2(80, 256, 16, 32)
+region_rect = Rect2(224, 544, 16, 32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -8)

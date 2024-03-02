@@ -82,6 +82,7 @@ shape = SubResource("RectangleShape2D_iej4u")
 position = Vector2(87, 192)
 
 [node name="Player" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("3_1xoxj")]
+z_index = 0
 position = Vector2(87, 192)
 powerup_state = 0
 camera = NodePath("../GameCamera")
