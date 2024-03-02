@@ -23,12 +23,15 @@ func _process(delta):
 			player.global_position.y -= delta*PIPE_SPEED
 			if(player.global_position.y <= tele_position.y):
 				transitioning = false
+	else:
+		player.z_index = 1
 	
 	
 func pipe_in_animation(down: bool, tele_pos: Vector2):
 	t_direction = TDirection.DOWN if down else TDirection.RIGHT
 	transitioning = true
 	tele_position = tele_pos
+	player.z_index = 0
 	$"../PipeAnimTimer".start()
 	$"../powerdown".play()
 	
