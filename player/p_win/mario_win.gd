@@ -20,8 +20,6 @@ var currently_changing_powerup = false
 func _ready():
 	anim_player.play("RESET")
 	$FlagSlideFX.playing = true
-	print("pleaes" + str(powerup_state))
-
 
 func _physics_process(delta):
 

@@ -269,7 +269,7 @@ func anim_teleport(tele_location, down: bool):
 	else:
 		#Play right pipe animation
 		pass
-	#Play Pipe Sound	
+	$powerdown.play()
 	#Sets the position that the player will teleport to
 	pipe_tele_location = tele_location
 	toggle_movement(false)

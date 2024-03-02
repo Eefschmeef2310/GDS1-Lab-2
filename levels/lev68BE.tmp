@@ -60,11 +60,9 @@ player = NodePath("../Player")
 [node name="OverworldTheme" type="AudioStreamPlayer" parent="GameCamera"]
 stream = ExtResource("3_ljuhp")
 autoplay = true
-bus = &"Music"
 
 [node name="UndergroundTheme" type="AudioStreamPlayer" parent="GameCamera"]
 stream = ExtResource("4_0qn1r")
-bus = &"Music"
 
 [node name="GameCamera#BackWall" type="StaticBody2D" parent="GameCamera"]
 position = Vector2(-138, 0)
