@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://beyho031wejqu"
+path="res://.godot/imported/Super Mario Bros (NES) Music - Star Theme.mp3-25d4f41756a80b00c947537e721c98bc.mp3str"
+
+[deps]
+
+source_file="res://sounds/Super Mario Bros (NES) Music - Star Theme.mp3"
+dest_files=["res://.godot/imported/Super Mario Bros (NES) Music - Star Theme.mp3-25d4f41756a80b00c947537e721c98bc.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

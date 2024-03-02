@@ -13,6 +13,9 @@ func _ready():
 	GameManager.updated_subworld.connect(update_camera_y)
 	GameManager.music_stoped.connect(stop_music)
 	GameManager.hundred_time_left.connect(play_warning)
+	GameManager.star_music_start.connect(star_music_start)
+	GameManager.star_music_stopped.connect(star_music_stop)
+
 
 func _physics_process(_delta):
 	if(player != null && !GameManager.get_subworld_state()):
@@ -56,3 +59,12 @@ func _on_underground_theme_finished():
 	#AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index($OverworldTheme.bus), 0, true)
 	$UndergroundTheme.stream = load("res://sounds/Super Mario Bros (NES) Music - Underground Theme.mp3")
 	$UndergroundTheme.play()
+	
+func star_music_start():
+	$OverworldTheme.stop()
+	$UndergroundTheme.stop()
+	$StarTheme.play()
+	
+func star_music_stop():
+	$StarTheme.stop()
+	$OverworldTheme.play()

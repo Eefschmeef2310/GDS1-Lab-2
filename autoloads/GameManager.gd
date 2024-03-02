@@ -8,6 +8,9 @@ signal coins_updated
 signal updated_subworld
 signal music_stoped
 signal hundred_time_left
+signal star_music_start
+signal star_music_stopped
+
 
 var fast_time : bool = false
 @onready var timer = $Timer
@@ -107,3 +110,9 @@ func spawn_score_or_1up_popup(position : Vector2):
 
 func stop_playing_music():
 	music_stoped.emit()
+
+func star_music():
+	star_music_start.emit()
+
+func star_music_stop():
+	star_music_stopped.emit()
