@@ -5,7 +5,6 @@ extends Sprite2D
 const SCORE_POPUP = preload("res://ui/score_popup.tscn")
 
 func _ready():
-	GameManager.increase_score(score)
 	GameManager.collect_coin()
 
 func spawn_popup():

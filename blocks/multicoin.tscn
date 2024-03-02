@@ -28,6 +28,7 @@ _data = {
 [node name="Multicoin" instance=ExtResource("1_lqftm")]
 script = ExtResource("2_5yocx")
 COIN = ExtResource("3_t0tv2")
+item_type = 4
 max_hits = 15
 
 [node name="Sprite2D" parent="." index="0"]

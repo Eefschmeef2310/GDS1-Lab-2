@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://vngdnovxe7s6"]
+[gd_scene load_steps=12 format=3 uid="uid://vngdnovxe7s6"]
 
 [ext_resource type="Script" path="res://enemy/goomba.gd" id="1_tkggg"]
 [ext_resource type="Texture2D" uid="uid://far6xocq267e" path="res://assets/deadGoomba.png" id="2_8pn4n"]
 [ext_resource type="Texture2D" uid="uid://c78q6y6k6miaw" path="res://assets/enemies.png" id="2_ggu3s"]
+[ext_resource type="AudioStream" uid="uid://d00gp763147gq" path="res://sounds/smb_stomp.wav" id="4_dj1fa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0rumx"]
 atlas = ExtResource("2_ggu3s")
@@ -41,15 +42,22 @@ size = Vector2(14, 1)
 size = Vector2(1, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uj18e"]
-size = Vector2(16, 12)
+size = Vector2(16, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8gx4c"]
-size = Vector2(16, 4)
+size = Vector2(12, 4)
 
-[node name="Goomba" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite_2d", "collision_shape_2d") groups=["entity"]]
+[node name="Goomba" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite_2d", "collision_shape_2d", "hurtHitbox", "directionHithox", "stompHitbox") groups=["entity"]]
+collision_layer = 16
+collision_mask = 24
 script = ExtResource("1_tkggg")
 animated_sprite_2d = NodePath("AnimatedSprite2D")
 collision_shape_2d = NodePath("CollisionShape2D")
+hurtHitbox = NodePath("hurtHitbox")
+directionHithox = NodePath("directionHitbox")
+stompHitbox = NodePath("stompHitbox")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5t0ub")
@@ -60,6 +68,8 @@ position = Vector2(0, 7.5)
 shape = SubResource("RectangleShape2D_y1cnn")
 
 [node name="directionHitbox" type="Area2D" parent="."]
+collision_layer = 24
+collision_mask = 24
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="directionHitbox"]
 position = Vector2(-8.5, -0.5)
@@ -70,7 +80,7 @@ debug_color = Color(0.666667, 0.509804, 0, 0.419608)
 position = Vector2(0, -6)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtHitbox"]
-position = Vector2(0, 8)
+position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_uj18e")
 debug_color = Color(0.964706, 0, 0.478431, 0.419608)
 
@@ -81,8 +91,10 @@ position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_8gx4c")
 debug_color = Color(0, 0.647059, 0.211765, 0.419608)
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_dj1fa")
 
-[connection signal="body_entered" from="directionHitbox" to="." method="_on_direction_hitbox_body_entered"]
-[connection signal="body_entered" from="stompHitbox" to="." method="_on_area_2d_body_entered"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="Activate"]
+[connection signal="body_entered" from="directionHitbox" to="." method="_on_direction_hitbox_body_entered"]
+[connection signal="body_entered" from="hurtHitbox" to="." method="_on_hurt_hitbox_body_entered"]
+[connection signal="body_entered" from="stompHitbox" to="." method="_on_area_2d_body_entered"]

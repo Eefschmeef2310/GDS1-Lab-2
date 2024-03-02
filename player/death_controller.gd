@@ -18,8 +18,8 @@ func oob_kill_player():
 #Replaces the player character with another scene 
 #Other scene plays the particle system/animation + deals with the new loading screen	
 func death_logic(death_particle):
-	get_tree().paused = true
 	GameManager.reduce_lives()
+	get_tree().paused = true
 	GameManager.timer.stop()
 	death_particle.global_position = $"..".global_position
 	get_tree().root.add_child(death_particle)

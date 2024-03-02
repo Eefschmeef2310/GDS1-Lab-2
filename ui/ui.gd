@@ -5,6 +5,7 @@ extends CanvasLayer
 @onready var time = $MarginContainer/HBoxContainer/Time
 
 var underground : bool = false
+var loading_screen : bool = false
 
 var coin_animation : AnimatedTexture
 
@@ -13,7 +14,7 @@ func _ready():
 	GameManager.coins_updated.connect(update_coin)
 	
 func _process(_delta):
-	time.text = "TIME\n" + str(int(GameManager.timer.time_left * 2.5)) if !underground else "TIME\n\n"
+	time.text = "TIME\n" + str(int(GameManager.timer.time_left * 2.5)).pad_zeros(3) if !loading_screen else "TIME\n\n"
 
 func update_score():
 	score.text = "MARIO\n" + str(GameManager.score).pad_zeros(6)

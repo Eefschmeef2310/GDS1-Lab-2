@@ -7,6 +7,7 @@ var x_velocity = 0
 @onready var anim_player = $AnimationPlayer
 var state = "sliding"
 
+
 enum PowerupState {
 	SMALL,
 	BIG,
@@ -14,18 +15,11 @@ enum PowerupState {
 }
 var powerup_state_names: PackedStringArray = ["small", "big", "fire"]
 @export var powerup_state: PowerupState
+var currently_changing_powerup = false
 
 func _ready():
 	anim_player.play("RESET")
-	if (powerup_state == PowerupState.SMALL):
-		anim_player.play("flag_slide_small")
-	elif (powerup_state == PowerupState.BIG):
-		anim_player.play("flag_slide_big")
-	elif (powerup_state == PowerupState.FIRE):
-		anim_player.play("flag_slide_big_fire")
 	$FlagSlideFX.playing = true
-	
-	print(powerup_state)
 
 func _physics_process(delta):
 
@@ -34,21 +28,26 @@ func _physics_process(delta):
 	if position.y < 192:
 		y_velocity = climb_speed * delta
 		position.y += y_velocity
-		
+	
+		if (powerup_state == PowerupState.SMALL):
+			anim_player.play("flag_slide_small")
+		elif (powerup_state == PowerupState.BIG):
+			anim_player.play("flag_slide_big")
+		elif (powerup_state == PowerupState.FIRE):
+			anim_player.play("flag_slide_big_fire")
+	
 	elif(position.y >= 192):
 		if state != "run":
 			state = "run"
 			$FlagSlideFX.playing = false
 			$WinMusic.playing = true
 			position.y = 192
-			$AnimationPlayer.play("jump_off_flag_small")
-			
 			if (powerup_state == PowerupState.SMALL):
-				anim_player.play("jump_off_flag_slide_small")
+				$AnimationPlayer.play("jump_off_flag_small")
 			elif (powerup_state == PowerupState.BIG):
-				anim_player.play("jump_off_flag_slide_big")
+				$AnimationPlayer.play("jump_off_flag_big")
 			elif (powerup_state == PowerupState.FIRE):
-				anim_player.play("jump_off_flag_slide_big_fire")
+				$AnimationPlayer.play("jump_off_flag_big_fire")
 		
 			
 		
@@ -66,3 +65,7 @@ func _physics_process(delta):
 		#velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	#move_and_slide()
+
+
+func _on_win_music_finished():
+	get_tree().change_scene_to_file("res://levels/you_win.tscn")

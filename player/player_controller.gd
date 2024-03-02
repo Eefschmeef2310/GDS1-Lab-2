@@ -8,12 +8,18 @@ enum PowerupState {
 }
 var powerup_state_names: PackedStringArray = ["small", "big", "fire"]
 @export var powerup_state: PowerupState = PowerupState.FIRE
+@export var camera: Camera2D
 var currently_changing_powerup = false
-
 var fireball_scene: PackedScene = preload("res://player/fireball.tscn")
-var fireball_x
+var fireball_marker_x: float
+
+var max_incinvible_time: float = 3
+@onready var invincibility_timer = $InvincibilityTimer
+
+signal touched_flag()
 
 # Horizontal movement
+var current_max_speed = 85.0
 var max_speed = 85.0
 var max_run_speed = 150.0
 var acceleration = 10.0
@@ -42,51 +48,72 @@ var gravity_factor = 1
 # Input
 var move_direction: float
 var can_change_direction: bool = true
+var is_crouched = false
 
 # Get the gravity from the project settings so you can sync with rigid body nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 # Lauren variables
 @onready var anim_player = $AnimationPlayer
-var is_falling = false
-var is_landing = true
-#signal toTankControl()
-
-var killY = 9999
+#var is_falling = false
+#var is_landing = true
 
 var player_win_scene = preload("res://player/p_win/mario_win.tscn")
 
+#Star shader and powerup
+const STAR = preload("res://shaders/star.tres")
+@export var max_star_time: float = 12
+@onready var star_timer = $StarTimer
+
+#for stomp sequence
+var stomp_sequence : int
+
 func _ready():
-	fireball_x = $FireballMarker.position.x
+	fireball_marker_x = $FireballMarker.position.x
 
 func _process(_delta):
+	if is_transitioning():
+		return
+			
+	#reset stomp sequence when on floor. also /looked into it, having a star does NOT stack score
+	if is_on_floor():
+		stomp_sequence = 0
+	
 	if !currently_changing_powerup:
 		#Input
 		move_direction = Input.get_axis("left", "right")
+		if powerup_state != PowerupState.SMALL and is_on_floor():
+			if move_direction == 0 and Input.is_action_pressed("down"):
+				is_crouched = true
+			else:
+				is_crouched = false
 		if Input.is_action_just_pressed("jump"):
 			jump()
 		if Input.is_action_just_released("jump"):
 			jump_release()
 		
+		
 		#Fire
 		if powerup_state == PowerupState.FIRE and Input.is_action_just_pressed("run"):
-			if velocity.x != 0:
+			if velocity.x != 0 and !is_crouched:
 				$AnimationPlayerFire.play("throw_replace")
 			else:
 				$AnimationPlayerFire.play("throw_whole")
 		
+		# Animation
 		handle_animations()
-		
-		if Input.is_action_just_pressed("debug_hurt"):
-			hurt()
 
 func _physics_process(delta):
+	if is_transitioning():
+		return
+
 	if !currently_changing_powerup:
 		# Handle movement.
-		var move_speed = max_speed
-		if Input.is_action_pressed("run"):
-			move_speed = max_run_speed
-		var desired_velocity = move_direction * move_speed * move_factor
+		if is_on_floor():
+			current_max_speed = max_speed
+			if Input.is_action_pressed("run"):
+				current_max_speed = max_run_speed
+		var desired_velocity = move_direction * current_max_speed * move_factor
 		if desired_velocity != 0:
 			velocity = velocity.move_toward(Vector2(desired_velocity, velocity.y), acceleration)
 		else:
@@ -119,8 +146,8 @@ func _physics_process(delta):
 		# Move and slide.
 		move_and_slide()
 
-func move(direction: float):
-	move_direction = direction
+#func move(direction: float):
+	#move_direction = direction
 
 func jump():
 	jump_is_held = true
@@ -143,13 +170,13 @@ func try_jump():
 		else:
 			$big_jump.play()
 
-func force_jump():
-	coyote_counter = 0
-	jump_buffer_counter = 0
-	is_jumping = true
-	
-	# Does not use air jump speed at all right now
-	velocity.y = jump_speed * jump_factor
+#func force_jump():
+	#coyote_counter = 0
+	#jump_buffer_counter = 0
+	#is_jumping = true
+	#
+	## Does not use air jump speed at all right now
+	#velocity.y = jump_speed * jump_factor
 
 func jump_release():
 	jump_is_held = false
@@ -159,35 +186,38 @@ func update_direction():
 		$Sprite2D.flip_h = move_direction < 0
 		$Sprite2DUpperFire.flip_h = move_direction < 0
 		$Sprite2DUpperFireThrow.flip_h = move_direction < 0
-		$FireballMarker.position.x = fireball_x * move_direction
+		$FireballMarker.position.x = fireball_marker_x * move_direction
 
 #handles all animations
 func handle_animations():
 	var anim_prefix: String = powerup_state_names[powerup_state] + "_"
 	
-	#jumping animations
-	if not is_on_floor():
-		anim_player.play(anim_prefix + "jump")
+	if is_crouched:
+		anim_player.play(anim_prefix + "crouch")
 	else:
-		if velocity.x != 0:
-			if move_direction != 0 and move_direction != sign(velocity.x):
-				anim_player.play(anim_prefix + "skid")
-			elif abs(velocity.x) >= max_run_speed:
-				anim_player.play(anim_prefix + "run_fast")
-			else:
-				anim_player.play(anim_prefix + "run")
+		if not is_on_floor():
+			anim_player.play(anim_prefix + "jump")
 		else:
-			anim_player.play(anim_prefix + "idle")
+			if velocity.x != 0:
+				if move_direction != 0 and move_direction != sign(velocity.x):
+					anim_player.play(anim_prefix + "skid")
+				elif abs(velocity.x) >= max_run_speed:
+					anim_player.play(anim_prefix + "run_fast")
+				else:
+					anim_player.play(anim_prefix + "run")
+			else:
+				anim_player.play(anim_prefix + "idle")
 
 func get_death_controller():
 	return $DeathController
 
 func change_powerup(new_powerup: String):
+	$powerup.play()
 	if powerup_state == PowerupState.SMALL:
 		powerup_state = PowerupState.BIG
 		currently_changing_powerup = true
 		$AnimationPlayer.play("big_upgrade")
-	elif powerup_state == PowerupState.BIG:
+	elif powerup_state == PowerupState.BIG or powerup_state == PowerupState.SMALL:
 		if new_powerup == "fire":
 			powerup_state = PowerupState.FIRE
 			currently_changing_powerup = true
@@ -195,22 +225,18 @@ func change_powerup(new_powerup: String):
 		else:
 			# Picked up a mushroom while big.
 			pass
-	else:
-		# Picked up a flower while fire.
-		pass
-
-
-
 
 func _on_flag_collision_area_entered(area):
 	var pos = global_position
 	var area_type = area.get_groups()
 	if (area_type.has("flag")):
+		
 		var player_win = player_win_scene.instantiate()
-		$"..".add_child(player_win)
+		$"..".call_deferred("add_child", player_win)
 		player_win.global_position = pos
 		player_win.powerup_state = powerup_state
-		#print(PowerupState.SMALL, PowerupState.BIG, PowerupState.FIRE)
+		
+		touched_flag.emit()
 		if (area_type.has("5000p")):
 			print("5000 points")
 		elif (area_type.has("2000p")):
@@ -221,25 +247,80 @@ func _on_flag_collision_area_entered(area):
 			print("400 points")
 		elif (area_type.has("100p")):
 			print("100 points")
-		print(position)
-		print(player_win.position)
+		#print(position)
+		#print(player_win.position)
+		GameManager.stop_playing_music()
 		queue_free();
+
 func hurt():
+	$powerdown.play()
 	if powerup_state == PowerupState.SMALL:
 		$DeathController.kill_player()
 	else:
 		powerup_state = PowerupState.SMALL
 		currently_changing_powerup = true
+		invincibility_timer.start(max_incinvible_time)
 		$AnimationPlayer.play("small_downgrade")
+		$AnimationPlayerInvincible.play("invincible")
+		
+func _on_invincibility_timer_timeout():
+	$AnimationPlayerInvincible.play("base")
 
 func toggle_tree(on: bool):
 	process_mode = Node.PROCESS_MODE_ALWAYS if on else Node.PROCESS_MODE_INHERIT
 	currently_changing_powerup = on
+	if (camera != null):
+		camera.process_mode = Node.PROCESS_MODE_ALWAYS if on else Node.PROCESS_MODE_INHERIT
 	get_tree().paused = on
 
 func throw_fireball():
+	$fireball.play()
 	var fireball = fireball_scene.instantiate()
 	fireball.global_position = $FireballMarker.global_position
-	get_tree().get_root().add_child(fireball)
+	get_tree().root.add_child(fireball)
 	if $Sprite2D.flip_h:
 		fireball.velocity.x *= -1
+
+#Refactored the pipe code into Transition Contoller
+func anim_teleport(tele_location, down: bool):
+	#Plays "dummy" animation for now
+	$PipeAnimTimer.start()
+	if(down):
+		#Play pipedown animation
+		pass
+	else:
+		#Play right pipe animation
+		pass
+	$powerdown.play()
+	#Sets the position that the player will teleport to
+	#pipe_tele_location = tele_location
+	#toggle_movement(false)
+	velocity = Vector2(0, 0)
+	$TransitionController.pipe_in_animation(down, tele_location)
+
+#Checks if mario is in pipe (to prevent any input/animations being called when true)
+func is_transitioning():
+	return $TransitionController.is_transitioning()
+	
+
+func start_star():
+	GameManager.star_music()
+	toggle_shader(true)
+	star_timer.start(max_star_time)
+	
+func _on_star_timer_timeout():
+	GameManager.star_music_stop()
+	toggle_shader(false)
+
+# Invincibility after getting hit.
+func is_invincible():
+	return invincibility_timer.time_left > 0
+
+func is_star():
+	return star_timer.time_left > 0
+
+func toggle_shader(on : bool):
+	#Set shader on ALL Sprites
+	$Sprite2D.material = STAR if on else null
+	$Sprite2DUpperFire.material = STAR if on else null
+	$Sprite2DUpperFireThrow.material = STAR if on else null
