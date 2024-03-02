@@ -129,4 +129,23 @@ tele_location = Vector2(2400, 300)
 position = Vector2(2584, 440)
 tele_location = Vector2(2624, 177)
 
+[connection signal="body_entered" from="TileMap/Coin" to="TileMap/Coin" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@28847" to="TileMap/@Area2D@28847" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@28848" to="TileMap/@Area2D@28848" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@28849" to="TileMap/@Area2D@28849" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@28850" to="TileMap/@Area2D@28850" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@28851" to="TileMap/@Area2D@28851" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@28852" to="TileMap/@Area2D@28852" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@28853" to="TileMap/@Area2D@28853" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@28854" to="TileMap/@Area2D@28854" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@28855" to="TileMap/@Area2D@28855" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@28856" to="TileMap/@Area2D@28856" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@28857" to="TileMap/@Area2D@28857" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@28858" to="TileMap/@Area2D@28858" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@28859" to="TileMap/@Area2D@28859" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@28860" to="TileMap/@Area2D@28860" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@28861" to="TileMap/@Area2D@28861" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@28862" to="TileMap/@Area2D@28862" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@28863" to="TileMap/@Area2D@28863" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@28864" to="TileMap/@Area2D@28864" method="_on_body_entered"]
 [connection signal="body_entered" from="Checkpoint 1" to="." method="_on_checkpoint_1_body_entered"]
