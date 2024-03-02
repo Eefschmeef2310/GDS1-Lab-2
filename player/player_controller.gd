@@ -16,7 +16,7 @@ var fireball_marker_x: float
 var max_incinvible_time: float = 3
 @onready var invincibility_timer = $InvincibilityTimer
 
-signal touched_flag(points_value)
+signal touched_flag()
 
 # Horizontal movement
 var current_max_speed = 85.0
@@ -238,21 +238,17 @@ func _on_flag_collision_area_entered(area):
 		$"..".call_deferred("add_child", player_win)
 		player_win.global_position = pos
 		player_win.powerup_state = powerup_state
+		touched_flag.emit()
 		if (area_type.has("5000p")):
 			print("5000 points")
-			touched_flag.emit(5000)
 		elif (area_type.has("2000p")):
 			print("2000 points")
-			touched_flag.emit(2000)
 		elif (area_type.has("800p")):
 			print("800 points")
-			touched_flag.emit(800)
 		elif (area_type.has("400p")):
 			print("400 points")
-			touched_flag.emit(400)
 		elif (area_type.has("100p")):
 			print("100 points")
-			touched_flag.emit(100)
 		#print(position)
 		#print(player_win.position)
 		GameManager.stop_playing_music()
@@ -298,10 +294,12 @@ func is_transitioning():
 	
 
 func start_star():
+	GameManager.star_music()
 	toggle_shader(true)
 	star_timer.start(max_star_time)
 	
 func _on_star_timer_timeout():
+	GameManager.star_music_stop()
 	toggle_shader(false)
 
 # Invincibility after getting hit.

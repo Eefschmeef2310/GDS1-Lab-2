@@ -5,5 +5,5 @@ extends Node2D
 func _ready():
 	anim_player.play("RESET")
 
-func _on_player_touched_flag(points_value):
+func _on_player_touched_flag():
 	anim_player.play("flag")
