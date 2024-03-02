@@ -95,13 +95,8 @@ position = Vector2(-12, -66)
 shape = SubResource("RectangleShape2D_x6qcq")
 debug_color = Color(1, 0.0117647, 0.0235294, 0.419608)
 
-[node name="FlagpolePoints2" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(180, -85)
-texture = ExtResource("2_rpmqn")
-
 [node name="FLAG TESTING" type="Node2D" parent="."]
-position = Vector2(189, 195)
+position = Vector2(548, -18)
 
 [node name="100p" type="Node2D" parent="FLAG TESTING" groups=["100p", "flag"]]
 
@@ -152,3 +147,7 @@ position = Vector2(0, -67)
 position = Vector2(-12, -66)
 shape = SubResource("RectangleShape2D_x6qcq")
 debug_color = Color(1, 0.0117647, 0.0235294, 0.419608)
+
+[node name="FlagpolePoints2" type="Sprite2D" parent="FLAG TESTING"]
+position = Vector2(0, -67)
+texture = ExtResource("2_rpmqn")

@@ -35,6 +35,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, -18)]
+}
 
 [sub_resource type="Animation" id="Animation_el7v3"]
 resource_name = "flag_slide_big"
@@ -62,7 +74,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -18)]
+"values": [Vector2(1, -18)]
 }
 
 [sub_resource type="Animation" id="Animation_gxrrb"]
@@ -91,7 +103,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -18)]
+"values": [Vector2(1, -18)]
 }
 
 [sub_resource type="Animation" id="Animation_s0gs6"]
@@ -148,7 +160,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.72, 0.75, 0.85, 0.95, 1.05, 2.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(14, -18), Vector2(14, -18), Vector2(18, -18), Vector2(19, -18), Vector2(21, -15), Vector2(24, 0), Vector2(101, 0)]
+"values": [Vector2(17, -18), Vector2(17, -18), Vector2(18, -18), Vector2(19, -18), Vector2(21, -15), Vector2(24, 0), Vector2(101, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -201,7 +213,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.72, 0.75, 0.85, 0.95, 1.05, 2.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(14, -18), Vector2(14, -18), Vector2(18, -18), Vector2(19, -18), Vector2(21, -15), Vector2(24, 0), Vector2(101, 0)]
+"values": [Vector2(17, -18), Vector2(17, -18), Vector2(18, -18), Vector2(19, -18), Vector2(21, -15), Vector2(24, 0), Vector2(101, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -301,9 +313,10 @@ position = Vector2(-1377, 48)
 texture = ExtResource("2_kjkan")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -18)
 texture = ExtResource("1_306xy")
 region_enabled = true
-region_rect = Rect2(136, 8, 16, 16)
+region_rect = Rect2(154, 31, 16, 32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
