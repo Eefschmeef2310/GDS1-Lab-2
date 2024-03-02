@@ -102,9 +102,6 @@ func _process(_delta):
 		
 		# Animation
 		handle_animations()
-		
-		if Input.is_action_just_pressed("debug_hurt"):
-			hurt()
 
 func _physics_process(delta):
 	if is_transitioning():
