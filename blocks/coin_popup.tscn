@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cnq68exhuyi0x"]
+[gd_scene load_steps=6 format=3 uid="uid://cnq68exhuyi0x"]
 
 [ext_resource type="Texture2D" uid="uid://d3qyt0ccrl0v1" path="res://assets/items.png" id="1_hpgeo"]
 [ext_resource type="Script" path="res://blocks/coin_popup.gd" id="2_otymh"]
-[ext_resource type="AudioStream" uid="uid://dywelpbat3yu4" path="res://sounds/smb_coin.wav" id="3_puhoe"]
 
 [sub_resource type="Animation" id="Animation_wf2mg"]
 length = 0.001
@@ -96,7 +95,3 @@ libraries = {
 "": SubResource("AnimationLibrary_cq2oi")
 }
 autoplay = "default"
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_puhoe")
-autoplay = true

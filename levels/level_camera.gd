@@ -7,6 +7,7 @@ var overworld_y: float
 func _ready():
 	overworld_y = global_position.y
 	GameManager.updated_subworld.connect(update_camera_y)
+	GameManager.music_stoped.connect(stop_music)
 	pass
 
 func _physics_process(_delta):
@@ -17,7 +18,15 @@ func _physics_process(_delta):
 func update_camera_y():
 	if(GameManager.get_subworld_state()):
 		#Positions the camera perfectly for subworld
+		$OverworldTheme.stop()
+		$UndergroundTheme.play()
 		global_position.y = 360
 		global_position.x = 2496
 	else:
 		global_position.y = overworld_y
+		$OverworldTheme.play()
+		$UndergroundTheme.stop()
+		
+func stop_music():
+	$OverworldTheme.stop()
+	$UndergroundTheme.stop()
