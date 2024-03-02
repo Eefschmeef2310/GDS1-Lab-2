@@ -72,7 +72,7 @@ collision_layer = 8
 collision_mask = 8
 script = ExtResource("1_s5vyy")
 animated_sprite_2d = NodePath("AnimatedSprite2D")
-shellSpeed = 225
+shellSpeed = 150
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(-8.5, 0.5)

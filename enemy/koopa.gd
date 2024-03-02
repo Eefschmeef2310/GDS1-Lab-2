@@ -8,6 +8,8 @@ var shelled : bool = false
 var recoverTimer : float = 0
 @export var shellSpeed = 300
 
+var shell_hits : int = 0
+
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("player"):
 		if !shelled:
@@ -21,9 +23,6 @@ func _on_area_2d_body_entered(body):
 				
 			else:
 				direction = 0
-				
-		
-		
 		#collision_shape_2d.set_deferred("disabled",true)
 		
 		body.velocity.y = stompLanchHeight
@@ -41,7 +40,10 @@ func _on_hurt_hitbox_body_entered(body):
 	if body.is_in_group("player"): # replace false with if player is invicinble
 		if !body.is_star():
 			body.hurt()
-	if body.has_method("startDying") && shelled : body.startDying()
+	if body.has_method("startDying") && shelled : 
+		body.startDying()
+		GameManager.spawn_score_or_1up_popup_koopa(global_position, shell_hits)
+		shell_hits += 1
 	else:
 		pass
 		#queue_free()

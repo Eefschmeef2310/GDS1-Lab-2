@@ -235,6 +235,7 @@ func _on_flag_collision_area_entered(area):
 		$"..".call_deferred("add_child", player_win)
 		player_win.global_position = pos
 		player_win.powerup_state = powerup_state
+		
 		touched_flag.emit()
 		if (area_type.has("5000p")):
 			print("5000 points")

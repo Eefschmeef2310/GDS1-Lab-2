@@ -8,20 +8,20 @@ extends Ground_Enemy
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("player") && !dying:
+		GameManager.spawn_score_or_1up_popup(global_position)
 		startDying()
 		body.stomp_sequence += 1
 		
 		body.velocity.y = stompLanchHeight
-	if "shelled" in body.get_parent():
-		if body.shelled == true: 
-			startDying()
+		
+	#if "shelled" in body.get_parent():
+		#if body.shelled: 
+			#GameManager.spawn_score_or_1up_popup(global_position)
+			#startDying()
 	#if "is_exploding" in body:
 		#startDying()
 
 func startDying():
-	#spawn score popup or 1-up popup
-	GameManager.spawn_score_or_1up_popup(global_position)
-	
 	$AudioStreamPlayer.play()
 	dying = true
 	animated_sprite_2d.set_animation("dead")
@@ -44,5 +44,6 @@ func _on_hurt_hitbox_body_entered(body):
 		if !body.is_star() and !body.is_invincible():
 			body.hurt()
 		else:
+			GameManager.spawn_score_or_1up_popup(global_position)
 			startDying()
 		

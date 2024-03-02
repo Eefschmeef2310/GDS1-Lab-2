@@ -106,7 +106,16 @@ func spawn_score_or_1up_popup(position : Vector2):
 		get_tree().root.add_child(score_popup)
 	else:
 		get_tree().root.add_child(_1_UP_POPUP.instantiate())
-		
+
+func spawn_score_or_1up_popup_koopa(position : Vector2, shell_hits : int):
+	#same as the above method, but for shells specifically
+	if shell_hits < shell_scores.size():
+		#spawn score popup
+		var score_popup = SCORE_POPUP.instantiate()
+		score_popup.set_values(shell_scores[shell_hits], position)
+		get_tree().root.add_child(score_popup)
+	else:
+		get_tree().root.add_child(_1_UP_POPUP.instantiate())
 
 func stop_playing_music():
 	music_stoped.emit()
