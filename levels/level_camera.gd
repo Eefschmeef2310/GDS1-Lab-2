@@ -40,3 +40,4 @@ func star_music_start():
 	
 func star_music_stop():
 	$StarTheme.stop()
+	$OverworldTheme.play()
