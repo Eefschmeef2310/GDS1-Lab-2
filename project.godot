@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="GDS1 Lab 2"
-run/main_scene="res://levels/level.tscn"
+config/name="GDS1 Lab 2 - 12PM Group 3"
+run/main_scene="res://levels/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
-config/icon="res://icon.svg"
+config/icon="res://icon.png"
 
 [audio]
 
@@ -31,7 +31,6 @@ window/size/viewport_width=256
 window/size/viewport_height=240
 window/size/mode=2
 window/stretch/mode="canvas_items"
-mouse_cursor/custom_image="res://ui/cursor.png"
 
 [file_customization]
 
@@ -98,3 +97,4 @@ down={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
 anti_aliasing/screen_space_roughness_limiter/enabled=false
+anti_aliasing/quality/msaa_2d=3
