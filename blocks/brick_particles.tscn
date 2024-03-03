@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbtp5up4t64jy"]
+[gd_scene load_steps=4 format=3 uid="uid://cbtp5up4t64jy"]
 
 [ext_resource type="Texture2D" uid="uid://dhdurd5pe1dc8" path="res://blocks/brick_particle.png" id="1_st3ba"]
+[ext_resource type="AudioStream" uid="uid://huu6k62076pe" path="res://sounds/smb_breakblock.wav" id="2_paunp"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ufdcy"]
 particle_flag_disable_z = true
@@ -18,3 +19,7 @@ process_material = SubResource("ParticleProcessMaterial_ufdcy")
 texture = ExtResource("1_st3ba")
 one_shot = true
 explosiveness = 1.0
+
+[node name="BlockBreak" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_paunp")
+autoplay = true

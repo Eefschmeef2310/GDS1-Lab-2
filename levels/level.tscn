@@ -161,6 +161,7 @@ tele_location = Vector2(2624, 177)
 [connection signal="body_entered" from="TileMap/@Area2D@153608" to="TileMap/@Area2D@153608" method="_on_body_entered"]
 [connection signal="body_entered" from="TileMap/@Area2D@153609" to="TileMap/@Area2D@153609" method="_on_body_entered"]
 [connection signal="body_entered" from="TileMap/@Area2D@153610" to="TileMap/@Area2D@153610" method="_on_body_entered"]
+[connection signal="touched_flag" from="Player" to="TileMap/Flag" method="_on_player_touched_flag"]
 [connection signal="body_entered" from="Checkpoint 1" to="." method="_on_checkpoint_1_body_entered"]
 
 [editable path="Player"]
