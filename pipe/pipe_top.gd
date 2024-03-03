@@ -40,10 +40,8 @@ func _on_tele_collider_body_exited(body):
 
 func _on_edge_detector_body_entered(body):
 	if(body.is_in_group("player")):
-		print("edge")
 		on_edge = true
 
 func _on_edge_detector_body_exited(body):
 	if(body.is_in_group("player")):
-		print("coo")
 		on_edge = false
