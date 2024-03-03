@@ -5,7 +5,10 @@ extends Node2D
 func _ready():
 	UI.underground = false
 	UI.loading_screen = false
+	
+	GameManager.timer.paused = false
 	GameManager.timer.start(160)
+	
 	UI.update_coin()
 	
 	if GameManager.level1_checkpoint:

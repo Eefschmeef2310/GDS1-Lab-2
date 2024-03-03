@@ -10,7 +10,7 @@ script = ExtResource("1_bxapp")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 160.0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="1UP" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_lljld")
 
 [node name="CoinSFX" type="AudioStreamPlayer" parent="."]
