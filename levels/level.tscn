@@ -92,6 +92,7 @@ position = Vector2(87, 192)
 position = Vector2(87, 192)
 powerup_state = 0
 camera = NodePath("../GameCamera")
+metadata/_edit_group_ = true
 
 [node name="ItemBlocks" type="Node2D" parent="."]
 
@@ -140,5 +141,26 @@ tele_location = Vector2(2624, 177)
 
 [connection signal="finished" from="GameCamera/OverworldTheme" to="GameCamera" method="_on_overworld_theme_finished"]
 [connection signal="finished" from="GameCamera/UndergroundTheme" to="GameCamera" method="_on_underground_theme_finished"]
-[connection signal="touched_flag" from="Player" to="TileMap/Flag" method="_on_player_touched_flag"]
+[connection signal="touched_flag" from="Player/FlagCollisionController" to="TileMap/Flag" method="_on_flag_collision_controller_touched_flag"]
+[connection signal="body_entered" from="TileMap/Coin" to="TileMap/Coin" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@22473" to="TileMap/@Area2D@22473" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@22474" to="TileMap/@Area2D@22474" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@22475" to="TileMap/@Area2D@22475" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@22476" to="TileMap/@Area2D@22476" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@22477" to="TileMap/@Area2D@22477" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@22478" to="TileMap/@Area2D@22478" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@22479" to="TileMap/@Area2D@22479" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@22480" to="TileMap/@Area2D@22480" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@22481" to="TileMap/@Area2D@22481" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@22482" to="TileMap/@Area2D@22482" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@22483" to="TileMap/@Area2D@22483" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@22484" to="TileMap/@Area2D@22484" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@22485" to="TileMap/@Area2D@22485" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@22486" to="TileMap/@Area2D@22486" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@22487" to="TileMap/@Area2D@22487" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@22488" to="TileMap/@Area2D@22488" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@22489" to="TileMap/@Area2D@22489" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@22490" to="TileMap/@Area2D@22490" method="_on_body_entered"]
 [connection signal="body_entered" from="Checkpoint 1" to="." method="_on_checkpoint_1_body_entered"]
+
+[editable path="Player"]

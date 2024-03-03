@@ -14,7 +14,7 @@ signal star_music_stopped
 
 var fast_time : bool = false
 @onready var timer = $Timer
-@onready var audio_stream_player = $AudioStreamPlayer
+@onready var audio_stream_player = $"1UP"
 
 #Because we know these variables will only be ints, we can cast them as such
 var coin_counter : int = 0
@@ -23,6 +23,8 @@ var lives : int = 3
 
 var level1_checkpoint : bool
 var in_subworld: bool = false
+
+var level_complete : bool = false
 
 var player_scores : Array[int] = [
 	100,
@@ -47,12 +49,23 @@ var shell_scores : Array[int] = [
 func _process(_delta):
 	if Input.is_action_just_pressed("esc"):
 		get_tree().quit()
-	if int(timer.time_left * 2.5) == 100 and !fast_time:
+	if int(timer.time_left * 2.5) == 100 and !fast_time and !level_complete:
 		fast_time = true
 		hundred_time_left.emit()
+		
+	#do the funnt time tickdown when level completed
+	if level_complete and timer.wait_time > 0.002:
+		$CoinSFX.play()
+		increase_score(50)
+		timer.start(timer.wait_time)
 
 func _on_timer_timeout():
-	get_tree().get_first_node_in_group("player").hurt()
+	if !level_complete:
+		get_tree().get_first_node_in_group("player").death_controller.kill_player()
+
+func add_bonus_time():
+	var tween = get_tree().create_tween()
+	tween.tween_property(timer, "wait_time", 0.001, 2)
 
 func reset():
 	fast_time = false
@@ -61,6 +74,7 @@ func reset():
 	lives = 3
 	level1_checkpoint = false
 	score_updated.emit()
+	level_complete = false
 	
 func collect_coin():
 	coin_counter += 1

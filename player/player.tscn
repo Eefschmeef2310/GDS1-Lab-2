@@ -1,9 +1,10 @@
-[gd_scene load_steps=45 format=3 uid="uid://bxhlnr2grbq1t"]
+[gd_scene load_steps=46 format=3 uid="uid://bxhlnr2grbq1t"]
 
 [ext_resource type="Script" path="res://player/player_controller.gd" id="1_tgen6"]
 [ext_resource type="Texture2D" uid="uid://bkmx0qwx2k4b2" path="res://assets/mario.png" id="2_8dkuo"]
 [ext_resource type="Script" path="res://player/transition_controller.gd" id="4_7b27s"]
 [ext_resource type="Script" path="res://player/death_controller.gd" id="4_agbdj"]
+[ext_resource type="Script" path="res://player/flag_collision_controller.gd" id="5_7k7sy"]
 [ext_resource type="AudioStream" uid="uid://46lroccp805h" path="res://sounds/smb_jump-small.wav" id="5_itp50"]
 [ext_resource type="AudioStream" uid="uid://c5q36cbhmv345" path="res://sounds/smb_jump-super.wav" id="6_bpru2"]
 [ext_resource type="AudioStream" uid="uid://uhdnalrfcp6j" path="res://sounds/smb_powerup.wav" id="7_pdam7"]
@@ -2147,6 +2148,9 @@ script = ExtResource("4_agbdj")
 [node name="TransitionController" type="Node" parent="."]
 script = ExtResource("4_7b27s")
 
+[node name="FlagCollisionController" type="Node" parent="."]
+script = ExtResource("5_7k7sy")
+
 [node name="FlagCollision" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FlagCollision"]
@@ -2183,7 +2187,7 @@ one_shot = true
 wait_time = 3.0
 one_shot = true
 
-[connection signal="area_entered" from="FlagCollision" to="." method="_on_flag_collision_area_entered"]
+[connection signal="area_entered" from="FlagCollision" to="FlagCollisionController" method="_on_flag_collision_area_entered"]
 [connection signal="area_entered" from="FlagCollision" to="FlagCollision" method="_on_area_entered"]
 [connection signal="timeout" from="PipeAnimTimer" to="." method="_on_pipe_anim_timer_timeout"]
 [connection signal="timeout" from="PipeAnimTimer" to="TransitionController" method="_on_pipe_anim_timer_timeout"]

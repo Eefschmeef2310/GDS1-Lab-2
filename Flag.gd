@@ -5,5 +5,5 @@ extends Node2D
 func _ready():
 	anim_player.play("RESET")
 
-func _on_player_touched_flag():
+func _on_flag_collision_controller_touched_flag():
 	anim_player.play("flag")
