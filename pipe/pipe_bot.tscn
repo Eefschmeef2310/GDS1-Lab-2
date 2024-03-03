@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0bvqkrdb2jaf"]
+[gd_scene load_steps=5 format=3 uid="uid://b0bvqkrdb2jaf"]
 
 [ext_resource type="Script" path="res://pipe/pipe_top.gd" id="1_higw5"]
 [ext_resource type="Texture2D" uid="uid://dgwyodwv3deoc" path="res://assets/terrain_merged.png" id="2_0lqti"]
@@ -8,9 +8,6 @@ size = Vector2(7.5, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u7qsr"]
 size = Vector2(2, 21)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vmenb"]
-size = Vector2(1, 32)
 
 [node name="PipeLeft" type="StaticBody2D"]
 script = ExtResource("1_higw5")
@@ -33,14 +30,5 @@ shape = SubResource("RectangleShape2D_lkxgv")
 position = Vector2(-8, -8.5)
 shape = SubResource("RectangleShape2D_u7qsr")
 
-[node name="EdgeDetector" type="Area2D" parent="."]
-position = Vector2(7, -8)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EdgeDetector"]
-position = Vector2(-31, 0)
-shape = SubResource("RectangleShape2D_vmenb")
-
 [connection signal="body_entered" from="TeleCollider" to="." method="_on_tele_collider_body_entered"]
 [connection signal="body_exited" from="TeleCollider" to="." method="_on_tele_collider_body_exited"]
-[connection signal="body_entered" from="EdgeDetector" to="." method="_on_edge_detector_body_entered"]
-[connection signal="body_exited" from="EdgeDetector" to="." method="_on_edge_detector_body_exited"]
