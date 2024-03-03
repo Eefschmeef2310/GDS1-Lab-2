@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bymgigrcgvbat"]
 
 [ext_resource type="Script" path="res://levels/you_win.gd" id="1_t4rkg"]
-[ext_resource type="AudioStream" uid="uid://4qs8wt3f35pq" path="res://sounds/smb_gameover.wav" id="2_pqp6l"]
+[ext_resource type="AudioStream" uid="uid://dolk8iljyvbkg" path="res://sounds/smb_world_clear.wav" id="2_eisw2"]
 
 [sub_resource type="Gradient" id="Gradient_388rn"]
 offsets = PackedFloat32Array(0)
@@ -27,7 +27,7 @@ scale = Vector2(4, 3.75)
 texture = SubResource("GradientTexture2D_olonj")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_pqp6l")
+stream = ExtResource("2_eisw2")
 autoplay = true
 
 [node name="Label" type="Label" parent="."]
